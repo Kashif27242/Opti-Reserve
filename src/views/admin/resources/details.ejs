@@ -1,0 +1,43 @@
+<div class="container my-5">
+
+  <!-- Resource Main Image -->
+  <div class="text-center mb-4">
+    <img src="<%= resource.image %>" alt="<%= resource.name %>" class="img-fluid" style="max-height: 400px; object-fit: cover;">
+  </div>
+
+  <!-- Resource Name & Category -->
+  <h2 class="mb-3"><%= resource.name %></h2>
+  <% if (categoryName) { %>
+    <p><strong>Category:</strong> <%= categoryName %></p>
+  <% } %>
+
+  <!-- Description -->
+  <div class="mb-4">
+    <p><%= resource.description || 'No description available.' %></p>
+  </div>
+
+  <!-- Booking Form -->
+  <div class="card p-3 bg-light">
+    <h4 class="mb-3">Book This Resource</h4>
+    <form action="/booking/request" method="POST">
+      <input type="hidden" name="resourceId" value="<%= resource.id %>">
+      <div class="mb-3">
+        <label>Name</label>
+        <input type="text" name="name" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label>Phone</label>
+        <input type="tel" name="phone" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label>Email</label>
+        <input type="email" name="email" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label>Booking Date</label>
+        <input type="date" name="bookingDate" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Book Now</button>
+    </form>
+  </div>
+</div>

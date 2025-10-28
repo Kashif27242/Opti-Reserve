@@ -1,0 +1,37 @@
+.navbar-dark {
+    padding-top: 14px;
+    padding-bottom: 11px;
+    .navbar-nav {
+        .nav-item {
+            margin-left: 14px;
+            .nav-link {
+                color: $navColor;
+                @include font-regular;
+                text-transform: uppercase;
+                font-size: 1.4rem;
+                &:hover {
+                    color: $navHover;
+                }
+            }
+        }
+    }
+    .dropdown-menu {
+        @media (min-width: 991px) {
+            margin-top: 2.2rem;
+        }
+        @media (max-width: 991px) {
+            background: transparent;
+        }
+        .dropdown-item {
+            font-size: 1.4rem;
+            padding: 8px 20px;
+            @media (max-width: 991px) {
+                color: $navColor;
+            }
+            &:hover {
+                background-color: $secondaryColor;
+                color: $textColorLight;
+            }
+        }
+    }
+}

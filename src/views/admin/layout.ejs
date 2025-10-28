@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title><%= title || "Opti-Reserve" %></title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/admin/images/favicon.png" />
+
+  <!-- Google fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- jQuery + jQuery UI -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link
+    rel="stylesheet"
+    href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+  />
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+  <!-- SweetAlert -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css"
+    rel="stylesheet"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.all.min.js"></script>
+
+  <!-- Bootstrap icons -->
+  <link
+    rel="stylesheet"
+    href="/assets/admin/dist/icons/bootstrap-icons-1.4.0/bootstrap-icons.min.css"
+    type="text/css"
+  />
+
+  <!-- Bootstrap Docs -->
+  <link
+    rel="stylesheet"
+    href="/assets/admin/dist/css/bootstrap-docs.css"
+    type="text/css"
+  />
+
+  <!-- Slick -->
+  <link rel="stylesheet" href="/assets/admin/libs/slick/slick.css" type="text/css" />
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="/assets/admin/dist/css/app.min.css" type="text/css" />
+  <link rel="stylesheet" href="/assets/admin/dist/css/custom.css" type="text/css" />
+
+  <!-- Fancybox -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"
+  />
+
+  <!-- Dropzone -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css"
+  />
+
+  <style>
+    .form-group {
+      margin: 20px;
+    }
+
+    .upload-container {
+      border: 2px dashed #ccc;
+      width: 100%;
+      max-width: 500px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      margin: 0 auto;
+      background-color: #f8f8f8;
+    }
+
+    .upload-container input[type="file"] {
+      position: absolute;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .upload-text {
+      font-size: 16px;
+      color: #999;
+    }
+
+    .upload-container .form-text {
+      position: absolute;
+      bottom: 5px;
+      width: 100%;
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+    }
+
+    .circle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #DBB778;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+    }
+
+    .btn-logout {
+      background: none;
+      border: none;
+      padding: 0;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+      outline: inherit;
+    }
+
+    .btn-logout:focus {
+      box-shadow: none !important;
+    }
+
+    .card {
+      border: 1px solid #1e1e1e !important;
+    }
+
+    .header-title {
+      flex-grow: 1;
+      white-space: nowrap;
+    }
+
+    .header-title span {
+      font-size: 20px;
+      white-space: nowrap;
+      margin-left: 2%;
+    }
+
+    .header-mobile-buttons a {
+      margin-left: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .header-title:nth-child(1) {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header include -->
+  <%- include('./components/header') %>
+
+  <!-- Page Content -->
+    <%- include(body) %>
+
+  <!-- Scripts -->
+  <script src="/assets/admin/libs/bundle.js"></script>
+  <script src="/assets/admin/libs/charts/apex/apexcharts.min.js"></script>
+  <script src="/assets/admin/libs/slick/slick.min.js"></script>
+  <script src="/assets/admin/dist/js/examples/dashboard.js"></script>
+  <script src="/assets/admin/dist/js/app.min.js"></script>
+</body>
+</html>

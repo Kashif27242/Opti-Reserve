@@ -1,0 +1,188 @@
+<%- include('../layout') %>
+
+<style>
+.circle-btn {
+    border: none;
+    border-radius: 50%;
+    width: 40px; 
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.circle-btn i { font-size: 15px; }
+
+.btn-success { background-color: rgb(21, 162, 21); }
+.btn-danger { background-color: red; }
+</style>
+
+<div class="layout-wrapper">
+    <!-- Header -->
+    <div class="header d-flex justify-content-between align-items-center p-0 m-0">
+        <div class="menu-toggle-btn">
+            <a href="#"><i class="bi bi-list" style="color: #DBB778; margin-left:10px;"></i></a>
+        </div>
+        <div class="header-title"><span>Contact Us</span></div>
+        <a href="index.html" class="logo">
+            <img src="/assets/User/logo/Logo-min.png" width="170" height="80" id="logo" alt="logo">
+        </a>
+        <div class="header-mobile-buttons d-flex align-items-center">
+            <a href="#" class="search-bar-btn"></a>
+            <a href="#" class="actions-btn"><i class="bi bi-three-dots"></i></a>
+            <%- include('../components/logout') %>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="mb-4">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="#"><i class="bi bi-globe2 small me-2"></i> Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+                </ol>
+            </nav>
+
+            <div>
+                <a href="/contacts/export">
+                    <button class="btn btn-primary">Export Excel File</button>
+                </a>
+            </div>
+
+            <br>
+            <div id="message-container" class="alert-container"></div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="d-md-flex gap-4 align-items-center">
+                    <div class="d-none d-md-flex text-dark">All Contacts</div>
+                    <div class="d-md-flex gap-4 align-items-center">
+                        <form class="mb-3 mb-md-0" id="filterForm">
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <select class="form-select" id="sortSelect">
+                                        <option value="">Sort by</option>
+                                        <option value="desc">Desc</option>
+                                        <option value="asc">Asc</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-select" id="perPageSelect">
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                        <option value="40">40</option>
+                                        <option value="50">50</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search" id="searchInput">
+                                        <button class="btn btn-outline-light" type="button" id="searchButton"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive mt-3">
+            <table class="table table-custom table-lg mb-0" id="featuresTable">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>NAME</th>
+                        <th>EMAIL</th>
+                        <th>MOBILE</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% contacts.forEach(contact => { %>
+                    <tr>
+                        <td>
+                            <button type="button" class="circle-btn custom-dropdown btn-success" data-bs-toggle="collapse" data-bs-target="#details-<%= contact.id %>" aria-expanded="false">
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                        </td>
+                        <td><%= contact.first_name %></td>
+                        <td><%= contact.email %></td>
+                        <td><%= contact.phone %></td>
+                        <td class="text-end">
+                            <div class="d-flex">
+                                <a href="/contacts/<%= contact.id %>" class="btn btn-primary me-2" style="padding: 0.55rem 0.75rem;">
+                                    <img src="/assets/admin/dist/icons/external-link.png" style="width: 15px; height: 15px;">
+                                </a>
+                                <form action="/contacts/<%= contact.id %>/delete" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger" style="padding: 0.55rem 0.75rem;">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="collapse" id="details-<%= contact.id %>">
+                        <td colspan="5">
+                            <div class="card mb-4">
+                                <div class="card-body text-dark">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <p class="fw-bold">Informed By</p>
+                                            <% if(contact.inform_by) { contact.inform_by.forEach(info => { %>
+                                                <span class="badge bg-success me-2"><%= info %></span>
+                                            <% }) } %>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <p class="fw-bold">Date</p>
+                                            <%= contact.created_at %>
+                                        </div>
+                                    </div>
+                                    <div class="row mx-3">
+                                        <div class="col">
+                                            <p class="fw-bold">Comment</p>
+                                            <p><%= contact.comments %></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+
+        <nav class="mt-4" aria-label="Page navigation example"></nav>
+    </div>
+
+    <footer>
+        <p class="text-center my-2">&copy; 2024 LMG Motors</p>
+    </footer>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const dropdownButtons = document.querySelectorAll('.custom-dropdown');
+    dropdownButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const targetId = button.getAttribute('data-bs-target');
+            const targetElement = document.querySelector(targetId);
+            const icon = button.querySelector('i');
+            targetElement.addEventListener('shown.bs.collapse', function() {
+                button.classList.replace('btn-success','btn-danger');
+                icon.classList.replace('bi-chevron-down','bi-chevron-up');
+            });
+            targetElement.addEventListener('hidden.bs.collapse', function() {
+                button.classList.replace('btn-danger','btn-success');
+                icon.classList.replace('bi-chevron-up','bi-chevron-down');
+            });
+        });
+    });
+});
+</script>

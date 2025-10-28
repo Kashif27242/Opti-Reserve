@@ -1,0 +1,39 @@
+.btn {
+    padding: 1.3rem 2.2rem;
+    font-size: 1.4rem;
+}
+.btn-primary {
+    background-color: $secondaryColor;
+    border-color: $secondaryColor;
+    box-shadow: none !important;
+    @include transition-ease;
+    &:hover {
+        background-color: #8f1313;
+        border-color: #8f1313;
+    }
+    &:focus {
+        outline: none;
+        border-color: #8f1313;
+        box-shadow: none;
+    }
+}
+.btn-secondary {
+    background-color: #202020;
+    border-color: #202020;
+    box-shadow: none !important;
+    @include transition-ease;
+    &:hover {
+        background-color: #202020;
+        border-color: #202020;
+    }
+    &:focus {
+        outline: none;
+        border-color: #202020;
+        box-shadow: none;
+    }
+}
+.btn-lg {
+    margin-top: 15px;
+    font-size: 1.6rem;
+    padding: 1.3rem 2.8rem;
+}

@@ -1,0 +1,16 @@
+@mixin font-regular {
+    font-family: 'Interstate Regular';
+    line-height: normal;
+}
+@mixin font-paragraph {
+    font-family: 'Interstate Light';
+    line-height: normal;
+}
+@mixin font-heading {
+    font-family: 'Interstate Bold';
+    line-height: normal;
+}
+@mixin font-light {
+    font-family: 'Interstate ExtraLight';
+    line-height: normal;
+}

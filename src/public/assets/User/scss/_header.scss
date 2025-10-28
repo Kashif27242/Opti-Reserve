@@ -1,0 +1,35 @@
+.top-bar {
+    background-color: $bgLight;
+    font-size: calc(1.3rem);
+    @include font-paragraph;
+    padding: 17px 0 18px;
+    a {
+        color: $navColor;
+        display: inline-block;
+        line-height: 2.3rem;
+        margin-left: 1.6rem;
+        @media (min-width: 1190px) {
+            margin-left: 6.8rem;
+        }
+        &:hover {
+            color: $navHover;
+        }
+    }
+    .address1 {
+        background: url(../images/address1.png) no-repeat left;
+        padding-left: 3.7rem;
+    }
+    .phone1 {
+        background: url(../images/phone1.png) no-repeat left;
+        padding-left: 3.7rem;
+    }
+}
+.navbar-brand {
+    img {
+        height: 41px;
+        @media (min-width: 1199px) {
+            margin-left: 5.5rem;
+            margin-right: 141px;
+        }
+    }
+}

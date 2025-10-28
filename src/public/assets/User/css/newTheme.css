@@ -1,0 +1,1367 @@
+/* .banner-home img {
+    width: calc(100%);
+    margin: 0;
+} */
+
+.overlap-group {
+    position: relative;
+    width: 167px;
+    height: 34px;
+    background-color: #14191c;
+    border-radius: 1000px;
+}
+
+.text-wrapper {
+    position: absolute;
+    top: 8px;
+    left: 39px;
+    font-family: "Inter-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.mask-group-wrapper {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 5px;
+    left: 7px;
+    background-color: #000000;
+    border-radius: 12px;
+    box-shadow: 0px 4px 4px #00000040;
+}
+
+.mask-group {
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    top: 6px;
+    left: 5px;
+}
+
+#carup {
+    background-color: #000000;
+}
+
+.bg.dark {
+    background-color: #121212;
+}
+
+.banner-home .bannerTextDiv {
+    height: 30%;
+    top: 407px;
+    background-image: linear-gradient(183deg, #00000000 0%, #000000 100%);
+    background-color: revert;
+}
+
+.search-filter h2 {
+    margin-top: 0px !important;
+}
+
+.group-3 {
+    /* position: absolute; */
+    width: 97px;
+    height: 7px;
+    /* display: none; */
+    /* top: 765px;
+    left: 289px; */
+}
+
+.arrow {
+    position: absolute;
+    /* width: 63px; */
+    height: 25px;
+    /* top: 0; */
+    left: 170px;
+}
+
+.arrow-2 {
+    position: absolute;
+    /* width: 21px; */
+    height: 25px;
+    /* top: 0; */
+    left: 214px;
+}
+
+.ellipse {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    top: 142px;
+    left: 201px;
+    background-color: #ffffff;
+    border-radius: 3.43px;
+}
+
+.logo-light {
+    position: relative;
+    /* width: 150px; */
+    height: 50px;
+    object-fit: cover;
+}
+
+.group-4 {
+    position: relative;
+    width: 210px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    /* top: 56px;
+    left: 214px; */
+}
+
+.instagram-wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #14191c;
+}
+
+.text-wrapper-2 {
+    margin-top: -1px;
+    font-size: 16px;
+    position: relative;
+    width: fit-content;
+    font-family: "Font Awesome 6 Brands-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.text-wrapper-2 img {
+    height: 18px;
+}
+
+.facebook-wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left: 42px;
+    background-color: #14191c;
+}
+
+.youtube-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left: 86px;
+    background-color: #14191c;
+}
+
+.twitter-wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left: 132px;
+    background-color: #14191c;
+}
+
+.linked-in-wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left: 176px;
+    background-color: #14191c;
+}
+
+.navbar-dark .navbar-nav .nav-item .nav-link {
+    font-size: 16px;
+}
+
+.social .socialIcon {
+    color: white;
+    padding: 7px;
+    font-size: 24px;
+    background-color: #14191c;
+    border-radius: revert;
+    padding-left: revert;
+    padding-right: revert;
+    /* padding-top: 4px; */
+    padding-bottom: revert;
+    display: block;
+    float: left;
+    width: 36px;
+    height: 35px;
+    margin-right: 7px;
+    margin-bottom: revert;
+    text-align: center;
+}
+
+.top-bar {
+    border-bottom: 1px solid #d7c29d73;
+}
+
+.navbar {
+    top: 67px;
+    background-image: linear-gradient(183deg, #000000 0%, #000000d9 100%);
+    /* background-color: revert; */
+    /* background: linear-gradient(180deg, #000 24%, #695959 131%); */
+    /* opacity: 0.8; */
+}
+
+.navbar-dark .navbar-nav .nav-item .nav-link {
+    color: #ffffff;
+}
+
+.navbar-dark .navbar-nav .nav-item .nav-link:hover {
+    color: #DBB778;
+}
+
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+    max-height: 400px;
+    /* overflow-x: scroll; */
+    overflow-y: scroll;
+}
+
+/* Customize the appearance of the scrollbar */
+
+.navbar-expand-lg .navbar-nav .dropdown-menu::-webkit-scrollbar {
+    width: 10px;
+    /* Set the width of the scrollbar */
+}
+
+/* Track */
+
+.navbar-expand-lg .navbar-nav .dropdown-menu::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* Track background color */
+}
+
+/* Handle */
+
+.navbar-expand-lg .navbar-nav .dropdown-menu::-webkit-scrollbar-thumb {
+    background: #DBB778;
+    /* Scrollbar handle color */
+    border-radius: 5px;
+    /* Rounded scrollbar handle */
+}
+
+/* Handle on hover */
+
+.navbar-expand-lg .navbar-nav .dropdown-menu::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Scrollbar handle color on hover */
+}
+
+.navbar-dark .navbar-nav .nav-link.active,
+.navbar-dark .navbar-nav .show>.nav-link {
+    border-bottom: 2px solid;
+    color: #DBB778;
+}
+
+.navbar-dark .dropdown-menu .dropdown-item:hover {
+    background-color: #181818;
+}
+
+.footer .social a:hover {
+    background-color: #DBB778;
+}
+
+.social a:hover {
+    background-color: #DBB778;
+}
+
+.banner-home-md {
+    top: -59px;
+}
+
+.top-bar a {
+    margin-left: 0px;
+    /* line-height: 3.3rem; */
+}
+
+.top-bar .phone1 {
+    height: 25px;
+}
+
+.line {
+    /* position: absolute; */
+    border-bottom: 1px solid #DBB778;
+}
+
+.group-13 {
+    display: flex;
+    justify-content: space-evenly;
+    /* width: 410px;
+    height: 24px; */
+    /* top: 1519px;
+    left: 210px; */
+}
+
+.card {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.card .card-text-body {
+    /* min-height: 75px; */
+    /* min-height: 87px; */
+    min-height: 98px;
+}
+
+.group-14 {
+    display: flex;
+    align-items: center;
+}
+
+.group-14 img {
+    margin-right: 5px;
+    height: 18px;
+}
+
+
+
+#ContentPlaceHolder1_btnsubscribe {
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 15px;
+}
+
+.navbar-dark {
+    padding-top: 14px;
+    padding-bottom: 11px;
+}
+
+.footer p,
+footer h3,
+footer a,
+footer a:visited {
+    color: #ffffff;
+}
+
+.footer a:hover {
+    color: #dbb778;
+}
+
+.btn-maroon {
+    background-color: #dbb778;
+    color: black;
+    border-radius: 4px;
+    border: none;
+}
+
+.search-filter .form-select {
+    background-color: #181818;
+    color: #ffffff;
+    border: none;
+}
+
+.fieldDiv {
+    display: flex;
+    border: 1px solid #dbb77854;
+    background-color: #181818;
+    align-items: center;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+/* .btnDiv {
+    background-color: #dbb778;
+    border-radius: 4px;
+} */
+
+.viewAllBtn {
+    background-color: #dbb778;
+    color: #000000;
+    border: none;
+    margin-bottom: 30px;
+    border-radius: 4px;
+}
+
+/* .btnDiv:hover {
+    background-color: #121010;
+    border-color: #121010;
+} */
+
+.vehicles-section {
+    background-color: #ffffff;
+}
+
+.figure-caption {
+    display: flex;
+    justify-content: center;
+    font-size: 20px !important;
+    padding: 30px !important;
+}
+
+.figure-caption a {
+    display: flex;
+    color: #ffffff;
+    font-size: 24px;
+    /* align-items:center; */
+}
+
+.figure-caption a>i {
+    display: flex;
+    align-items: center;
+}
+
+.section-welcome .welcome-wrap {
+    padding-left: 0px;
+}
+
+.welcomeDiv {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.welcomeTextDiv {
+    background-color: #000000;
+    color: #ffffff;
+    max-height: 407px;
+    /* overflow-y: scroll; */
+    overflow-y: auto;
+    /* -webkit-overflow-scrolling: touch; */
+}
+
+.carsDescriptionLimit {
+    max-height: 280px;
+    overflow-y: auto;
+    font-size: calc(1.6rem);
+}
+
+.brandDescriptionDiv {
+    max-height: 280px;
+    overflow-y: auto;
+    padding: 0px;
+    margin: 0px 100px 50px;
+    line-height: revert;
+}
+
+.c-btn-phone {
+    bottom: 81px !important;
+    /* width: 41px !important; */
+}
+
+.c-btn-location {
+    bottom: 145px !important;
+    /* width: 41px !important; */
+}
+
+.c-btn-whatsapp:before {
+    background: rgba(0, 184, 51, .6);
+    width: 44px;
+    height: 44px;
+    left: 0px;
+    top: -1px;
+}
+
+.c-btn-whatsapp:after {
+    background: rgba(0, 184, 51, .4);
+    width: 54px;
+    height: 54px;
+    left: -5px;
+    top: -6px;
+}
+
+span.select2-container--open {
+    z-index: 9999;
+}
+
+.requestModal+.select2-container {
+    width: 100% !important;
+    z-index: 9999 !important;
+}
+
+.select2-container--bootstrap .select2-selection--multiple {
+    height: auto;
+}
+
+.textarea:focus {
+    border: none !important;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+    background-color: #ffbf0026 !important;
+    /* padding: 14px; */
+    /* height: auto !important; */
+    font-size: 16px !important;
+    color: #1f2734 !important;
+    border-radius: 0px !important;
+    border: 1px solid #e0e0e0 !important;
+    box-shadow: none !important;
+    -webkit-appearance: none !important;
+}
+
+.requestModal+.select2-container--default.select2-container--focus .select2-selection--multiple {
+    background-color: #f0f2f5 !important
+}
+
+.+.select2-container--default .select2-selection--multiple {
+    background-color: #f0f2f5 !important
+}
+
+.select2-container--default .select2-selection--multiple {
+  
+
+    align-content: center;
+    height: 50px !important;
+    font-size: 16px !important;
+    color: #1f2734 !important;
+    border-radius: 0px !important;
+    border: 1px solid #e0e0e0 !important;
+    box-shadow: none !important;
+    -webkit-appearance: none !important;
+}
+
+.select2-search__field:focus {
+    border: none !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #dbb778 !important;
+    border: 1px solid #dbb778 !important;
+    color: white !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    color: #fff !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+    background-color: #dbb778 !important;
+    color: #999 !important;
+}
+
+/* Customize the appearance of the scrollbar */
+
+.brandDescriptionDiv::-webkit-scrollbar,
+.carsDescriptionLimit::-webkit-scrollbar,
+.welcomeTextDiv::-webkit-scrollbar {
+    width: 10px;
+    /* Set the width of the scrollbar */
+}
+
+/* Track */
+
+.brandDescriptionDiv::-webkit-scrollbar-track,
+.carsDescriptionLimit::-webkit-scrollbar-track,
+.welcomeTextDiv::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* Track background color */
+}
+
+/* Handle */
+
+.brandDescriptionDiv::-webkit-scrollbar-thumb,
+.carsDescriptionLimit::-webkit-scrollbar-thumb,
+.welcomeTextDiv::-webkit-scrollbar-thumb {
+    background: #DBB778;
+    /* Scrollbar handle color */
+    border-radius: 5px;
+    /* Rounded scrollbar handle */
+}
+
+/* Handle on hover */
+
+.brandDescriptionDiv::-webkit-scrollbar-thumb:hover,
+.carsDescriptionLimit::-webkit-scrollbar-thumb:hover,
+.welcomeTextDiv::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Scrollbar handle color on hover */
+}
+
+/* Specific styles for CKEditor content */
+
+.ckeditor-content {
+    border: none;
+}
+
+.ckeditor-content ul,
+ol,
+dl {
+    list-style-position: inside;
+}
+
+.ckeditor-content table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.ckeditor-content th,
+.ckeditor-content td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.ckeditor-content th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+.ckeditor-content figure.table {
+    margin: 0;
+    padding: 30px;
+}
+
+.moreAboutBtn {
+    background-color: #dbb778;
+    color: #000000;
+    border-radius: 4px;
+}
+
+.section-welcome .welcome-wrap h2 {
+    font-family: sans-serif;
+}
+
+.inventoryBannerText {
+    display: block;
+    text-align-last: center;
+    color: #ffffff;
+    position: relative;
+    z-index: 1;
+}
+
+.inventoryBannerText p b {
+    font-size: 20px;
+    font-weight: 600;
+    color: #dbb778;
+}
+
+.inventoryBannerText p {
+    font-size: 40px;
+    font-weight: 300;
+}
+
+/* .slick-track {
+    display: flex;
+} */
+
+.card {
+    /* width: 32% !important; */
+    /* width: auto !important; */
+}
+
+.socialIconHeader {
+    display: flex;
+}
+
+.post-list-img {
+    height: 240px;
+    width: revert;
+}
+
+.blogs {
+    width: 30%;
+    margin-left: 25px;
+}
+
+/* .input-group .form-control, .input-group-addon, .input-group-btn {
+    background-color: #eaf7f7;
+} */
+
+.btn-secondary {
+    background-color: #dbb778;
+    color: #000;
+    font-weight: 600;
+    border-radius: 5px;
+}
+
+.searchBTn {
+    background-color: #202020;
+    color: #ffffff;
+    border-radius: 0px 5px 5px 0px;
+}
+
+.hoverBtnShow,
+.detailbtnHover {
+    display: none;
+}
+
+.vehicle-card:hover .card-body {
+    background-color: #202020 !important;
+}
+
+.vehicle-card:hover .card-body {
+    background-color: #202020 !important;
+}
+
+.vehicle-card:hover .card-body .card-text-body h5 {
+    color: #ffffff;
+    /* padding-top: 25px; */
+}
+
+/* .vehicle-card .card-body .card-text-body .group-13:hover {
+    display: none;
+} */
+
+.vehicle-card:hover .card-body .group-14 {
+    display: none;
+}
+
+/* .vehicle-card:hover img {
+    opacity: 0.8;
+} */
+
+/* .vehicle-card:hover{
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+} */
+
+.vehicle-card:hover .card-body .hoverBtnShow {
+    display: block;
+    margin-top: -16px;
+    margin-bottom: -2px;
+}
+
+.dlab-bnr-inr::before {
+    
+    border-radius: 0%;
+    top: 0%;
+    content: "";
+    height: 100%;
+    left: 0%;
+    /* mix-blend-mode: multiply; */
+    opacity: .3;
+    position: absolute;
+    width: 100%;
+    z-index: 0;
+}
+
+.showIconWithSelect {
+    font-size: calc(1.4rem);
+    height: 40px;
+    padding-left: 1rem;
+    border-radius: 0;
+    background-image: url(../images/select-arrow.svg);
+   
+    line-height: normal;
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+}
+
+.vehicle-card:hover .card-body .detailbtnHover {
+    display: block;
+    /* margin-top: -16px; */
+    margin-bottom: -2px;
+}
+
+.vehicle-card.card .card-body h5 {
+    /* min-height: 36px; */
+    min-height: 50px;
+    margin-top: -10px;
+    /* margin-bottom: 21px; */
+}
+
+.featuredDetailCardStockDetail h5 {
+    min-height: 68px !important;
+}
+
+.vehicle-card:hover .featuredDetailCardStockDetail h5 {
+    min-height: 52px !important;
+}
+
+.stockDetailTextDiv {
+    margin-top: 41px;
+}
+
+.sold-card.card .card-body h5 {
+    /* min-height: 36px; */
+    min-height: 50px;
+    margin-top: -10px;
+    /* margin-bottom: 21px; */
+}
+
+.featured-vehicles {
+    /* padding: 4.3rem 0 3.9rem; */
+    padding: 0.3rem 0 3.9rem;
+}
+
+.search-filter .btn-primary {
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 15px;
+    padding: 0px;
+}
+
+.vehicles-section .figure .figure-caption {
+    background-image: linear-gradient(183deg, #00000000 0%, #000000 100%);
+    background-color: revert;
+    border-radius: 0px 0px 8px 8px;
+}
+
+.logoImg {
+    height: 25px;
+}
+
+.featuredHeading {
+    font-size: 3.2rem;
+}
+
+.welcomeHeading {
+    font-size: 4rem;
+    font-weight: 100;
+    line-height: 4.1rem !important;
+}
+
+.car-features h5 {
+    margin: 0px;
+    align-self: center;
+}
+
+.findVehicleFormDiv {
+    justify-content: center;
+}
+
+/* .car-features i {
+    font-size: 25px;
+} */
+
+/* .section-full:last-child {
+    margin-bottom: -90px;
+} */
+
+.used-car-dl-info li .viewAllBrand {
+    background-color: #95949482;
+}
+
+.used-car-dl-info li a {
+    border-radius: 4px;
+}
+
+.used-car-dl-info li a:hover {
+    background-color: #dbb778;
+    border: 1px solid #dbb778 !important;
+    color: #ffffff;
+}
+
+.used-car-dl-info li .viewAllBrand {
+    background-color: #dbb778;
+    border: 1px solid #dbb778 !important;
+    color: #ffffff;
+}
+
+.used-car-dl-info li .viewAllBrand:hover {
+    background-color: #121010;
+    border: 1px solid #121010 !important;
+    color: #fff;
+}
+
+.featuredDetailCard {
+    min-height: 95px !important;
+}
+
+.featuredDetailCardStockDetail {
+    min-height: 104px !important;
+}
+
+.homeCardTitle {
+    min-height: 73px !important;
+}
+
+.vehicle-card:hover .homeCardTitle {
+    min-height: 50px !important;
+}
+
+.viewInventoryBtn:hover {
+    color: #dbb778;
+}
+
+.cardNameText {
+    font-size: 24px;
+    margin-bottom: 0px;
+}
+
+.cardNameText:hover {
+    color: #dbb778;
+}
+
+/* .img-gradient{
+    position:relative;
+    display:inline-block;
+} */
+
+.vehicle-card:hover .img-gradient:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    background: -moz-linear-gradient(top, #00000096 0%, #00000094 0%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #00000094), color-stop(0%, #00000096));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #00000096 0%, #00000094 0%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #00000096 0%, #00000094 0%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #00000096 0%, #00000094 0%);
+    /* IE10+ */
+    background: linear-gradient(183deg, #0000005e 0%, #0000005c 0%);
+}
+
+.featured-vehicles .featured-slide .card .card-body {
+    position: relative;
+    z-index: 1;
+}
+
+.featured-vehicles .featured-slide .slick-next {
+    margin-top: -52px;
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #dbb778;
+    border-color: #dbb778;
+}
+
+.newArrival {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    margin: 14px;
+}
+
+.newArrivalTag {
+    font-weight: 600;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+/* .img-gradient img{
+    display:block;
+} */
+
+.cardRowDiv {
+    /* margin: 0px 0px; */
+}
+
+/* .featured-vehicles .featured-slide .card .card-body h5 {
+    min-height: 50px !important;
+} */
+
+/* .sold-label-frontend {
+    background-color: #dbb778;
+    width: 19%;
+    padding-top: 5px;
+    padding-bottom: 5px !important;
+}
+
+.sold-label-frontend:hover {
+   color: #ffffff;
+} */
+
+/* .vehicle-card:hover .soldDiv {
+    display: none;
+} */
+
+.soldDiv {
+    display: flex;
+    justify-content: center;
+    margin-top: -30px;
+    margin-bottom: 20px;
+}
+
+::selection {
+    background: #dbb778;
+}
+
+.formInputField {
+  
+    padding: 14px;
+    height: auto !important;
+    font-size: 16px !important;
+    color: #1f2734 !important;
+    border-radius: 0px !important;
+    border: 1px solid #e0e0e0 !important;
+    box-shadow: none !important;
+    -webkit-appearance: none !important;
+}
+
+.searchInputField {
+    background-color: #f5f8f9 !important;
+}
+
+.contact-style-1 .form-control {
+    padding-right: 14px !important;
+    padding-top: 14px !important;
+    padding-bottom: 14px !important;
+   
+}
+
+input[type="text"]:focus {
+    border: 2px solid #dbb778;
+}
+
+input[type="checkbox"]+label:before,
+input[type="radio"]+label:before {
+    border: 2px solid #dbb778;
+    background-color: #fff;
+}
+
+input[type="radio"]:checked+label:before,
+input[type="checkbox"]+label:hover:before,
+input[type="radio"]+label:hover:before {
+    border: 2px solid #dbb778;
+    background-color: #dbb778;
+}
+
+.sell {
+    margin-bottom: 25px
+}
+
+.car-valuation h2 {
+    margin-bottom: 35px;
+}
+
+.bg-white-important {
+    background-color: #fff;
+}
+
+.owl-next,
+.owl-prev {
+    background-color: #000000;
+    border-color: #000000;
+    color: #fff;
+}
+
+.owl-next:active,
+.owl-next:focus,
+.owl-next:hover,
+.owl-prev:active,
+.owl-prev:focus,
+.owl-prev:hover {
+    border: 2px solid #dbb778;
+    background-color: #dbb778;
+    color: #fff;
+}
+
+.post_body p span {
+    font-size: 16px !important;
+}
+
+.previousNext {
+    color: #000000;
+}
+
+.previousNext:hover {
+    color: #dbb778;
+}
+
+.stockDetailCarFeatures {
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 30px;
+    min-height: 40px;
+    border-bottom: 1px solid;
+}
+
+.corValuesList {
+    font-size: 15px;
+    padding: 16px;
+    /* list-style-type: "->" */
+}
+
+.corValuesList li {
+    padding: 5px;
+    font-weight: 600;
+}
+
+.corValuesList li::marker {
+    color: #dbb778;
+}
+
+.aboutUsPageContent {
+    padding-bottom: 0px;
+}
+
+.modal-header {
+    background-color: #dbb778;
+}
+
+.site-button:active,
+.current2,
+.page_numeric2:hover {
+    background-color: #dbb778;
+    border: 1px solid #dbb778;
+    /* border: #dbb778; */
+}
+
+.imageHeaderMobile {
+    display: none;
+}
+
+.sellYourCarCall {
+    margin-top: 5px;
+}
+
+.numberNumberClick:hover .overlap-group .text-wrapper {
+    color: #dbb778;
+}
+
+.visitLocationClick:hover .overlap-group_address .text-wrapper {
+    color: #dbb778;
+}
+
+.blogWithSearch {
+    display: flex;
+    justify-content: space-between;
+}
+
+.previousNotData {
+    color: gray;
+}
+
+.nextNotData {
+    color: gray;
+}
+
+.previousNotData:hover {
+    color: gray;
+}
+
+.nextNotData:hover {
+    color: gray;
+}
+
+.overlap-group_address {
+    position: relative;
+    width: 115px;
+    height: 34px;
+    background-color: #14191c;
+    border-radius: 1000px;
+    margin-right: 10px;
+}
+
+.numberMainDiv {
+    display: flex;
+    justify-content: end;
+}
+
+.firstHeaderIconDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#brandId::-webkit-scrollbar-thumb {
+    background: #DBB778;
+    /* Scrollbar handle color */
+    border-radius: 5px;
+    /* Rounded scrollbar handle */
+}
+
+.intl-tel-input .flag-container {
+    margin-top: -9px;
+}
+
+.desktop-only {
+    pointer-events: none;
+    cursor: default;
+}
+
+@media (min-width: 280px) and (max-width:340px) {
+    .pill {
+        font-size: 8px !important;
+    }
+}
+
+@media (min-width: 280px) and (max-width:767px) {
+    .new_arrival {
+        left: revert;
+    }
+    .current {
+        left: revert;
+    }
+    .sold {
+        left: revert;
+    }
+    .pill {
+        font-size: 10px !important;
+    }
+    .newArrival {
+        margin: 10px;
+    }
+    .newArrivalTag {
+        font-weight: 600;
+        padding: 5px;
+        border-radius: 4px;
+        font-size: 10px;
+    }
+    .brandDescriptionDiv {
+        margin: 0px 23px 50px;
+    }
+    .select2-container--default.select2-container--focus .select2-selection--multiple {
+        font-size: 13px !important;
+    }
+    .requestModal+.select2-container {
+        width: 98% !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width:991px) {
+    .newArrival {
+        margin: 8px;
+    }
+    .newArrivalTag {
+        font-weight: 600;
+        padding: 5px;
+        border-radius: 4px;
+        font-size: 8px;
+    }
+    .banner-home .bannerTextDiv {
+        height: 90%;
+        top: 60px;
+    }
+    .group-3 {
+        display: none;
+    }
+    .title-separator {
+        margin: 0px !important;
+        margin-bottom: revert !important;
+    }
+    .fieldDiv {
+        margin-right: revert;
+        margin: 5px;
+    }
+    .findVehicleFormDiv div {
+        width: 25% !important;
+    }
+    .blogs {
+        width: 45%;
+    }
+    .car-features {
+        width: 100% !important;
+    }
+    .vehicles-section>.container-fluid>.row>div {
+        width: 33%;
+    }
+    .figure-caption a {
+        font-size: 15px;
+    }
+    .bx-style-1 h4 {
+        background-color: rgb(249, 249, 249);
+        padding: 10px 5px;
+        margin-bottom: 10px;
+    }
+}
+
+@media (min-width: 768px) {
+    .new_arrival {
+        left: 16px;
+    }
+    .current {
+        left: -16px;
+    }
+    .sold {
+        left: -46px;
+    }
+    .ThreeCardImgDiv {
+        border-radius: 8px;
+    }
+    .ThreeCardImgDiv:hover+.figure-caption .cardNameText {
+        color: #dbb778 !important;
+    }
+    .desktop-only {
+        pointer-events: auto;
+        cursor: pointer;
+    }
+}
+
+
+
+.card.slick-slide:hover .featured-vehicle-desc-wrapper .group-13 {
+    display: none;
+}
+
+.card.slick-slide .card-body.new-design .featured-vehicle-desc-wrapper.card-text-body {
+    padding: 0rem 1rem;
+}
+
+.card.slick-slide .card-body.new-design {
+    padding: 1rem 0;
+    padding-top: 0 !important;
+    padding-bottom: 1rem !important;
+}
+
+.card.slick-slide .featured-vehicle-desc-wrapper .detailbtnHover {
+    margin: 0;
+}
+
+.card.slick-slide .featured-vehicle-desc-wrapper .group-13 * {
+    color: #000;
+}
+
+.card.slick-slide:hover .featured-vehicle-desc-wrapper .detailbtnHover {
+    display: inline-block;
+    margin-top: -25px;
+}
+
+.card.slick-slide:hover .card-body.new-design {
+    background-color: #000;
+}
+
+.card.slick-slide:hover .featured-vehicle-desc-wrapper h5 {
+    color: #fff;
+}
+
+/* Container for the image */
+
+.img-gradient {
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.vehicle-card:hover .img-gradient {
+    border-radius: 5px 5px 0px 0px;
+}
+
+/* Apply a dark overlay on hover */
+
+.img-gradient::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0);
+    /* Initially transparent */
+    transition: background-color 0.3s ease;
+    /* Add transition effect */
+}
+
+/* Change the dark overlay on hover */
+
+.img-gradient:hover::before {
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Adjust the alpha value to control darkness */
+}

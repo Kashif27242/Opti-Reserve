@@ -1,0 +1,35 @@
+//Search filter CSS
+.search-filter {
+    background: url(../images/search-banner.jpg) no-repeat center center #070707;
+    background-size: cover;
+    padding: 36px 0 26px;
+    h2 {
+        text-align: center;
+        color: $textColorLight;
+    }
+    .title-separator {
+        margin-top: 18px;
+        margin-bottom: 30px;
+        span {
+            background-color: $secondaryColor;
+        }
+    }
+    .form-select {
+        background-color: #333;
+        border-color: #4d4d4d;
+        color: #999;
+        font-size: calc(1.4rem);
+        height: 40px;
+        padding-left: 1rem;
+        border-radius: 0;
+        background-image: url(../images/select-arrow.svg);
+        @include font-paragraph;
+    }
+    .btn-primary {
+        height: 40px;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        @include font-regular;
+    }
+}

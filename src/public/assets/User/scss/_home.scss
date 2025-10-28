@@ -1,0 +1,191 @@
+.vehicles-section {
+    background: #050100;
+    padding: 25px 0 8px;
+    .figure {
+        margin: 15px;
+        .figure-caption {
+            z-index: 1;
+            padding: 1rem 1rem;
+            font-size: 1.6rem;
+            color: $textColorLight;
+            text-align: center;
+            width: 100%;
+            img {
+                width: 60px;
+            }
+        }
+    }
+}
+.featured-vehicles {
+    background-color: #fafafa;
+    padding: 4.3rem 0 7.1rem;
+    .featured-slide {
+        .card {
+            @media (min-width: 991px) {
+                height: 350px;
+                overflow: hidden;
+            }
+            margin: 5px;
+            position: relative;
+            .card-body {
+                background: $bgWhite;
+                @media (min-width: 991px) {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    top: 0;
+                    bottom: 0;
+                    z-index: 2;
+                    margin-top: 180px;
+                }
+                text-align: center;
+                padding-top: 31px;
+                transition: .4s;
+                h5 {
+                    font-size: 1.5rem;
+                    color: #181818;
+                    @include font-heading;
+                }
+                .card-text {
+                    margin-bottom: 5px;
+                }
+                .card-price {
+                    padding-top: 12px;
+                    span{
+                        display: inline-block;
+                        padding: 1.6rem 2rem 2.7rem;
+                        font-size: 2.6rem;
+                        border-top: 1px solid #e5e5e5;
+                    }
+                    
+                }
+                .quick-specs {
+                    padding: 1.3rem 0 0;
+                    li {
+                        font-size: 1.6rem;
+                        margin-bottom: 1rem;
+                    }
+                }
+            }
+            &:hover {
+                .card-body {
+                    @media (min-width: 991px) {margin-top: 0;}  
+                }
+            }
+        }
+        .slick-next{
+            @media (max-width: 600px) {right: 10px; width: 35px; background-size: 100%;}
+        }
+        .slick-prev{
+            @media (max-width: 600px) {left: 10px; z-index: 10; width: 35px; background-size: 100%;}
+        }
+    }
+}
+.logos-wrap {
+    background: #f1f2f6;
+    padding: 2.5rem 0 2.4rem;
+    .logos-slide {
+        .logo-card {
+            background-color: $bgWhite;
+            margin: 5px;
+            img {
+                border: 1px solid #ccc;
+                width: 135px;
+                height: 106px;
+            }
+        }
+        .slick-prev, .slick-next {
+            top: 60%;
+            width: 21px;
+            height: 28px;
+            z-index: 1;
+        }
+        .slick-next{
+            right: 0;
+            background: url(../images/next-red.png) no-repeat;
+        }
+        .slick-prev{
+            left: 5px;
+            background: url(../images/prev-red.png) no-repeat;
+        }
+    }
+}
+.banner-home {
+    position: relative;
+    @media (min-width: 1199px) {
+        height: 581px;
+    }
+        overflow: hidden;
+    video {
+        width: calc(100%);
+        margin: 0;
+    }
+    .banner-text {
+        position: absolute;
+        z-index: 1;
+        background-color: rgba($color: #000000, $alpha: 0.4);
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        padding-top: 2rem;
+        @media (min-width: 1199px) {
+            // padding-top: 135px;
+            padding-left: 138px;
+        }
+        @media (max-width: 991px) {
+            text-align: center;
+            padding: 5rem 2rem;
+        }
+        h1 {
+            font-size: calc(3rem);
+            @include font-heading;
+            letter-spacing: -3px;
+            @media (min-width: 991px) {
+                font-size: calc(6.6rem);
+                line-height: 6.5rem;
+                margin-bottom: 16px;
+            }
+            span {
+                font-size: 2.2rem;
+                line-height: 2.4rem;
+                margin-bottom: 10px;
+                letter-spacing: normal;
+            }
+        }
+        p {
+            margin-bottom: 0.6rem;
+            @media (min-width: 1199px) {
+                margin-bottom: 18px;
+            }
+            a {
+                img {
+                    @media (max-width: 767px) {
+                    width: 40px;
+                    }
+                }
+            }
+        }
+    }
+}
+.section-welcome {
+    .welcome-wrap {
+        padding-top: 6.5rem;
+        @media (min-width: 1199px) {
+            padding-left: 50px;
+        }
+        h2 {
+            font-family: 'Interstate BoldCondensed';
+            font-size:  calc(4rem) ;
+            margin-bottom: 2rem;
+            letter-spacing: -2px;
+        }
+        hr {
+            margin-bottom: 4rem;
+        }
+        p {
+            line-height: 2.1rem;
+            margin-bottom: 17px;
+        }
+    }
+}

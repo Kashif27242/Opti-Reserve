@@ -1,0 +1,152 @@
+<div class="layout-wrapper">
+  <!-- Header -->
+  <div class="header d-flex justify-content-between align-items-center">
+    <div class="menu-toggle-btn">
+      <a href="#"
+        ><i class="bi bi-list" style="color: #dbb778; margin-left: 10px"></i
+      ></a>
+    </div>
+    <div class="header-title"><span>Manage Resources</span></div>
+    <a href="/" class="logo">
+      <img src="/assets/User/logo/Logo-min.png" height="40" alt="logo" />
+    </a>
+  </div>
+
+  <!-- Breadcrumb -->
+  <div class="mb-4">
+    <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="/dashboard"
+            ><i class="bi bi-globe2 small me-2"></i> Dashboard</a
+          >
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Resources</li>
+      </ol>
+    </nav>
+
+    <div>
+      <a href="/resources/create"
+        ><button class="btn btn-primary">Add Resource</button></a
+      >
+    </div>
+    <br />
+    <% if (success && success.length > 0) { %>
+    <div class="alert alert-success"><%= success %></div>
+    <% } %> <% if (error && error.length > 0) { %>
+    <div class="alert alert-danger"><%= error %></div>
+    <% } %>
+
+     <!-- Card: Filters and Table -->
+    <div class="card">
+      <div class="card-body">
+
+        <div class="d-md-flex gap-4 align-items-center">
+          <div class="d-none d-md-flex text-dark">All Categories</div>
+
+          <div class="d-md-flex gap-4 align-items-center">
+            <form class="mb-3 mb-md-0" id="filterForm">
+              <div class="row g-3">
+                <div class="col-md-3">
+                  <select class="form-select" name="sortDirection" id="sortSelect">
+                    <option value="">Sort by</option>
+                    <option value="desc">Desc</option>
+                    <option value="asc">Asc</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <select class="form-select" id="perPageSelect">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" id="searchInput">
+                    <button class="btn btn-outline-light" type="button" id="searchButton"></button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Table -->
+   <div class="table-responsive">
+      <table class="table table-custom table-lg mb-0" id="featuresTable">
+        <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Category ID</th>
+              <th>Image</th>
+              <th>Available</th>
+              <th class="text-end">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% if (resources && resources.length > 0) { %> <%
+            resources.forEach(resource => { %>
+            <tr>
+              <td><%= resource.id %></td>
+              <td><%= resource.name %></td>
+              <td><%= resource.categoryId || "-" %></td>
+              <td>
+                <% if (resource.image) { %>
+                <img
+                  src="/uploads/resources/<%= resource.image %>"
+                  height="50"
+                />
+                <% } else { %> - <% } %>
+              </td>
+              <td><%= resource.available ? "Yes" : "No" %></td>
+              <td class="text-end">
+                <div class="dropdown ms-auto">
+                  <a
+                    href="#"
+                    data-bs-toggle="dropdown"
+                    class="btn btn-floating"
+                  >
+                    <i class="bi bi-three-dots"></i>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-end">
+                    <!-- Optional edit -->
+                    <!-- <a href="/resources/<%= resource.id %>/edit" class="dropdown-item">Edit</a> -->
+                    <form
+                      action="/resources/delete/<%= resource.id %>"
+                      method="GET"
+                      style="display: inline"
+                    >
+                      <button type="submit" class="dropdown-item text-danger">
+                        Delete
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <% }) %> <% } else { %>
+            <tr>
+              <td colspan="6" class="text-center text-muted">
+                No resources found.
+              </td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer>
+      <p class="text-center my-2">&copy; 2024 Opti-Reserve</p>
+    </footer>
+  </div>
+</div>

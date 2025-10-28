@@ -1,0 +1,82 @@
+html {
+    font-size: 62.5%;
+}
+body {
+    @include font-paragraph;
+}
+p {
+    font-size: calc(1.6rem);
+    @include font-paragraph;
+}
+h1, h2, h3, h4, h5, h6 {
+    @include font-paragraph;
+}
+h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong {
+    @include font-heading;
+}
+h2 {
+    font-size: 2.8rem;
+}
+a {
+    @include transition-ease;
+    text-decoration: none;
+    &:hover {
+        color: $secondaryColor;
+    }
+}
+.bg-dark {
+    background-color: $bgDark !important;
+}
+.dark {
+    @include theme($dark-theme: true);
+    a {
+        color: $textColorLight;
+    }
+}
+.title-separator {
+    margin: 17px 0 27px;
+    span {
+        background-color: #f7ac08;
+        height: 3px;
+        width: 100px;
+        margin: 0 auto;
+        display: block;
+    }
+}
+.c-btn-whatsapp {
+    display: block;
+    position: fixed;
+    font-size: 23px;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    line-height: 45px;
+    text-align: center;
+    z-index: 300;
+    left: 18px;
+    bottom: 18px;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.scroltop {
+    background: transparent;
+    bottom: 0px;
+    cursor: pointer;
+    height: 80px;
+    margin: 0;
+    position: absolute;
+    right: 72px;
+    z-index: 999;
+    img {
+        width: 45px;
+    }
+}
+.c-btn-chat {
+    position: fixed;
+    right: 22px;
+    bottom: 10px;
+    z-index: 250;
+    img {
+        width: 32px;
+    }
+}

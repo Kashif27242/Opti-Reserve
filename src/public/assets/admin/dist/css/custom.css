@@ -1,0 +1,198 @@
+body {
+    background-color: black !important;
+    color: white !important;
+}
+
+.header {
+    background-color: black !important;
+    height: 80px !important;
+    padding-bottom: 0 !important;
+    margin: 0% !important;
+}
+
+
+
+/* input,
+select,
+textarea {
+    background-color: white !important;
+} */
+
+.form-check-input:checked {
+    background-color: #DBB778;
+     border:  #DBB778 !important;
+}
+
+
+
+.form-check-input:active {
+    background-color: #DBB778;
+     border:  #DBB778 !important;
+}
+
+
+.form-check-input::selection{
+    background-color: #DBB778;
+    border:  #DBB778 !important;
+}
+
+
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(219, 183, 120, 0.25);
+}
+
+
+input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(219, 183, 120, 0.25);
+}
+.form-group {
+    margin: 20px;
+}
+.menu-body{
+
+
+    color:  white !important;
+}
+
+
+.menu-body ul li>a {
+    color: white !important;
+}
+
+.menu-body ul li>a:hover {
+    color: #eac380 !important;
+}
+
+.btn-primary {
+    background-color: #DBB778 !important;
+    border: none;
+}
+
+
+
+
+.table.table-custom thead tr th {
+    color: white !important;
+}
+
+
+.menu-body ul li>a.active {
+    position: relative;
+    background:rgb(219 183 120 / 35%);
+    color:  #DBB778;
+    border-left-color:  #DBB778 ;
+    border-right-color: #DBB778 ;
+}
+
+
+
+a {
+    text-decoration: none;
+    color:  #DBB778 ;
+}
+
+
+a:hover{
+color:  #DBB778 !important;
+
+}
+
+button:hover{
+    color:  #DBB778 !important;
+
+}
+
+button:focus{
+    border: #DBB778 !important;
+}
+
+input:focus, 
+textarea:focus, 
+select:focus  , button:focus {
+    outline: none !important; /* Removes the default outline */
+    border-color: #DBB778 !important; /* Set your desired border color */
+    box-shadow: 0 0 0 0.2rem rgba(219, 183, 120, 0.25) !important; /* Add a custom shadow for focus */
+}
+
+.bg-primary{
+    background-color: #DBB778 !important; 
+}
+
+.color-primary{
+    color: #DBB778 !important; 
+
+}
+
+
+.page-item .page-link{
+
+    color: #DBB778;
+}
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #DBB778 !important; 
+    border-color: #DBB778;
+}
+
+.page-link:focus {
+    box-shadow: 0 0 0 0.2rem rgba(219, 183, 120, 0.25);
+    outline: none;
+}
+
+
+
+
+
+
+
+
+.table-container {
+    max-height: auto;
+}
+    .dataTables_wrapper .dataTables_paginate {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    
+    .dataTables_wrapper .dataTables_scrollBody {
+        overflow-y: hidden !important;
+    }
+    
+    .dataTables_wrapper .paginate_button {
+        padding: 5px 10px;
+        margin: 0 5px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        cursor: pointer;
+
+        color: #fff !important;
+
+    }
+    
+    .dataTables_wrapper .paginate_button.current {
+        background-color:  #DBB778;
+        border: 1px solid  #DBB778;
+    }
+    
+    .dataTables_wrapper .paginate_button:hover {
+        background-color: #f0f0f0;
+        color:  black !important;
+    }
+    
+    .dataTables_wrapper .paginate_button.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .swal2-modal .swal2-actions .swal2-confirm {
+        background-color: #D4B170 !important;
+        color: #fff;
+    }
+
+
+    .btn-check:focus+.btn, .btn:focus {
+        outline: 0;
+        -webkit-box-shadow: 0 0 0 1px #DBB778;
+        box-shadow: #DBB778;
+    }

@@ -14,6 +14,7 @@ model User {
   name      String
   email     String   @unique
   password  String
+  dob       DateTime 
   role      Role     @default(FACULTY)
   approved  Boolean  @default(false)
   createdAt DateTime @default(now())
@@ -23,4 +24,35 @@ model User {
 enum Role {
   ADMIN
   FACULTY
+}
+
+// -------------------- Independent Models --------------------
+
+model ResourceCategory {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Resource {
+  id          Int      @id @default(autoincrement())
+  name        String
+  image       String?  
+  description String?
+  available   Boolean  @default(true)
+  categoryId  Int?     // keep numeric reference but no relation
+  createdById Int?     // keep numeric reference but no relation
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+
+model Booking {
+  id           Int       @id @default(autoincrement())
+  userId       Int
+  resourceId   Int
+  bookingDate  DateTime
+  status       String    @default("pending")
+  createdAt    DateTime  @default(now())
 }

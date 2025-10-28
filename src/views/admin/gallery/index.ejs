@@ -1,0 +1,315 @@
+<%- include('../layout') %>
+
+<style>
+.circle-btn {
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.circle-btn i { font-size: 15px; }
+.btn-success { background-color: rgb(21, 162, 21); }
+.btn-danger { background-color: red; }
+</style>
+
+<div class="layout-wrapper">
+
+    <!-- Header -->
+    <div class="header d-flex justify-content-between align-items-center p-0 m-0">
+        <div class="menu-toggle-btn">
+            <a href="#"><i class="bi bi-list" style="color: #DBB778; margin-left:10px;"></i></a>
+        </div>
+        <div class="header-title"><span>Gallery</span></div>
+        <a href="index.html" class="logo">
+            <img src="/assets/User/logo/Logo-min.png" width="170" height="80" id="logo" alt="logo">
+        </a>
+        <div class="header-mobile-buttons d-flex align-items-center">
+            <a href="#" class="search-bar-btn"></a>
+            <a href="#" class="actions-btn"><i class="bi bi-three-dots"></i></a>
+            <%- include('../components/logout') %>
+        </div>
+    </div>
+
+    <div class="content">
+
+        <div class="mb-4">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="#"><i class="bi bi-globe2 small me-2"></i> Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Gallery</li>
+                </ol>
+            </nav>
+
+            <% if(successMessage){ %>
+                <div class="alert alert-success"><%= successMessage %></div>
+            <% } %>
+
+            <% if(message){ %>
+                <div class="alert alert-success"><%= message %></div>
+            <% } %>
+        </div>
+
+        <!-- Gallery Upload Form -->
+        <div class="card mb-4 mx-3">
+            <div class="card-body text-dark">
+                <h3>Manage Gallery</h3>
+                <form method="POST" enctype="multipart/form-data" name="demoform" id="demoform" action="/galleries/store">
+                    <label for="formFile" class="form-label mx-3">Gallery Images</label>
+                    <div class="dropzone mx-3" id="dropzoneDragArea">
+                        <div class="dz-default dz-message dropzoneDragArea">
+                            <span>Upload file</span>
+                        </div>
+                        <div class="dropzone-previews"></div>
+                    </div>
+                    <div id="emailHelp" class="form-text mb-3 mx-3">(Images Size: Width: 1000px Height: 1000px)</div>
+                    <button type="submit" class="btn btn-primary mx-3 my-2">Upload</button>
+                    <button type="submit" class="btn my-2">Cancel</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Gallery Table -->
+        <div class="table-responsive mx-3">
+            <div class="mt-0 d-flex justify-content-between">
+                <div>
+                    <% if(galleries && galleries.length > 0){ %>
+                        <a href="javascript:void(0);" d-value="select_all" class="btn btn-success me-2" id="selectAllImagesBtn">Select All</a>
+                    <% } %>
+                    <a href="javascript:void(0);" class="btn btn-danger me-2" style="display: none;" id="deleteSelectedImagesBtn">Delete Selected Images</a>
+                    <div id="loader_img_overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; display: none; align-items: center; justify-content: center; background-color: rgba(0,0,0,0.5);">
+                        <img width="120px" id="loader_img" src="/assets/loading/loading.gif" alt="image" />
+                    </div>
+                </div>
+                <% if(galleries && galleries.length > 0){ %>
+                    <a href="javascript:void(0);" class="btn btn-primary active reorder" id="reorder">Reorder Images</a>
+                <% } %>
+                <a href="javascript:void(0);" class="btn btn-primary active" style="display: none" id="updateReorder">Save Changes</a>
+            </div>
+
+            <div id="reorderMsg" class="alert alert-primary" style="display: none;">
+                Drag images to reorder them and click "Save Changes" to save the new order.
+            </div>
+
+            <table class="table table-custom table-lg mb-0" id="featuresTable">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Image</th>
+                        <th class="text-end">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="sortable">
+                    <% if(galleries){ galleries.forEach(gallery => { %>
+                        <tr data-id="<%= gallery.id %>">
+                            <td class="text-start">
+                                <input type="checkbox" name="imageIds[]" class="imageIds form-check-input" value="<%= gallery.id %>" />
+                            </td>
+                            <td>
+                                <img src="<%= gallery.image %>" alt="Gallery Image" style="width: 60px; height:auto;">
+                            </td>
+                            <td class="text-end">
+                                <form action="/galleries/<%= gallery.id %>/delete" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger" style="padding: 0.55rem 0.75rem !important;">
+                                        <i class="bi bi-trash" style="font-size: 15px;"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }) } %>
+                </tbody>
+            </table>
+        </div>
+
+        <footer>
+            <p class="text-center my-2">&copy; 2024 LMG Motors</p>
+        </footer>
+        <br>
+    </div>
+</div>
+
+
+<script>
+Dropzone.autoDiscover = false;
+
+$(function() {
+    var myDropzone = new Dropzone("div#dropzoneDragArea", {
+        paramName: "file",
+        url: "/admin/galleries/upload", // Node route for upload
+        previewsContainer: 'div.dropzone-previews',
+        addRemoveLinks: true,
+        autoProcessQueue: false,
+        uploadMultiple: true,
+        maxFiles: 1000,
+        parallelUploads: 1000,
+        maxFilesize: 100, // MB
+        timeout: 1800000,
+        init: function() {
+            var dz = this;
+
+            dz.on("error", function(file, responseText) {
+                console.error(responseText);
+            });
+
+            $("form#demoform").submit(function(event) {
+                event.preventDefault();
+                if (dz.getQueuedFiles().length > 0) {
+                    dz.processQueue();
+                } else {
+                    console.error("No files to upload.");
+                }
+            });
+
+            dz.on("success", function(file, response) {
+                console.log("File uploaded successfully:", response);
+                displayMessage("Images uploaded successfully");
+            });
+
+            dz.on("complete", function(file) {
+                dz.removeFile(file);
+            });
+        }
+    });
+
+    $(".dropzone-previews").sortable({
+        items: '.dz-preview',
+        cursor: 'move',
+        opacity: 0.5,
+        containment: '.dropzone-previews',
+        distance: 20,
+        tolerance: 'pointer',
+        stop: function() {
+            var queue = myDropzone.files;
+            let newQueue = [];
+            $('.dropzone-previews .dz-preview .dz-image img').each(function(count, el) {
+                var name = el.getAttribute('alt');
+                queue.forEach(function(file) {
+                    if (file.name === name) newQueue.push(file);
+                });
+            });
+            myDropzone.files = newQueue;
+        }
+    });
+
+    function displayMessage(message) {
+        let container = $('#message-container');
+        if(container.length === 0) return;
+        container.text(message).addClass('alert alert-success');
+        setTimeout(() => location.reload(), 2000);
+    }
+});
+
+// Select / Delete Images
+var el = document.querySelectorAll(".imageIds");
+
+function showDeleteButton() { $("#deleteSelectedImagesBtn").show(); }
+function hideDeleteButton() { $("#deleteSelectedImagesBtn").hide(); }
+function hideSelectAllButton() { 
+    $("#selectAllImagesBtn").html("Unselect All").attr('d-value','unselect_all'); 
+}
+function showSelectAllButton() { 
+    $("#selectAllImagesBtn").html("Select All").attr('d-value','select_all'); 
+}
+
+function selectAllImages(el) {
+    el.forEach(item => item.checked = true);
+    showDeleteButton();
+    hideSelectAllButton();
+}
+
+function unSelectAllImages(el) {
+    el.forEach(item => item.checked = false);
+    hideDeleteButton();
+    showSelectAllButton();
+}
+
+function showDeleteButtonHandler() {
+    hideDeleteButton();
+    showSelectAllButton();
+    document.querySelectorAll(".imageIds").forEach(item => {
+        if(item.checked) showDeleteButton();
+    });
+}
+
+el.forEach(item => item.addEventListener('change', showDeleteButtonHandler));
+
+document.querySelector("#selectAllImagesBtn")?.addEventListener("click", (e) => {
+    var value = e.target.getAttribute('d-value');
+    if(value === "select_all") selectAllImages(el);
+    else if(value === "unselect_all") unSelectAllImages(el);
+});
+
+$("#deleteSelectedImagesBtn").on('click', () => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "Once deleted, you will not be able to recover the record!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "OK",
+        reverseButtons: true
+    }).then((result) => {
+        if(result.isConfirmed) deleteSelectedImages(el);
+    });
+});
+
+function deleteSelectedImages(el) {
+    var imageIds = Array.from(el).filter(item => item.checked).map(item => item.value);
+    if(imageIds.length === 0) return;
+
+    $.ajax({
+        url: "/admin/galleries/delete", // Node route
+        type: 'DELETE',
+        contentType: 'application/json',
+        data: JSON.stringify({ imageIds }),
+        success: (result) => {
+            if(result.success) location.reload();
+            else alert("Error deleting images.");
+        },
+        error: (err) => {
+            console.error(err);
+            alert("Error deleting images.");
+        }
+    });
+}
+
+// Reorder Images
+$(document).ready(function() {
+    $("#sortable").sortable({
+        update: function(event, ui) {
+            $('#updateReorder').show();
+            $('#reorderMsg').show();
+        }
+    });
+
+    $('#reorder').on('click', function() {
+        $('#sortable').sortable('enable');
+        $('#updateReorder').show();
+        $(this).hide();
+    });
+
+    $('#updateReorder').on('click', function() {
+        var order = [];
+        $('#sortable tr').each(function() { order.push($(this).data('id')); });
+
+        $.ajax({
+            type: "POST",
+            url: "/admin/galleries/reorder", // Node route
+            contentType: 'application/json',
+            data: JSON.stringify({ ids: order }),
+            success: function(response) {
+                if(response.success) {
+                    $('#updateReorder').hide();
+                    $('#reorderMsg').hide();
+                    $('#reorder').show();
+                }
+            }
+        });
+    });
+});
+</script>

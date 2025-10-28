@@ -1,0 +1,111 @@
+<%- include('../layout') %>
+
+<div class="layout-wrapper">
+
+    <!-- Header -->
+    <div class="header d-flex justify-content-between align-items-center">
+        <div class="menu-toggle-btn">
+            <a href="#"><i class="bi bi-list" style="color: #DBB778; margin-left:10px;"></i></a>
+        </div>
+        <div class="header-title"><span>Contact Us</span></div>
+        <a href="index.html" class="logo">
+            <img src="/assets/User/logo/Logo-min.png" width="170" height="80" id="logo" alt="logo">
+        </a>
+        <div class="header-mobile-buttons d-flex align-items-center">
+            <a href="#" class="search-bar-btn"></a>
+            <a href="#" class="actions-btn"><i class="bi bi-three-dots"></i></a>
+            <%- include('../components/logout') %>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="mb-4">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="#"><i class="bi bi-globe2 small me-2"></i> Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Model</li>
+                </ol>
+            </nav>
+        </div>
+
+        <!-- Contact Details Card -->
+        <div class="row">
+            <div class="col-lg-12 px-12 col-md-12">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="text-center text-dark">Contact Us</h5>
+                    </div>
+
+                    <% if(successMessage){ %>
+                        <div class="alert alert-success mt-3"><%= successMessage %></div>
+                    <% } %>
+
+                    <% if(message){ %>
+                        <div class="alert alert-success"><%= message %></div>
+                    <% } %>
+
+                    <% if(errors && errors.length > 0){ %>
+                        <div class="alert alert-danger">
+                            <ul>
+                                <% errors.forEach(error => { %>
+                                    <li><%= error %></li>
+                                <% }) %>
+                            </ul>
+                        </div>
+                    <% } %>
+
+                    <div class="card-body text-dark">
+                        <div class="mb-5">
+                            <span>Contact ID : <a href="#">#<%= contact.id %></a></span>
+                        </div>
+
+                        <div class="row mb-5">
+                            <div class="col-md-4 col-sm-6 mb-5">
+                                <p class="fw-bold">Name</p>
+                                <%= contact.first_name %> <%= contact.last_name %>
+                            </div>
+                            <div class="col-md-4 col-sm-6 mb-5">
+                                <p class="fw-bold">Email</p>
+                                <%= contact.email %>
+                            </div>
+                            <div class="col-md-4 col-sm-6 mb-5">
+                                <p class="fw-bold">Contact No</p>
+                                <%= contact.phone %>
+                            </div>
+
+                            <div class="col-md-4 col-sm-6">
+                                <p class="fw-bold">Inform By</p>
+                                <% if(contact.inform_by){ %>
+                                    <% contact.inform_by.forEach(info => { %>
+                                        <span class="badge bg-success me-2"><%= info %></span>
+                                    <% }) %>
+                                <% } %>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <p class="fw-bold">Contacted at</p>
+                                <%= contact.created_at %>
+                            </div>
+                        </div>
+
+                        <div class="row mb-5">
+                            <div class="col">
+                                <p class="fw-bold">Comment</p>
+                                <p><%= contact.comments %></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Optional pagination placeholder -->
+                <!-- <nav class="mt-4" aria-label="Page navigation example"></nav> -->
+            </div>
+        </div>
+
+        <footer>
+            <p class="text-center my-2">&copy; 2024 Event Ease</p>
+        </footer>
+        <br>
+    </div>
+</div>

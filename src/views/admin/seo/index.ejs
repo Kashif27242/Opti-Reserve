@@ -1,0 +1,147 @@
+<%- include('admin/layout') %>
+
+<style>
+.circle-btn {
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.circle-btn i { font-size: 15px; }
+.btn-success { background-color: rgb(21, 162, 21); }
+.btn-danger { background-color: red; }
+</style>
+
+<div class="layout-wrapper">
+    <div class="header d-flex justify-content-between align-items-center p-0 m-0">
+        <div class="menu-toggle-btn">
+            <a href="#"><i class="bi bi-list" style="color: #DBB778; margin-left:10px;"></i></a>
+        </div>
+        <div class="header-title"><span>SEO TAGS</span></div>
+        <a href="index.html" class="logo">
+            <img src="logo/Logo-min.png" width="170" height="80" id="logo" alt="logo">
+        </a>
+        <div class="header-mobile-buttons d-flex align-items-center">
+            <a href="#" class="search-bar-btn"></a>
+            <a href="#" class="actions-btn"><i class="bi bi-three-dots"></i></a>
+            <%- include('components/logout') %>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="mb-1">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#"><i class="bi bi-globe2 small me-2"></i> Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">SEO</li>
+                </ol>
+            </nav>
+            <br>
+
+            <% if (successMessage) { %>
+                <div class="alert alert-success mt-3"><%= successMessage %></div>
+            <% } %>
+
+            <% if (message) { %>
+                <div class="alert alert-success"><%= message %></div>
+            <% } %>
+
+            <% if (errors && errors.length > 0) { %>
+                <div class="alert alert-danger">
+                    <ul>
+                        <% errors.forEach(function(error){ %>
+                            <li><%= error %></li>
+                        <% }) %>
+                    </ul>
+                </div>
+            <% } %>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-custom table-lg mb-0">
+                <thead>
+                    <tr>
+                        <th>Page</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Home</td>
+                        <td class="text-end">
+                            <div class="d-flex">
+                                <div class="dropdown ms-auto">
+                                    <a href="#" data-bs-toggle="dropdown" class="btn btn-floating" aria-haspopup="true" aria-expanded="false">
+                                        <i class="bi bi-three-dots"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a href="/admin/seo/edit/1" class="dropdown-item">Edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Services</td>
+                        <td class="text-end">
+                            <div class="d-flex">
+                                <div class="dropdown ms-auto">
+                                    <a href="#" data-bs-toggle="dropdown" class="btn btn-floating">
+                                        <i class="bi bi-three-dots"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a href="/admin/seo/edit/3" class="dropdown-item">Edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>About US</td>
+                        <td class="text-end">
+                            <div class="d-flex">
+                                <div class="dropdown ms-auto">
+                                    <a href="#" data-bs-toggle="dropdown" class="btn btn-floating">
+                                        <i class="bi bi-three-dots"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a href="/admin/seo/edit/2" class="dropdown-item">Edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Contact US</td>
+                        <td class="text-end">
+                            <div class="d-flex">
+                                <div class="dropdown ms-auto">
+                                    <a href="#" data-bs-toggle="dropdown" class="btn btn-floating">
+                                        <i class="bi bi-three-dots"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a href="/admin/seo/edit/4" class="dropdown-item">Edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer>
+            <p class="text-center my-2">&copy; 2024 LMG Motors</p>
+        </footer>
+        <br>
+    </div>
+</div>

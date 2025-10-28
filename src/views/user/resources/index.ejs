@@ -1,0 +1,107 @@
+<style>
+  /* --- Layout container --- */
+  .featured-vehicles {
+    margin-top: 0;
+    padding-top: 2%;
+    background-color: #111; /* Dark background for contrast */
+  }
+
+  .card-container {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  /* --- Card styling --- */
+  .resource-card {
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    background-color: #1e1e1e;
+  }
+
+  .resource-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(219, 183, 120, 0.3);
+  }
+
+  .resource-card img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+
+  /* --- Content inside the card --- */
+  .card-body-custom {
+    padding: 12px;
+    border-top: 1px solid rgba(219, 183, 120, 0.3);
+  }
+
+  .card-body-custom h3 {
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+    margin: 0;
+    font-weight: 500;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* --- Responsive Adjustments --- */
+  @media (max-width: 768px) {
+    .resource-card h3 {
+      font-size: 1rem;
+    }
+  }
+
+  .active {
+    background-color: #DBB778;
+    color: #1e1e1e;
+  }
+</style>
+
+
+<div class="mt-5 text-center">
+  <div class="button-group-container">
+    <% const topCategories = categories.slice(0,5); %>
+    <% topCategories.forEach((cat, index) => { %>
+      <a href="/user/resources?filter=<%= cat.id %>" 
+         class="btn-custom filter-button <%= index === 0 && !filter ? 'active' : (filter == cat.id ? 'active' : '') %>">
+         <%= cat.name %>
+      </a>
+    <% }) %>
+  </div>
+</div>
+
+
+<section class="featured-vehicles">
+  <div class="container card-container py-4">
+    <% if (resources.length === 0) { %>
+      <h1 class="text-white text-center">No Services Available.</h1>
+    <% } else { %>
+      <div class="row" id="resources-container">
+        <% resources.forEach(resource => { %>
+          <div class="col-md-4 mb-4 col-sm-6">
+            <div class="resource-card">
+              <a href="/user/resources/<%= resource.id %>" class="text-decoration-none">
+                <div class="bg-white">
+                  <img
+                    src="<%= resource.image || '/images/placeholder.jpg' %>"
+                    alt="<%= resource.name %>"
+                    loading="lazy"
+                  >
+                </div>
+                <div class="card-body-custom">
+                  <h3><%= resource.name %></h3>
+                </div>
+              </a>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+</section>

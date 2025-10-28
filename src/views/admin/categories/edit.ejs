@@ -1,0 +1,83 @@
+<div class="layout-wrapper">
+  <div class="content">
+
+    <!-- Header -->
+    <div class="header d-flex justify-content-between align-items-center">
+      <div class="menu-toggle-btn">
+        <a href="#"><i class="bi bi-list" style="color: #DBB778; margin-left:10px;"></i></a>
+      </div>
+      <div class="header-title">
+        <span>Edit Resource Category</span>
+      </div>
+      <a href="#" class="logo">
+        <img src="/assets/User/logo/Logo-min.png" width="150" height="60" alt="logo" />
+      </a>
+      <div class="header-mobile-buttons d-flex align-items-center">
+        <a href="#" class="actions-btn"><i class="bi bi-three-dots"></i></a>
+        <%- include('../../components/logout') %>
+      </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="mb-4">
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="/admin/dashboard"><i class="bi bi-globe2 small me-2"></i> Dashboard</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="/admin/resource-categories">Resource Categories</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Edit</li>
+        </ol>
+      </nav>
+    </div>
+
+    <!-- Alerts -->
+    <% if (typeof success !== 'undefined') { %>
+      <div class="alert alert-success"><%= success %></div>
+    <% } %>
+
+    <% if (typeof error !== 'undefined') { %>
+      <div class="alert alert-danger"><%= error %></div>
+    <% } %>
+
+    <!-- Form Card -->
+    <div class="card">
+      <div class="card-body text-dark">
+        <!-- Update form -->
+        <form action="/admin/resource-categories/<%= category._id %>?_method=PUT" method="POST">
+          <div class="form-group mb-3">
+            <label for="name">Category Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form-control"
+              value="<%= category.name %>"
+              required
+            />
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="description">Description (optional)</label>
+            <textarea
+              id="description"
+              name="description"
+              class="form-control"
+              rows="3"
+            ><%= category.description || '' %></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary mx-3">Update Category</button>
+          <button type="button" class="btn btn-light my-2" onclick="history.back()">Cancel</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p class="text-center my-2">&copy; 2024 Academic Resource Booking</p>
+  </footer>
+</div>

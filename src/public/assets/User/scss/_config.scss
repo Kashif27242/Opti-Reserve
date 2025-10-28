@@ -1,0 +1,9 @@
+@mixin transition-ease {
+    transition: all 0.3s ease-in-out;
+}
+@mixin theme ($dark-theme: true) {
+    @if $dark-theme {
+        background: darken($bgDark, 100%);
+        color: lighten($textColorLight, 100%);
+    }
+}
