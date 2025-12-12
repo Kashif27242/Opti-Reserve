@@ -22,12 +22,11 @@ export function validateRegisterInput({ name, email, password, dob }) {
   }
 
   // Password validation
-  const passwordRegex =
-    /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
-  if (!passwordRegex.test(password)) {
-    return "Password must be at least 8 characters long, include one uppercase letter, one number, and one special character.";
-  }
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,}$/;
 
+if (!passwordRegex.test(password)) {
+  return "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.";
+}
   // DOB validation
   const parsedDob = new Date(dob);
   if (isNaN(parsedDob.getTime())) {
@@ -35,16 +34,16 @@ export function validateRegisterInput({ name, email, password, dob }) {
   }
 
   // Age check (must be at least 18)
-  const today = new Date();
-  let age = today.getFullYear() - parsedDob.getFullYear();
-  const m = today.getMonth() - parsedDob.getMonth();
-  if (m < 0 || (m === 0 && today.getDate() < parsedDob.getDate())) {
-    age--;
-  }
+  // const today = new Date();
+  // let age = today.getFullYear() - parsedDob.getFullYear();
+  // const m = today.getMonth() - parsedDob.getMonth();
+  // if (m < 0 || (m === 0 && today.getDate() < parsedDob.getDate())) {
+  //   age--;
+  // }
 
-  if (age < 18) {
-    return "You must be at least 18 years old to register.";
-  }
+  // if (age < 18) {
+  //   return "You must be at least 18 years old to register.";
+  // }
 
   return null; // ✅ all good
 }

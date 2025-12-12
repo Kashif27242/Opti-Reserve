@@ -1,0 +1,73 @@
+<div class="container my-5">
+
+  <!-- Resource Main Image -->
+  <!-- <div class="text-center mb-4">
+    <img src="<%= resource.image %>" alt="<%= resource.name %>" class="img-fluid" style="max-height: 400px; object-fit: cover;">
+  </div> -->
+
+  <!-- Resource Name & Category -->
+  <h1 class="mb-3 text-white text-center" style="font-size: 5rem;"><%= resource.name %></h1>
+  <% if (categoryName) { %>
+    <p><strong>Category:</strong> <%= categoryName %></p>
+  <% } %>
+
+  <!-- Description -->
+  <div class="mb-4">
+    <p><%= resource.description || 'No description available.' %></p>
+  </div>
+
+  <!-- Booking Form -->
+  <div class="card p-3 bg-light">
+  <h4 class="mb-3 text-center">Book This Resource</h4>
+  <form action="/booking/request" method="POST">
+    <input type="hidden" name="resourceId" value="<%= resource.id %>">
+
+    <div class="mb-3">
+      <label>Name</label>
+      <input
+        type="text"
+        name="name"
+        class="form-control"
+        value="<%= resource.name || '' %>"
+        required
+      >
+    </div>
+
+    <div class="mb-3">
+      <label>Booking Date</label>
+      <input type="date" name="bookingDate" class="form-control" required>
+    </div>
+
+    <!-- Improved Session Dropdown -->
+    <div class="mb-3">
+      <label>Select Session(s)</label>
+      <select
+        name="sessions[]"
+        class="form-control"
+        multiple
+        size="10" 
+        style="min-height: 300px;"
+        required
+      >
+        <option value="8:30 AM - 9:15 AM">8:30 AM - 9:15 AM</option>
+        <option value="9:15 AM - 10:00 AM">9:15 AM - 10:00 AM</option>
+        <option value="10:00 AM - 10:45 AM">10:00 AM - 10:45 AM</option>
+        <option value="10:45 AM - 11:30 AM">10:45 AM - 11:30 AM</option>
+        <option value="11:30 AM - 12:15 PM">11:30 AM - 12:15 PM</option>
+        <option value="12:15 PM - 1:00 PM">12:15 PM - 1:00 PM</option>
+        <option value="1:00 PM - 1:45 PM">1:00 PM - 1:45 PM</option>
+        <option value="1:45 PM - 2:30 PM">1:45 PM - 2:30 PM</option>
+        <option value="2:30 PM - 3:15 PM">2:30 PM - 3:15 PM</option>
+        <option value="3:15 PM - 4:00 PM">3:15 PM - 4:00 PM</option>
+        <option value="4:00 PM - 4:45 PM">4:00 PM - 4:45 PM</option>
+        <option value="4:45 PM - 5:30 PM">4:45 PM - 5:30 PM</option>
+        <option value="5:30 PM - 6:15 PM">5:30 PM - 6:15 PM</option>
+      </select>
+      <small class="text-muted">Hold Ctrl (Windows) or ⌘ (Mac) to select multiple sessions</small>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Book Now</button>
+  </form>
+</div>
+ -->
+</div>

@@ -26,13 +26,12 @@
     </div>
 
     <!-- Alerts -->
-    <% if (typeof success !== 'undefined') { %>
-      <div class="alert alert-success"><%= success %></div>
-    <% } %>
-
-    <% if (typeof error !== 'undefined') { %>
-      <div class="alert alert-danger"><%= error %></div>
-    <% } %>
+    <% if (error && error.length) { %>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <%= error[0] %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% } %>
 
     <!-- Form Card -->
     <div class="card">

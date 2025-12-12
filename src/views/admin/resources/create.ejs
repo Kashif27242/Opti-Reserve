@@ -24,13 +24,12 @@
   </div>
 
   <!-- Alerts -->
-  <% if (success) { %>
-    <div class="alert alert-success"><%= success %></div>
-  <% } %>
-  <% if (error) { %>
-    <div class="alert alert-danger"><%= error %></div>
-  <% } %>
-
+  <% if (error && error.length) { %>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <%= error[0] %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% } %>
   <!-- Form Card -->
   <div class="card">
     <div class="card-body text-dark">
@@ -60,10 +59,10 @@
           <input type="file" id="image" name="image" class="form-control" accept="image/*" />
         </div>
 
-        <div class="form-check mb-3">
+        <!-- <div class="form-check mb-3">
           <input type="checkbox" class="form-check-input" id="available" name="available" checked>
           <label class="form-check-label" for="available">Available</label>
-        </div>
+        </div> -->
 
         <button type="submit" class="btn btn-primary mx-3">Add Resource</button>
         <button type="button" class="btn btn-light my-2" onclick="history.back()">Cancel</button>

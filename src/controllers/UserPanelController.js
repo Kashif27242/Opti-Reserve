@@ -84,40 +84,54 @@ class UserPanelController {
 
 
 
-  // Show Resource Details
- static async showResourceDetails(req, res) {
-  const id = parseInt(req.params.id);
+// Show Resource Details
+static async showResourceDetails(req, res) {
+  try {
+    const id = parseInt(req.params.id);
 
-  const resource = await prisma.resource.findUnique({
-    where: { id },
-  });
+    // ✅ Validate ID
+    if (isNaN(id)) {
+      return res.status(400).send("Invalid resource ID");
+    }
 
-  if (!resource) return res.status(404).send("Resource not found");
-
-  // ✅ Wrap in array, then get first element
-  const formattedResources = UserPanelController.formatResourceImages([resource]);
-  const formattedResource = formattedResources[0];
-
-  // Fetch category name if exists
-  let categoryName = null;
-  if (formattedResource.categoryId) {
-    const category = await prisma.resourceCategory.findUnique({
-      where: { id: formattedResource.categoryId },
+    // ✅ Fetch resource
+    const resource = await prisma.resource.findUnique({
+      where: { id },
     });
-    categoryName = category?.name || null;
-  }
 
-  // Render EJS with user layout
-  res.render("user/layout", {
-    title: formattedResource.name,
-    body: "../user/resources/details",   // ✅ Correct
-    formattedResource,
-    categoryName,
-    user: req.session.user || null,
-    message: req.flash("message"),
-    errors: req.flash("errors"),
-  });
+    if (!resource) {
+      return res.status(404).send("Resource not found");
+    }
+
+    // ✅ Format resource images
+    const formattedResources = UserPanelController.formatResourceImages([resource]);
+    const formattedResource = formattedResources[0];
+
+    // ✅ Fetch category name if exists
+    let categoryName = null;
+    if (formattedResource.categoryId) {
+      const category = await prisma.resourceCategory.findUnique({
+        where: { id: formattedResource.categoryId },
+      });
+      categoryName = category?.name || null;
+    }
+
+    // ✅ Render user layout with proper variable names
+    res.render("user/layout", {
+      title: formattedResource.name,
+      body: "../user/resources/details",
+      resource: formattedResource, // 👈 renamed so EJS uses 'resource'
+      categoryName,
+      user: req.session.user || null,
+      message: req.flash("message"),
+      errors: req.flash("errors"),
+    });
+  } catch (error) {
+    console.error("Error fetching resource details:", error);
+    res.status(500).send("Internal Server Error");
+  }
 }
+
 
 
 }
