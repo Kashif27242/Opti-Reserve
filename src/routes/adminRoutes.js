@@ -39,4 +39,22 @@ router.get("/timeslots/:id/edit", TimeSlotController.edit);
 router.put("/timeslots/:id", TimeSlotController.update);
 router.post("/timeslots/:id/delete", TimeSlotController.delete);
 
+// -------- Contacts --------
+import ContactController from "#controllers/admin/contactController.js";
+router.get("/contacts", ContactController.index);
+router.get("/contacts/:id", ContactController.show);
+router.post("/contacts/delete/:id", ContactController.delete);
+
+// -------- Sliders --------
+import SliderController from "#controllers/admin/SliderController.js";
+import { makeUploader } from "#utils/uploader.js";
+
+const upload = makeUploader("uploads/sliders");
+
+router.get("/sliders", SliderController.index);
+router.get("/sliders/create", SliderController.create);
+router.post("/sliders", upload.single("image"), SliderController.store);
+router.post("/sliders/:id/toggle", SliderController.toggleStatus);
+router.post("/sliders/delete/:id", SliderController.delete);
+
 export default router; // ✅ FIXED

@@ -1,118 +1,99 @@
-const ContactRepository = require('../repositories/contactRepository');
-const { contactCreateValidator, contactUpdateValidator } = require('../validators/contactValidator');
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 
 class ContactController {
-    constructor() {
-        this.repository = new ContactRepository();
-    }
 
-    // List contacts
-    async index(req, res) {
+    // 🧩 List all contacts (Admin)
+    static async index(req, res) {
         try {
-            const sortDirection = req.query.sortDirection || 'desc';
-            const page = parseInt(req.query.page) || 1;
-            const perPage = parseInt(req.query.perPage) || 10;
+            const contacts = await prisma.contact.findMany({
+                orderBy: { createdAt: "desc" },
+            });
 
-            const contacts = await this.repository.paginate({ page, perPage, sortBy: 'created_at', sortDirection });
-
-            res.json({ data: contacts });
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
-    }
-
-    // Store new contact
-    async store(req, res) {
-        try {
-            // Validate input
-            await contactCreateValidator(req.body);
-
-            // Prepare data
-            const data = {
-                ...req.body,
-                inform_by: JSON.stringify(req.body.informBY || [])
-            };
-
-            const contact = await this.repository.createContact(data);
-
-            res.json({
-                message: 'Thank you! We have successfully received your submission and will be in touch shortly.',
-                data: contact
+            res.render("admin/layout", {
+                title: "Contact Messages - Opti-Reserve",
+                body: "../admin/contacts/index",
+                contacts,
+                user: req.session.user || null,
             });
         } catch (error) {
-            res.status(400).json({ error: error.message });
+            console.error("Error loading contacts:", error);
+            req.flash("error", "Unable to load contacts");
+            res.redirect("/dashboard");
         }
     }
 
-    // Show single contact
-    async show(req, res) {
+    // 🧩 Show single contact (Admin)
+    static async show(req, res) {
+        const { id } = req.params;
         try {
-            const id = req.params.id;
-            const contact = await this.repository.findById(id);
+            const contact = await prisma.contact.findUnique({
+                where: { id: Number(id) },
+            });
 
-            if (!contact) return res.status(404).json({ error: 'Contact not found' });
+            if (!contact) {
+                req.flash("error", "Contact message not found");
+                return res.redirect("/contacts");
+            }
 
-            res.json({ data: contact });
+            res.render("admin/layout", {
+                title: "Message Details - Opti-Reserve",
+                body: "../admin/contacts/show",
+                contact,
+                user: req.session.user || null,
+            });
         } catch (error) {
-            res.status(500).json({ error: error.message });
+            console.error("Error loading contact details:", error);
+            req.flash("error", "Unable to load contact details");
+            res.redirect("/contacts");
         }
     }
 
-    // Edit contact (fetch for editing)
-    async edit(req, res) {
+    // 🧩 Store new contact (User)
+    static async store(req, res) {
         try {
-            const id = req.params.id;
-            const contact = await this.repository.findById(id);
+            const { first_name, last_name, email, phone, comments, informBY } = req.body;
 
-            if (!contact) return res.status(404).json({ error: 'Contact not found' });
+            if (!first_name || !last_name || !email || !phone || !comments) {
+                req.flash("errors", ["All fields are required."]);
+                return res.redirect("/contact");
+            }
 
-            res.json({ data: contact });
+            const informByString = Array.isArray(informBY) ? informBY.join(", ") : informBY;
+
+            await prisma.contact.create({
+                data: {
+                    firstName: first_name,
+                    lastName: last_name,
+                    email,
+                    phone,
+                    comments,
+                    informBy: informByString,
+                },
+            });
+
+            req.flash("message", "Thank you! We have successfully received your submission and will be in touch shortly.");
+            res.redirect("/contact");
+
         } catch (error) {
-            res.status(500).json({ error: error.message });
+            console.error("Error storing contact:", error);
+            req.flash("errors", ["Something went wrong. Please try again."]);
+            res.redirect("/contact");
         }
     }
 
-    // Update contact
-    async update(req, res) {
+    // 🧩 Delete contact (Admin)
+    static async delete(req, res) {
+        const { id } = req.params;
         try {
-            const id = req.params.id;
-
-            await contactUpdateValidator(req.body);
-
-            const contact = await this.repository.update(id, req.body);
-
-            res.json({ message: 'Contact updated.', data: contact });
+            await prisma.contact.delete({ where: { id: Number(id) } });
+            req.flash("success", "Message deleted successfully");
         } catch (error) {
-            res.status(400).json({ error: error.message });
+            console.error("Error deleting contact:", error);
+            req.flash("error", "Unable to delete message");
         }
-    }
-
-    // Delete contact
-    async destroy(req, res) {
-        try {
-            const id = req.params.id;
-
-            const deleted = await this.repository.delete(id);
-
-            res.json({ message: 'Contact deleted.', deleted });
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
-    }
-
-    // Export contacts as CSV
-    async exportContacts(req, res) {
-        try {
-            const csvStream = await this.repository.exportContactsToCSV();
-
-            const filename = `contacts_${new Date().toISOString().replace(/[:.]/g, '-')}.csv`;
-            res.setHeader('Content-Type', 'text/csv');
-            res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
-            csvStream.pipe(res);
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
+        res.redirect("/contacts");
     }
 }
 
-module.exports = new ContactController();
+export default ContactController;

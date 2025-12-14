@@ -1,0 +1,93 @@
+<div class="layout-wrapper">
+    <div class="header d-flex justify-content-between align-items-center">
+        <div class="menu-toggle-btn">
+            <a href="#">
+                <i class="bi bi-list" style="color: #dbb778; margin-left: 10px"></i>
+            </a>
+        </div>
+        <div class="header-title">
+            <span>Add Slider Image</span>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="mb-4">
+            <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="/sliders">Slider</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Create</li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">New Slider Image</h5>
+
+                        <% if (typeof error !=='undefined' && error.length> 0) { %>
+                            <div class="alert alert-danger">
+                                <%= error %>
+                            </div>
+                            <% } %>
+
+                                <form action="/sliders" method="POST" enctype="multipart/form-data">
+                                    <div class="mb-3">
+                                        <label class="form-label">Image Source</label>
+                                        <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+                                            <button class="nav-link active" id="nav-file-tab" data-bs-toggle="tab"
+                                                data-bs-target="#nav-file" type="button" role="tab"
+                                                aria-controls="nav-file" aria-selected="true">Upload File</button>
+                                            <button class="nav-link" id="nav-url-tab" data-bs-toggle="tab"
+                                                data-bs-target="#nav-url" type="button" role="tab"
+                                                aria-controls="nav-url" aria-selected="false">Image URL</button>
+                                        </div>
+                                        <div class="tab-content" id="nav-tabContent">
+                                            <div class="tab-pane fade show active" id="nav-file" role="tabpanel"
+                                                aria-labelledby="nav-file-tab">
+                                                <input type="file" name="image" id="image" class="form-control"
+                                                    accept="image/*">
+                                                <div class="form-text">Recommended size: 1920x1080</div>
+                                            </div>
+                                            <div class="tab-pane fade" id="nav-url" role="tabpanel"
+                                                aria-labelledby="nav-url-tab">
+                                                <input type="url" name="imageUrl" id="imageUrl" class="form-control"
+                                                    placeholder="https://example.com/image.jpg">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="title" class="form-label">Title (Optional)</label>
+                                        <input type="text" name="title" id="title" class="form-control"
+                                            placeholder="e.g. Welcome to Opti-Reserve">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="description" class="form-label">Description (Optional)</label>
+                                        <input type="text" name="description" id="description" class="form-control"
+                                            placeholder="e.g. Smart Booking. Simple Experience.">
+                                    </div>
+
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" name="active" id="active" class="form-check-input"
+                                            checked>
+                                        <label for="active" class="form-check-label">Active</label>
+                                    </div>
+
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary">Upload Image</button>
+                                    </div>
+                                </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p class="text-center my-2">&copy; 2024 Opti-Reserve</p>
+        </footer>
+    </div>
+</div>

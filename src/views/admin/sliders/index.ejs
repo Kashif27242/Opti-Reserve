@@ -1,42 +1,37 @@
 <div class="layout-wrapper">
-    <!-- Header -->
     <div class="header d-flex justify-content-between align-items-center">
         <div class="menu-toggle-btn">
             <a href="#">
                 <i class="bi bi-list" style="color: #dbb778; margin-left: 10px"></i>
             </a>
         </div>
-
         <div class="header-title">
-            <span>Contact Messages</span>
+            <span>Manage Slider</span>
         </div>
-
         <a href="/" class="logo">
             <img src="/assets/User/logo/Logo-min.png" height="40" id="logo" alt="logo" />
         </a>
-
         <div class="header-mobile-buttons d-flex align-items-center">
             <a href="#" class="search-bar-btn"></a>
-            <a href="#" class="actions-btn">
-                <i class="bi bi-three-dots"></i>
-            </a>
+            <a href="#" class="actions-btn"><i class="bi bi-three-dots"></i></a>
         </div>
     </div>
 
-    <!-- Content -->
     <div class="content">
-        <!-- Breadcrumb -->
         <div class="mb-4">
             <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="/dashboard">
-                            <i class="bi bi-globe2 small me-2"></i> Dashboard
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">Contacts</li>
+                    <li class="breadcrumb-item"><a href="/dashboard"><i class="bi bi-globe2 small me-2"></i>
+                            Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Slider</li>
                 </ol>
             </nav>
+
+            <div>
+                <a href="/sliders/create">
+                    <button class="btn btn-primary">Add Slider Image</button>
+                </a>
+            </div>
 
             <br />
 
@@ -55,49 +50,40 @@
                         <% } %>
         </div>
 
-        <!-- Table -->
         <div class="table-responsive">
-            <table class="table table-custom table-lg mb-0" id="contactsTable">
+            <table class="table table-custom table-lg mb-0" id="slidersTable">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>NAME</th>
-                        <th>EMAIL</th>
-                        <th>PHONE</th>
-                        <th>MESSAGE</th>
-                        <th>PREF.</th>
-                        <th>DATE</th>
+                        <th>IMAGE</th>
+                        <th>TITLE</th>
+                        <th>STATUS</th>
                         <th class="text-end">Actions</th>
                     </tr>
                 </thead>
-
                 <tbody>
-                    <% if (contacts && contacts.length> 0) { %> <% contacts.forEach(contact=> { %>
+                    <% if (sliders && sliders.length> 0) { %>
+                        <% sliders.forEach(slider=> { %>
                             <tr>
                                 <td>
-                                    <%= contact.id %>
+                                    <%= slider.id %>
                                 </td>
                                 <td>
-                                    <%= contact.firstName %>
-                                        <%= contact.lastName %>
+                                    <% if (slider.image.startsWith('http')) { %>
+                                        <img src="<%= slider.image %>" alt="Slider Image"
+                                            style="width: 100px; height: 60px; object-fit: cover; border-radius: 5px;">
+                                        <% } else { %>
+                                            <img src="/uploads/sliders/<%= slider.image %>" alt="Slider Image"
+                                                style="width: 100px; height: 60px; object-fit: cover; border-radius: 5px;">
+                                            <% } %>
                                 </td>
                                 <td>
-                                    <%= contact.email %>
+                                    <%= slider.title || '-' %>
                                 </td>
                                 <td>
-                                    <%= contact.phone %>
-                                </td>
-                                <td>
-                                    <span title="<%= contact.comments %>">
-                                        <%= contact.comments.length> 50 ? contact.comments.substring(0, 50) + '...' :
-                                            contact.comments %>
+                                    <span class="badge bg-<%= slider.active ? 'success' : 'secondary' %>">
+                                        <%= slider.active ? 'Active' : 'Inactive' %>
                                     </span>
-                                </td>
-                                <td>
-                                    <%= contact.informBy || '-' %>
-                                </td>
-                                <td>
-                                    <%= new Date(contact.createdAt).toLocaleDateString() %>
                                 </td>
                                 <td class="text-end">
                                     <div class="d-flex">
@@ -107,12 +93,16 @@
                                                 <i class="bi bi-three-dots"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end">
-                                                <a href="/contacts/<%= contact.id %>" class="dropdown-item">View</a>
-                                                <form action="/contacts/delete/<%= contact.id %>" method="POST"
+                                                <form action="/sliders/<%= slider.id %>/toggle" method="POST"
                                                     style="display: inline">
-                                                    <button type="submit" class="dropdown-item text-danger">
-                                                        Delete
+                                                    <button type="submit" class="dropdown-item">
+                                                        <%= slider.active ? 'Deactivate' : 'Activate' %>
                                                     </button>
+                                                </form>
+                                                <form action="/sliders/delete/<%= slider.id %>" method="POST"
+                                                    style="display: inline" onsubmit="return confirm('Are you sure?');">
+                                                    <button type="submit"
+                                                        class="dropdown-item text-danger">Delete</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -122,9 +112,7 @@
                             <% }) %>
                                 <% } else { %>
                                     <tr>
-                                        <td colspan="8" class="text-center text-muted">
-                                            No messages found.
-                                        </td>
+                                        <td colspan="5" class="text-center text-muted">No slider images found.</td>
                                     </tr>
                                     <% } %>
                 </tbody>
@@ -134,6 +122,5 @@
         <footer>
             <p class="text-center my-2">&copy; 2024 Opti-Reserve</p>
         </footer>
-        <br />
     </div>
 </div>

@@ -1,29 +1,41 @@
 <div id="heroSlider" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
   <div class="carousel-inner">
 
-    <div class="carousel-item active">
-      <img src="https://szabist-isb.edu.pk/wp-content/uploads/2020/05/356A7777-3.jpg" class="d-block w-100 vh-100 object-fit-cover" alt="slide 1">
-      <div class="carousel-caption d-flex flex-column justify-content-center align-items-center h-100">
-        <h1 class="text-white fw-bold display-4">Welcome to Opti-Reserve</span></h1>
-        <p class="lead text-light">Smart Booking. Simple Experience.</p>
-      </div>
-    </div>
-
-    <div class="carousel-item">
-      <img src="https://wpassets.graana.com/blog/wp-content/uploads/2023/12/Szabist-Collage-Larkana.jpg" class="d-block w-100 vh-100 object-fit-cover" alt="slide 2">
-      <div class="carousel-caption d-flex flex-column justify-content-center align-items-center h-100">
-        <h1 class="text-white fw-bold display-4">Reserve Smarter</h1>
-        <p class="lead text-light">Seamless scheduling for modern users</p>
-      </div>
-    </div>
-
-    <div class="carousel-item">
-      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" class="d-block w-100 vh-100 object-fit-cover" alt="slide 3">
-      <div class="carousel-caption d-flex flex-column justify-content-center align-items-center h-100">
-        <h1 class="text-white fw-bold display-4">Experience Efficiency</h1>
-        <p class="lead text-light">Reliable bookings anytime, anywhere</p>
-      </div>
-    </div>
+    <% if (sliders && sliders.length> 0) { %>
+      <% sliders.forEach((slider, index)=> { %>
+        <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+          <% if (slider.image.startsWith('http')) { %>
+            <img src="<%= slider.image %>" class="d-block w-100 vh-100 object-fit-cover"
+              alt="<%= slider.title || 'Slide' %>">
+            <% } else { %>
+              <img src="/uploads/sliders/<%= slider.image %>" class="d-block w-100 vh-100 object-fit-cover"
+                alt="<%= slider.title || 'Slide' %>">
+              <% } %>
+                <div class="carousel-caption d-flex flex-column justify-content-center align-items-center h-100">
+                  <% if (slider.title) { %>
+                    <h1 class="text-white fw-bold display-4">
+                      <%= slider.title %>
+                    </h1>
+                    <% } %>
+                      <% if (slider.description) { %>
+                        <p class="lead text-light">
+                          <%= slider.description %>
+                        </p>
+                        <% } %>
+                </div>
+        </div>
+        <% }) %>
+          <% } else { %>
+            <!-- Fallback static slide if no dynamic sliders -->
+            <div class="carousel-item active">
+              <img src="https://szabist-isb.edu.pk/wp-content/uploads/2020/05/356A7777-3.jpg"
+                class="d-block w-100 vh-100 object-fit-cover" alt="Default Slide">
+              <div class="carousel-caption d-flex flex-column justify-content-center align-items-center h-100">
+                <h1 class="text-white fw-bold display-4">Welcome to Opti-Reserve</h1>
+                <p class="lead text-light">Smart Booking. Simple Experience.</p>
+              </div>
+            </div>
+            <% } %>
 
   </div>
 
@@ -42,3 +54,13 @@
 <br>
 <br>
 <br>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var myCarousel = document.querySelector('#heroSlider')
+    var carousel = new bootstrap.Carousel(myCarousel, {
+      interval: 4000,
+      ride: 'carousel'
+    })
+  });
+</script>

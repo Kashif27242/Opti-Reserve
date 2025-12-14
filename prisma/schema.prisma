@@ -74,3 +74,24 @@ model TimeSlot {
   updatedAt DateTime @updatedAt
   bookings  Booking[]
 }
+
+model Contact {
+  id        Int      @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String
+  phone     String
+  comments  String   @db.Text
+  informBy  String?  // Stored as JSON string or comma-separated
+  createdAt DateTime @default(now())
+}
+
+model Slider {
+  id          Int      @id @default(autoincrement())
+  image       String
+  title       String?
+  description String?
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

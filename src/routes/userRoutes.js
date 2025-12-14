@@ -15,4 +15,12 @@ router.post("/booking/request", BookingRequestController.submitRequest);
 router.get("/api/booking/availability", BookingRequestController.checkAvailability);
 router.get("/user/my-bookings", UserPanelController.showMyBookings);
 
+// Contact Submission
+import ContactController from "#controllers/admin/contactController.js";
+router.post("/contacts/store", ContactController.store);
+
+// Change Password
+router.get("/user/change-password", UserPanelController.showChangePassword);
+router.post("/user/change-password", UserPanelController.updatePassword);
+
 export default router;
