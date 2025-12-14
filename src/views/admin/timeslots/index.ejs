@@ -1,0 +1,149 @@
+<div class="layout-wrapper">
+    <!-- Header -->
+    <div class="header d-flex justify-content-between align-items-center">
+        <div class="menu-toggle-btn">
+            <a href="#">
+                <i class="bi bi-list" style="color: #dbb778; margin-left: 10px"></i>
+            </a>
+        </div>
+
+        <div class="header-title">
+            <span>Manage Time Slots</span>
+        </div>
+
+        <a href="/" class="logo">
+            <img src="/assets/User/logo/Logo-min.png" height="40" id="logo" alt="logo" />
+        </a>
+
+        <div class="header-mobile-buttons d-flex align-items-center">
+            <a href="#" class="search-bar-btn"></a>
+            <a href="#" class="actions-btn">
+                <i class="bi bi-three-dots"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <!-- Breadcrumb -->
+        <div class="mb-4">
+            <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/dashboard">
+                            <i class="bi bi-globe2 small me-2"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Time Slots</li>
+                </ol>
+            </nav>
+
+            <!-- Add button -->
+            <div>
+                <a href="/timeslots/create">
+                    <button class="btn btn-primary">Add Time Slot</button>
+                </a>
+            </div>
+
+            <br />
+
+            <% if (success && success.length) { %>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <%= success[0] %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <% } %>
+                    <% if (error && error.length) { %>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <%= error[0] %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                        </div>
+                        <% } %>
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive">
+            <table class="table table-custom table-lg mb-0" id="timeSlotsTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>LABEL</th>
+                        <th>START TIME</th>
+                        <th>END TIME</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% if (timeSlots && timeSlots.length> 0) { %> <% timeSlots.forEach(slot=> { %>
+                            <tr>
+                                <td>
+                                    <%= slot.id %>
+                                </td>
+                                <td>
+                                    <%= slot.label || '-' %>
+                                </td>
+                                <td>
+                                    <%= slot.startTime %>
+                                </td>
+                                <td>
+                                    <%= slot.endTime %>
+                                </td>
+                                <td class="text-end">
+                                    <div class="d-flex">
+                                        <div class="dropdown ms-auto">
+                                            <a href="#" data-bs-toggle="dropdown" class="btn btn-floating"
+                                                aria-haspopup="true" aria-expanded="false">
+                                                <i class="bi bi-three-dots"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a href="/timeslots/<%= slot.id %>/edit" class="dropdown-item">Edit</a>
+                                                <form action="/timeslots/<%= slot.id %>/delete" method="POST"
+                                                    style="display: inline">
+                                                    <button type="submit" class="dropdown-item text-danger">
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <% }) %>
+                                <% } else { %>
+                                    <tr>
+                                        <td colspan="5" class="text-center text-muted">
+                                            No time slots found.
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                </tbody>
+            </table>
+        </div>
+
+        <footer>
+            <p class="text-center my-2">&copy; 2024 Opti-Reserve</p>
+        </footer>
+        <br />
+    </div>
+</div>
+
+<script>
+    // Delete confirmation
+    document.querySelectorAll('form[action*="/delete"]').forEach((form) => {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            Swal.fire({
+                title: "Are you sure you want to delete this time slot?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
+            }).then((result) => {
+                if (result.isConfirmed) form.submit();
+            });
+        });
+    });
+</script>

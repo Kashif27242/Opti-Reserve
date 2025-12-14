@@ -1,0 +1,64 @@
+<div class="layout-wrapper">
+    <!-- Header -->
+    <div class="header d-flex justify-content-between align-items-center">
+        <div class="menu-toggle-btn">
+            <a href="#"><i class="bi bi-list" style="color: #DBB778; margin-left:10px;"></i></a>
+        </div>
+        <div class="header-title">
+            <span>Add Time Slot</span>
+        </div>
+        <a href="/" class="logo">
+            <img src="/assets/User/logo/Logo-min.png" height="40" alt="logo" />
+        </a>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="mb-4">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/dashboard"><i class="bi bi-globe2 small me-2"></i> Dashboard</a>
+                </li>
+                <li class="breadcrumb-item"><a href="/timeslots">Time Slots</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Create</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Alerts -->
+    <% if (error && error.length) { %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <%= error[0] %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <% } %>
+            <!-- Form Card -->
+            <div class="card">
+                <div class="card-body text-dark">
+                    <form action="/timeslots" method="POST">
+                        <div class="form-group mb-3">
+                            <label for="label">Label (Optional)</label>
+                            <input type="text" id="label" name="label" class="form-control"
+                                placeholder="e.g. Morning Session 1" />
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 form-group mb-3">
+                                <label for="startTime">Start Time</label>
+                                <input type="time" id="startTime" name="startTime" class="form-control" required />
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label for="endTime">End Time</label>
+                                <input type="time" id="endTime" name="endTime" class="form-control" required />
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mx-3">Add Time Slot</button>
+                        <button type="button" class="btn btn-light my-2" onclick="history.back()">Cancel</button>
+                    </form>
+                </div>
+            </div>
+
+            <footer>
+                <p class="text-center my-2">&copy; 2024 Opti-Reserve</p>
+            </footer>
+</div>

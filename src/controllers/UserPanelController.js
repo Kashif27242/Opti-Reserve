@@ -84,55 +84,92 @@ class UserPanelController {
 
 
 
-// Show Resource Details
-static async showResourceDetails(req, res) {
-  try {
-    const id = parseInt(req.params.id);
+  // Show Resource Details
+  static async showResourceDetails(req, res) {
+    try {
+      const id = parseInt(req.params.id);
 
-    // ✅ Validate ID
-    if (isNaN(id)) {
-      return res.status(400).send("Invalid resource ID");
-    }
+      // ✅ Validate ID
+      if (isNaN(id)) {
+        return res.status(400).send("Invalid resource ID");
+      }
 
-    // ✅ Fetch resource
-    const resource = await prisma.resource.findUnique({
-      where: { id },
-    });
-
-    if (!resource) {
-      return res.status(404).send("Resource not found");
-    }
-
-    // ✅ Format resource images
-    const formattedResources = UserPanelController.formatResourceImages([resource]);
-    const formattedResource = formattedResources[0];
-
-    // ✅ Fetch category name if exists
-    let categoryName = null;
-    if (formattedResource.categoryId) {
-      const category = await prisma.resourceCategory.findUnique({
-        where: { id: formattedResource.categoryId },
+      // ✅ Fetch resource
+      const resource = await prisma.resource.findUnique({
+        where: { id },
       });
-      categoryName = category?.name || null;
+
+      if (!resource) {
+        return res.status(404).send("Resource not found");
+      }
+
+      // ✅ Format resource images
+      const formattedResources = UserPanelController.formatResourceImages([resource]);
+      const formattedResource = formattedResources[0];
+
+      // ✅ Fetch category name if exists
+      let categoryName = null;
+      if (formattedResource.categoryId) {
+        const category = await prisma.resourceCategory.findUnique({
+          where: { id: formattedResource.categoryId },
+        });
+        categoryName = category?.name || null;
+      }
+
+      // ✅ Fetch Time Slots
+      const timeSlots = await prisma.timeSlot.findMany({
+        orderBy: { startTime: "asc" },
+      });
+
+      // ✅ Render user layout with proper variable names
+      res.render("user/layout", {
+        title: formattedResource.name,
+        body: "../user/resources/details",
+        resource: formattedResource, // 👈 renamed so EJS uses 'resource'
+        categoryName,
+        timeSlots, // Pass time slots to view
+        user: req.session.user || null,
+        message: req.flash("message"),
+        errors: req.flash("errors"),
+      });
+    } catch (error) {
+      console.error("Error fetching resource details:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  }
+
+
+
+  // Show My Bookings
+  static async showMyBookings(req, res) {
+    if (!req.session.user) {
+      req.flash("error", "Please login first");
+      return res.redirect("/login");
     }
 
-    // ✅ Render user layout with proper variable names
-    res.render("user/layout", {
-      title: formattedResource.name,
-      body: "../user/resources/details",
-      resource: formattedResource, // 👈 renamed so EJS uses 'resource'
-      categoryName,
-      user: req.session.user || null,
-      message: req.flash("message"),
-      errors: req.flash("errors"),
-    });
-  } catch (error) {
-    console.error("Error fetching resource details:", error);
-    res.status(500).send("Internal Server Error");
+    try {
+      const bookings = await prisma.booking.findMany({
+        where: { userId: req.session.user.id },
+        include: {
+          resource: true,
+          timeSlot: true,
+        },
+        orderBy: { bookingDate: "desc" },
+      });
+
+      res.render("user/layout", {
+        title: "My Bookings - Opti-Reserve",
+        body: "../user/bookings/index",
+        bookings,
+        user: req.session.user,
+        message: req.flash("message"),
+        errors: req.flash("errors"),
+      });
+    } catch (error) {
+      console.error("Error fetching user bookings:", error);
+      res.status(500).send("Internal Server Error");
+    }
   }
-}
-
-
 
 }
 

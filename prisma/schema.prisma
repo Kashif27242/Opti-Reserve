@@ -19,6 +19,7 @@ model User {
   approved  Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  bookings  Booking[]
 }
 
 enum Role {
@@ -31,6 +32,7 @@ enum Role {
 model ResourceCategory {
   id        Int      @id @default(autoincrement())
   name      String   @unique
+  description String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -45,6 +47,7 @@ model Resource {
   createdById Int?     // keep numeric reference but no relation
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  bookings    Booking[]
 }
 
 
@@ -52,7 +55,22 @@ model Booking {
   id           Int       @id @default(autoincrement())
   userId       Int
   resourceId   Int
+  timeSlotId   Int       
   bookingDate  DateTime
   status       String    @default("pending")
   createdAt    DateTime  @default(now())
+  
+  user         User      @relation(fields: [userId], references: [id])
+  resource     Resource  @relation(fields: [resourceId], references: [id])
+  timeSlot     TimeSlot  @relation(fields: [timeSlotId], references: [id])
+}
+
+model TimeSlot {
+  id        Int      @id @default(autoincrement())
+  startTime String   // Format: "HH:mm"
+  endTime   String   // Format: "HH:mm"
+  label     String?  // Optional display label
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  bookings  Booking[]
 }

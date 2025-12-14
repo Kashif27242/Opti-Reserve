@@ -1,68 +1,66 @@
 <style>
-.menu-header-logo img {
-  width: 100% !important;
-  height: 60px;
-  margin: 5%;
-}
-
-.menu {
-  background-color: black !important;
-  margin: 0;
-}
-
-@media (max-width: 992px) {
   .menu-header-logo img {
-    width: 50% !important;
+    width: 100% !important;
     height: 60px;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin: 5%;
   }
-}
 
-#main_logo {
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  font-size: 1.6rem;
-  color: #ffffff;
-  text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
-  border-bottom: 2px solid #00bfff;
-  display: inline-block;
-  padding-bottom: 3px;
-  margin: 0;
-  transition: all 0.3s ease-in-out;
-}
+  .menu {
+    background-color: black !important;
+    margin: 0;
+  }
 
-/* Blue text for the "Reserve" part */
-#main_logo span {
-  color: #00bfff;
-}
+  @media (max-width: 992px) {
+    .menu-header-logo img {
+      width: 50% !important;
+      height: 60px;
+      margin-left: 5%;
+      margin-right: 5%;
+    }
+  }
 
-/* Hover effect */
-#main_logo:hover {
-  text-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
-  border-bottom-color: #ffffff;
-}
-
-/* Mobile adjustments */
-@media (max-width: 480px) {
   #main_logo {
-    font-size: 1.2rem;
-    border-bottom: 1.5px solid #00bfff;
-    text-shadow: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1.6rem;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+    border-bottom: 2px solid #00bfff;
+    display: inline-block;
+    padding-bottom: 3px;
+    margin: 0;
+    transition: all 0.3s ease-in-out;
   }
-}
 
+  /* Blue text for the "Reserve" part */
+  #main_logo span {
+    color: #00bfff;
+  }
 
+  /* Hover effect */
+  #main_logo:hover {
+    text-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
+    border-bottom-color: #ffffff;
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 480px) {
+    #main_logo {
+      font-size: 1.2rem;
+      border-bottom: 1.5px solid #00bfff;
+      text-shadow: none;
+    }
+  }
 </style>
 
 <!-- Static Admin Header (for now) -->
 <div class="menu text-white">
   <div class="menu-header">
-<a href="/" class="menu-header-logo text-decoration-none">
-  <h1 id="main_logo">
-    Opti-<span>Reserve</span>
-  </h1>
-</a>
+    <a href="/" class="menu-header-logo text-decoration-none">
+      <h1 id="main_logo">
+        Opti-<span>Reserve</span>
+      </h1>
+    </a>
     </a>
     <a href="#" class="btn btn-sm menu-close-btn" style="color:#DDB778; background-color:transparent;">
       <i class="bi bi-x"></i>
@@ -76,11 +74,12 @@
           <span class="nav-link-icon">
             <img src="/assets/User/img/calendar.png" alt="">
           </span>
-          <span>Manage Bookings</span>
+          <span>Resource Management</span>
         </a>
         <ul class="custom-dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a href="/categories">Manage  Resources Categories</a></li>
-          <li><a href="/resources/list">Manage Resources</a></li>
+          <li><a href="/categories">Categories</a></li>
+          <li><a href="/resources/list">Resources</a></li>
+          <li><a href="/timeslots">Time Slots</a></li>
         </ul>
       </li>
 
@@ -120,13 +119,17 @@
         </a>
       </li>
 
-      <li>
-        <a href="#">
+      <li class="nav-item custom-dropdown">
+        <a class="nav-link custom-dropdown-toggle" href="#" id="bookingsDropdown" role="button">
           <span class="nav-link-icon">
             <img src="/assets/admin/dist/icons/phone-call.png" alt="">
           </span>
           <span>Booking Requests</span>
         </a>
+        <ul class="custom-dropdown-menu" aria-labelledby="bookingsDropdown">
+          <li><a href="/bookings">All Bookings</a></li>
+          <li><a href="/bookings/create">Create Booking</a></li>
+        </ul>
       </li>
 
       <li>

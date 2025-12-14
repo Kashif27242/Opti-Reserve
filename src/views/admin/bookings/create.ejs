@@ -1,0 +1,142 @@
+<div class="layout-wrapper">
+    <div class="header d-flex justify-content-between align-items-center">
+        <div class="menu-toggle-btn">
+            <a href="#">
+                <i class="bi bi-list" style="color: #dbb778; margin-left: 10px"></i>
+            </a>
+        </div>
+        <div class="header-title">
+            <span>Create Booking</span>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="mb-4">
+            <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="/bookings">Bookings</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Create</li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">New Booking</h5>
+
+                        <% if (typeof error !=='undefined' && error.length> 0) { %>
+                            <div class="alert alert-danger">
+                                <%= error %>
+                            </div>
+                            <% } %>
+
+                                <form action="/bookings" method="POST">
+                                    <div class="mb-3">
+                                        <label for="userId" class="form-label">User</label>
+                                        <select name="userId" id="userId" class="form-select" required>
+                                            <option value="">Select User</option>
+                                            <% if (users && users.length> 0) { %>
+                                                <% users.forEach(u=> { %>
+                                                    <option value="<%= u.id %>">
+                                                        <%= u.name %> (<%= u.email %>)
+                                                    </option>
+                                                    <% }) %>
+                                                        <% } %>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="resourceId" class="form-label">Resource</label>
+                                        <select name="resourceId" id="resourceId" class="form-select" required>
+                                            <option value="">Select Resource</option>
+                                            <% if (resources && resources.length> 0) { %>
+                                                <% resources.forEach(resource=> { %>
+                                                    <option value="<%= resource.id %>">
+                                                        <%= resource.name %>
+                                                    </option>
+                                                    <% }) %>
+                                                        <% } %>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="bookingDate" class="form-label">Date</label>
+                                        <input type="date" name="bookingDate" id="bookingDate" class="form-control"
+                                            required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="timeSlotId" class="form-label">Time Slot</label>
+                                        <select name="timeSlotId" id="timeSlotId" class="form-select" required>
+                                            <option value="">Select Time Slot</option>
+                                            <% if (timeSlots && timeSlots.length> 0) { %>
+                                                <% timeSlots.forEach(slot=> { %>
+                                                    <option value="<%= slot.id %>">
+                                                        <%= slot.startTime %> - <%= slot.endTime %>
+                                                                <%= slot.label ? `(${slot.label})` : '' %>
+                                                    </option>
+                                                    <% }) %>
+                                                        <% } %>
+                                        </select>
+                                    </div>
+
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary">Create Booking</button>
+                                    </div>
+                                </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p class="text-center my-2">&copy; 2024 Opti-Reserve</p>
+        </footer>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const resourceSelect = document.getElementById('resourceId');
+        const dateInput = document.getElementById('bookingDate');
+        const timeSlotSelect = document.getElementById('timeSlotId');
+
+        async function checkAvailability() {
+            const resourceId = resourceSelect.value;
+            const date = dateInput.value;
+
+            // Reset all options first
+            Array.from(timeSlotSelect.options).forEach(opt => {
+                if (opt.value !== "") {
+                    opt.disabled = false;
+                    opt.text = opt.text.replace(" (Booked)", "").replace(" (Pending)", "");
+                }
+            });
+
+            if (!resourceId || !date) return;
+
+            try {
+                const response = await fetch(`/api/booking/availability?resourceId=${resourceId}&date=${date}`);
+                const data = await response.json();
+
+                if (data.bookedSlotIds) {
+                    data.bookedSlotIds.forEach(slotId => {
+                        const option = timeSlotSelect.querySelector(`option[value="${slotId}"]`);
+                        if (option) {
+                            option.disabled = true;
+                            option.text += " (Booked)";
+                        }
+                    });
+                }
+            } catch (err) {
+                console.error("Error fetching availability:", err);
+            }
+        }
+
+        resourceSelect.addEventListener('change', checkAvailability);
+        dateInput.addEventListener('change', checkAvailability);
+    });
+</script>

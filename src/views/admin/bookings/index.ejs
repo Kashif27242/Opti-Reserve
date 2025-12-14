@@ -1,0 +1,156 @@
+<div class="layout-wrapper">
+    <!-- Header -->
+    <div class="header d-flex justify-content-between align-items-center">
+        <div class="menu-toggle-btn">
+            <a href="#">
+                <i class="bi bi-list" style="color: #dbb778; margin-left: 10px"></i>
+            </a>
+        </div>
+
+        <div class="header-title">
+            <span>Manage Bookings</span>
+        </div>
+
+        <a href="/" class="logo">
+            <img src="/assets/User/logo/Logo-min.png" height="40" id="logo" alt="logo" />
+        </a>
+
+        <div class="header-mobile-buttons d-flex align-items-center">
+            <a href="#" class="search-bar-btn"></a>
+            <a href="#" class="actions-btn">
+                <i class="bi bi-three-dots"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <!-- Breadcrumb -->
+        <div class="mb-4">
+            <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/dashboard">
+                            <i class="bi bi-globe2 small me-2"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Bookings</li>
+                </ol>
+            </nav>
+
+            <!-- Add button -->
+            <div>
+                <a href="/bookings/create">
+                    <button class="btn btn-primary">Create Booking</button>
+                </a>
+            </div>
+
+            <br />
+
+            <% if (success && success.length) { %>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <%= success[0] %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <% } %>
+                    <% if (error && error.length) { %>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <%= error[0] %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                        </div>
+                        <% } %>
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive">
+            <table class="table table-custom table-lg mb-0" id="bookingsTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>RESOURCE</th>
+                        <th>USER</th>
+                        <th>DATE</th>
+                        <th>TIME SLOT</th>
+                        <th>STATUS</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% if (bookings && bookings.length> 0) { %> <% bookings.forEach(booking=> { %>
+                            <tr>
+                                <td>
+                                    <%= booking.id %>
+                                </td>
+                                <td>
+                                    <%= booking.resource ? booking.resource.name : 'Unknown' %>
+                                </td>
+                                <td>
+                                    <%= booking.user ? booking.user.name : 'Unknown' %>
+                                </td>
+                                <td>
+                                    <%= new Date(booking.bookingDate).toLocaleDateString() %>
+                                </td>
+                                <td>
+                                    <% if (booking.timeSlot) { %>
+                                        <%= booking.timeSlot.startTime %> - <%= booking.timeSlot.endTime %>
+                                                <% } else { %>
+                                                    -
+                                                    <% } %>
+                                </td>
+                                <td>
+                                    <span
+                                        class="badge bg-<%= booking.status === 'confirmed' ? 'success' : (booking.status === 'pending' ? 'warning' : 'danger') %>">
+                                        <%= booking.status %>
+                                    </span>
+                                </td>
+                                <td class="text-end">
+                                    <div class="d-flex">
+                                        <div class="dropdown ms-auto">
+                                            <a href="#" data-bs-toggle="dropdown" class="btn btn-floating"
+                                                aria-haspopup="true" aria-expanded="false">
+                                                <i class="bi bi-three-dots"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <% if (booking.status==='pending' ) { %>
+                                                    <form action="/bookings/<%= booking.id %>/approve" method="POST"
+                                                        style="display: inline">
+                                                        <button type="submit"
+                                                            class="dropdown-item text-success">Approve</button>
+                                                    </form>
+                                                    <form action="/bookings/<%= booking.id %>/reject" method="POST"
+                                                        style="display: inline">
+                                                        <button type="submit"
+                                                            class="dropdown-item text-danger">Reject</button>
+                                                    </form>
+                                                    <% } %>
+                                                        <form action="/bookings/<%= booking.id %>/delete" method="POST"
+                                                            style="display: inline">
+                                                            <button type="submit" class="dropdown-item text-danger">
+                                                                Delete
+                                                            </button>
+                                                        </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <% }) %>
+                                <% } else { %>
+                                    <tr>
+                                        <td colspan="7" class="text-center text-muted">
+                                            No bookings found.
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                </tbody>
+            </table>
+        </div>
+
+        <footer>
+            <p class="text-center my-2">&copy; 2024 Opti-Reserve</p>
+        </footer>
+        <br />
+    </div>
+</div>

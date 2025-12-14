@@ -2,24 +2,44 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 class BookingController {
-  // 🧹 Private helper: Fetch all bookings
-  static async #fetchBookings() {
+  // 🧹 Helper: Fetch all bookings
+  static async fetchBookings() {
     return await prisma.booking.findMany({
       orderBy: { bookingDate: "desc" },
+      include: {
+        user: true,
+        resource: true,
+        timeSlot: true,
+      }
     });
   }
 
-  // 🧹 Private helper: Fetch all resources for dropdown
-  static async #fetchResources() {
+  // 🧹 Helper: Fetch all resources for dropdown
+  static async fetchResources() {
     return await prisma.resource.findMany({
       orderBy: { name: "asc" },
+    });
+  }
+
+  // 🧹 Helper: Fetch all users for dropdown
+  static async fetchUsers() {
+    return await prisma.user.findMany({
+      orderBy: { name: "asc" },
+      select: { id: true, name: true, email: true }
+    });
+  }
+
+  // 🧹 Helper: Fetch all time slots
+  static async fetchTimeSlots() {
+    return await prisma.timeSlot.findMany({
+      orderBy: { startTime: "asc" },
     });
   }
 
   // 🧩 Show all bookings
   static async index(req, res) {
     try {
-      const bookings = await this.#fetchBookings();
+      const bookings = await BookingController.fetchBookings();
 
       res.render("admin/layout", {
         title: "Resource Bookings - Opti-Reserve",
@@ -29,7 +49,7 @@ class BookingController {
       });
     } catch (error) {
       console.error("Error loading bookings:", error);
-      req.flash("error", "Unable to load bookings");
+      req.flash("error", "Unable to load bookings: " + error.message);
       res.redirect("/dashboard");
     }
   }
@@ -37,38 +57,42 @@ class BookingController {
   // 🧩 Show booking creation form
   static async create(req, res) {
     try {
-      const resources = await this.#fetchResources();
+      const resources = await BookingController.fetchResources();
+      const users = await BookingController.fetchUsers();
+      const timeSlots = await BookingController.fetchTimeSlots();
 
       res.render("admin/layout", {
         title: "New Booking - Opti-Reserve",
         body: "../admin/bookings/create",
         resources,
+        users,
+        timeSlots,
         user: req.session.user || null,
       });
     } catch (error) {
       console.error("Error loading booking form:", error);
-      req.flash("error", "Unable to load booking form");
+      req.flash("error", "Unable to load booking form: " + error.message);
       res.redirect("/bookings");
     }
   }
 
   // 🧩 Store new booking
   static async store(req, res) {
-    const { resourceId, bookingDate } = req.body;
+    const { resourceId, bookingDate, userId, timeSlotId } = req.body;
 
-    if (!resourceId || !bookingDate) {
+    if (!resourceId || !bookingDate || !userId || !timeSlotId) {
       req.flash("error", "All fields are required");
       return res.redirect("/bookings/create");
     }
 
     try {
-      const userId = req.session?.user?.id || null;
-
       // 🔍 Check for existing booking at same time
       const existing = await prisma.booking.findFirst({
         where: {
           resourceId: Number(resourceId),
           bookingDate: new Date(bookingDate),
+          timeSlotId: Number(timeSlotId),
+          status: { in: ["pending", "confirmed"] }
         },
       });
 
@@ -79,9 +103,10 @@ class BookingController {
 
       await prisma.booking.create({
         data: {
-          userId,
+          userId: Number(userId),
           resourceId: Number(resourceId),
           bookingDate: new Date(bookingDate),
+          timeSlotId: Number(timeSlotId),
           status: "pending",
         },
       });
@@ -90,7 +115,7 @@ class BookingController {
       res.redirect("/bookings");
     } catch (error) {
       console.error("Error storing booking:", error);
-      req.flash("error", "Unable to create booking");
+      req.flash("error", "Unable to create booking: " + error.message);
       res.redirect("/bookings/create");
     }
   }
@@ -107,6 +132,37 @@ class BookingController {
       req.flash("error", "Unable to delete booking");
     }
 
+    res.redirect("/bookings");
+  }
+  // 🧩 Approve booking
+  static async approve(req, res) {
+    const { id } = req.params;
+    try {
+      await prisma.booking.update({
+        where: { id: Number(id) },
+        data: { status: "confirmed" },
+      });
+      req.flash("success", "Booking approved");
+    } catch (error) {
+      console.error("Error approving booking:", error);
+      req.flash("error", "Unable to approve booking");
+    }
+    res.redirect("/bookings");
+  }
+
+  // 🧩 Reject booking
+  static async reject(req, res) {
+    const { id } = req.params;
+    try {
+      await prisma.booking.update({
+        where: { id: Number(id) },
+        data: { status: "rejected" },
+      });
+      req.flash("success", "Booking rejected");
+    } catch (error) {
+      console.error("Error rejecting booking:", error);
+      req.flash("error", "Unable to reject booking");
+    }
     res.redirect("/bookings");
   }
 }

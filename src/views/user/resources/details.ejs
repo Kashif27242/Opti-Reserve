@@ -6,68 +6,138 @@
   </div> -->
 
   <!-- Resource Name & Category -->
-  <h1 class="mb-3 text-white text-center" style="font-size: 5rem;"><%= resource.name %></h1>
+  <h1 class="mb-3 text-white text-center" style="font-size: 5rem;">
+    <%= resource.name %>
+  </h1>
   <% if (categoryName) { %>
-    <p><strong>Category:</strong> <%= categoryName %></p>
-  <% } %>
+    <p class="text-center text-white"><strong>Category:</strong>
+      <%= categoryName %>
+    </p>
+    <% } %>
 
-  <!-- Description -->
-  <div class="mb-4">
-    <p><%= resource.description || 'No description available.' %></p>
-  </div>
+      <!-- Description -->
+      <div class="mb-4 text-center text-white">
+        <p class="lead">
+          <%= resource.description || 'No description available.' %>
+        </p>
+      </div>
 
-  <!-- Booking Form -->
-  <div class="card p-3 bg-light">
-  <h4 class="mb-3 text-center">Book This Resource</h4>
-  <form action="/booking/request" method="POST">
-    <input type="hidden" name="resourceId" value="<%= resource.id %>">
+      <!-- Booking Form -->
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card p-4 shadow-lg border-0" style="border-radius: 15px;">
+            <h3 class="mb-4 text-center text-primary">Book This Resource</h3>
 
-    <div class="mb-3">
-      <label>Name</label>
-      <input
-        type="text"
-        name="name"
-        class="form-control"
-        value="<%= resource.name || '' %>"
-        required
-      >
-    </div>
+            <!-- Success/Error Messages -->
+            <% if (message && message.length> 0) { %>
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="bi bi-check-circle-fill me-2"></i>
+                <%= message %>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              <% } %>
+                <% if (errors && errors.length> 0) { %>
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    <%= errors %>
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                  <% } %>
 
-    <div class="mb-3">
-      <label>Booking Date</label>
-      <input type="date" name="bookingDate" class="form-control" required>
-    </div>
+                    <form action="/booking/request" method="POST">
+                      <input type="hidden" name="resourceId" value="<%= resource.id %>">
 
-    <!-- Improved Session Dropdown -->
-    <div class="mb-3">
-      <label>Select Session(s)</label>
-      <select
-        name="sessions[]"
-        class="form-control"
-        multiple
-        size="10" 
-        style="min-height: 300px;"
-        required
-      >
-        <option value="8:30 AM - 9:15 AM">8:30 AM - 9:15 AM</option>
-        <option value="9:15 AM - 10:00 AM">9:15 AM - 10:00 AM</option>
-        <option value="10:00 AM - 10:45 AM">10:00 AM - 10:45 AM</option>
-        <option value="10:45 AM - 11:30 AM">10:45 AM - 11:30 AM</option>
-        <option value="11:30 AM - 12:15 PM">11:30 AM - 12:15 PM</option>
-        <option value="12:15 PM - 1:00 PM">12:15 PM - 1:00 PM</option>
-        <option value="1:00 PM - 1:45 PM">1:00 PM - 1:45 PM</option>
-        <option value="1:45 PM - 2:30 PM">1:45 PM - 2:30 PM</option>
-        <option value="2:30 PM - 3:15 PM">2:30 PM - 3:15 PM</option>
-        <option value="3:15 PM - 4:00 PM">3:15 PM - 4:00 PM</option>
-        <option value="4:00 PM - 4:45 PM">4:00 PM - 4:45 PM</option>
-        <option value="4:45 PM - 5:30 PM">4:45 PM - 5:30 PM</option>
-        <option value="5:30 PM - 6:15 PM">5:30 PM - 6:15 PM</option>
-      </select>
-      <small class="text-muted">Hold Ctrl (Windows) or ⌘ (Mac) to select multiple sessions</small>
-    </div>
+                      <div class="mb-3">
+                        <label class="form-label fw-bold">Your Name</label>
+                        <input type="text" name="name" class="form-control form-control-lg"
+                          value="<%= user ? user.name : '' %>" readonly>
+                        <div class="form-text">Logged in as <%= user ? user.email : 'Guest' %>
+                        </div>
+                      </div>
 
-    <button type="submit" class="btn btn-primary w-100">Book Now</button>
-  </form>
+                      <div class="mb-3">
+                        <label class="form-label fw-bold">Select Date</label>
+                        <input type="date" name="bookingDate" class="form-control form-control-lg" required>
+                      </div>
+
+                      <!-- Improved Session Dropdown -->
+                      <div class="mb-4">
+                        <label class="form-label fw-bold">Select Session(s)</label>
+                        <select name="sessions[]" class="form-select" multiple size="8" style="min-height: 250px;"
+                          required>
+                          <% if (typeof timeSlots !=='undefined' && timeSlots.length> 0) { %>
+                            <% timeSlots.forEach(slot=> { %>
+                              <option value="<%= slot.id %>" class="py-2">
+                                <%= slot.label ? slot.label + ' (' + slot.startTime + ' - ' + slot.endTime + ')' :
+                                  slot.startTime + ' - ' + slot.endTime %>
+                              </option>
+                              <% }) %>
+                                <% } else { %>
+                                  <option disabled>No time slots available</option>
+                                  <% } %>
+                        </select>
+                        <div class="form-text mt-2"><i class="bi bi-info-circle"></i> Hold <strong>Ctrl</strong>
+                          (Windows) or <strong>⌘</strong> (Mac) to select multiple sessions.</div>
+                      </div>
+
+                      <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                          <i class="bi bi-calendar-check me-2"></i> Submit Booking Request
+                        </button>
+                        <a href="/user/resources" class="btn btn-outline-secondary">Back to Resources</a>
+                      </div>
+                    </form>
+          </div>
+        </div>
+      </div>
 </div>
- -->
-</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const dateInput = document.querySelector('input[name="bookingDate"]');
+    const select = document.querySelector('select[name="sessions[]"]');
+    const resourceId = document.querySelector('input[name="resourceId"]').value;
+
+    if (dateInput) {
+      // Set min date to today
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.setAttribute('min', today);
+
+      dateInput.addEventListener("change", async function () {
+        const date = this.value;
+        if (!date) return;
+
+        // Reset options
+        Array.from(select.options).forEach(opt => {
+          opt.disabled = false;
+          opt.classList.remove('text-danger', 'text-muted');
+          // Remove status text if present
+          const originalText = opt.text.split(' (')[0] + (opt.text.includes(' - ') ? ' (' + opt.text.split('(')[1].split(')')[0] + ')' : '');
+          // This regex replacement is tricky, simpler to just reset from data if possible, but we don't have it.
+          // Let's just remove the appended status strings.
+          opt.text = opt.text.replace(" (Booked)", "").replace(" (Pending)", "");
+        });
+
+        try {
+          // Show loading state?
+
+          const response = await fetch(`/api/booking/availability?resourceId=${resourceId}&date=${date}`);
+          const data = await response.json();
+
+          if (data.bookedSlotIds) {
+            data.bookedSlotIds.forEach(slotId => {
+              const option = select.querySelector(`option[value="${slotId}"]`);
+              if (option) {
+                option.disabled = true;
+                option.classList.add('text-danger');
+                option.text += " (Booked)";
+              }
+            });
+          }
+        } catch (err) {
+          console.error("Error fetching availability:", err);
+        }
+      });
+    }
+  });
+</script>

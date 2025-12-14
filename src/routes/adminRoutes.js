@@ -3,6 +3,7 @@ import { ensureAdmin } from "#middleware/authMiddleware.js";
 import ResourceCategoryController from "#controllers/admin/ResourceCategoryController.js";
 import ResourceController from "#controllers/admin/ResourceController.js";
 import BookingController from "#controllers/admin/BookingController.js";
+import TimeSlotController from "#controllers/admin/TimeSlotController.js";
 
 const router = express.Router();
 
@@ -26,6 +27,16 @@ router.get("/resources/dd", ResourceController.dd);
 router.get("/bookings", BookingController.index);
 router.get("/bookings/create", BookingController.create);
 router.post("/bookings", BookingController.store);
+router.post("/bookings/:id/approve", BookingController.approve);
+router.post("/bookings/:id/reject", BookingController.reject);
 router.post("/bookings/:id/delete", BookingController.delete);
+
+// -------- Time Slots --------
+router.get("/timeslots", TimeSlotController.index);
+router.get("/timeslots/create", TimeSlotController.create);
+router.post("/timeslots", TimeSlotController.store);
+router.get("/timeslots/:id/edit", TimeSlotController.edit);
+router.put("/timeslots/:id", TimeSlotController.update);
+router.post("/timeslots/:id/delete", TimeSlotController.delete);
 
 export default router; // ✅ FIXED
