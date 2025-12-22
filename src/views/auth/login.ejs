@@ -1,73 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>EventEase ADMIN PANEL</title>
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="/assets/admin/assets/images/favicon.png" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>EventEase ADMIN PANEL</title>
 
-    <!-- Themify icons -->
-    <link
-      rel="stylesheet"
-      href="/assets/admin/dist/icons/themify-icons/themify-icons.css"
-      type="text/css"
-    />
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/admin/assets/images/favicon.png" />
 
-    <!-- Main style file -->
-    <link
-      rel="stylesheet"
-      href="/assets/admin/dist/css/app.min.css"
-      type="text/css"
-    />
+  <!-- Themify icons -->
+  <link rel="stylesheet" href="/assets/admin/dist/icons/themify-icons/themify-icons.css" type="text/css" />
 
-    <style>
-      body {
-        background-color: #c5c5c5 !important;
-      }
+  <!-- Main style file -->
+  <link rel="stylesheet" href="/assets/admin/dist/css/app.min.css" type="text/css" />
 
-      .btn-primary {
-        background-color: #0d41eb !important;
-      }
+  <style>
+    body {
+      background-color: #c5c5c5 !important;
+    }
 
-      input:focus,
-      textarea:focus,
-      select:focus,
-      button:focus {
-        outline: none !important;
-        border-color: #dbb778 !important;
-        box-shadow: 0 0 0 0.2rem rgba(219, 183, 120, 0.25) !important;
-      }
+    .btn-primary {
+      background-color: #0d41eb !important;
+    }
 
-      button {
-        border: none !important;
-      }
-    </style>
-  </head>
+    input:focus,
+    textarea:focus,
+    select:focus,
+    button:focus {
+      outline: none !important;
+      border-color: #dbb778 !important;
+      box-shadow: 0 0 0 0.2rem rgba(219, 183, 120, 0.25) !important;
+    }
 
-  <body class="auth">
-    <div class="form-wrapper">
-      <div class="container">
-        <div
-          class="text-uppercase text-dark text-center my-1"
-          style="font-weight: 800; font-size: 24px"
-        >
-          Welcome to Opti-Reserve
-        </div>
+    button {
+      border: none !important;
+    }
+  </style>
+</head>
 
-        <div class="card text-white" style="background-color: black">
-          <div class="row g-0">
-            <div class="col login">
-              <div class="row">
-                <div class="col-md-10 offset-md-1">
-                  <div class="d-flex justify-content-center">
-                    <div class="d-block">
-                      <!-- <img src="/assets/User/logo/Logo-min.png" width="200"  id="logo" alt="logo"> -->
-                      <h1
-                        id="main_logo"
-                        style="
+<body class="auth">
+  <div class="form-wrapper">
+    <div class="container">
+      <div class="text-uppercase text-dark text-center my-1" style="font-weight: 800; font-size: 24px">
+        Welcome to Opti-Reserve
+      </div>
+
+      <div class="card text-white" style="background-color: black">
+        <div class="row g-0">
+          <div class="col login">
+            <div class="row">
+              <div class="col-md-10 offset-md-1">
+                <div class="d-flex justify-content-center">
+                  <div class="d-block">
+                    <!-- <img src="/assets/User/logo/Logo-min.png" width="200"  id="logo" alt="logo"> -->
+                    <h1 id="main_logo" style="
                           font-family: 'Inter', sans-serif;
                           font-weight: 700;
                           font-size: 2.5rem;
@@ -76,138 +64,103 @@
                           border-bottom: 3px solid #00bfff;
                           display: inline-block;
                           padding-bottom: 5px;
-                        "
-                      >
-                        Opti-<span style="color: #00bfff">Reserve</span>
-                      </h1>
-                    </div>
+                        ">
+                      Opti-<span style="color: #00bfff">Reserve</span>
+                    </h1>
                   </div>
-
-                  <div class="my-5 text-center text-lg-start">
-                    <h1 class="display-8">Sign In</h1>
-                    <p class="text-white">Sign in to continue</p>
-                  </div>
-
-                  <!-- Express + EJS Login Form -->
-                  <% if (error && error.length > 0) { %>
-                  <div class="alert alert-danger"><%= error %></div>
-                  <% } %> <% if (success && success.length > 0) { %>
-                  <div class="alert alert-success"><%= success %></div>
-                  <% } %>
-
-                  <form
-                    method="POST"
-                    action="<%= route('login.submit') %>"
-                    class="mb-5"
-                  >
-                    <div class="mb-3">
-                      <label for="email" class="form-label">Email</label>
-                      <input
-                        id="email"
-                        class="form-control"
-                        type="email"
-                        name="email"
-                        value="<%= typeof oldEmail !== 'undefined' ? oldEmail : '' %>"
-                        required
-                        autofocus
-                        autocomplete="username"
-                        placeholder="Enter email"
-                      />
-                    </div>
-
-                    <div class="mb-3 position-relative">
-                      <label for="password" class="form-label">Password</label>
-
-                      <div class="input-group">
-                        <input
-                          id="password"
-                          class="form-control"
-                          type="password"
-                          name="password"
-                          required
-                          autocomplete="current-password"
-                          placeholder="Enter password"
-                        />
-
-                        <button
-                          type="button"
-                          class="btn btn-outline-secondary"
-                          id="togglePassword"
-                          style="border-color: #333; background-color: #1c1c1c"
-                        >
-                          <!-- 👁 SVG Eye Icon -->
-                          <svg
-                            id="eyeIcon"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="20"
-                            height="20"
-                            fill="white"
-                            viewBox="0 0 16 16"
-                          >
-                            <path
-                              d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 
-                 8 5.5S16 8 16 8zM8 13c-2.5 0-4-2-4-5s1.5-5 
-                 4-5 4 2 4 5-1.5 5-4 5z"
-                            />
-                            <path
-                              d="M8 5.5a2.5 2.5 0 1 0 0 5 
-                 2.5 2.5 0 0 0 0-5z"
-                            />
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-
-                    <div class="text-center text-lg-start">
-                      <button type="submit" class="btn btn-primary">
-                        Sign In
-                      </button>
-                      <p class="text-center mt-3 text-muted">
-                        Don’t have an account?
-                        <a
-                          href="/register"
-                          class="text-primary fw-semibold text-decoration-none"
-                          >Register</a
-                        >
-                      </p>
-                      <p class="text-center mt-3 text-muted">
-                        Forgot Password?
-                        <a
-                          href="/forgot-password"
-                          class="text-primary fw-semibold text-decoration-none"
-                          >Reset it here</a
-                        >
-                      </p>
-                    </div>
-                  </form>
                 </div>
+
+                <div class="my-5 text-center text-lg-start">
+                  <h1 class="display-8">Sign In</h1>
+                  <p class="text-white">Sign in to continue</p>
+                </div>
+
+                <!-- Express + EJS Login Form -->
+                <% if (error && error.length> 0) { %>
+                  <div class="alert alert-danger">
+                    <%= error %>
+                  </div>
+                  <% } %>
+                    <% if (success && success.length> 0) { %>
+                      <div class="alert alert-success">
+                        <%= success %>
+                      </div>
+                      <% } %>
+
+                        <form method="POST" action="<%= route('login.submit') %>" class="mb-5">
+                          <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input id="email" class="form-control" type="email" name="email"
+                              value="<%= typeof oldEmail !== 'undefined' ? oldEmail : '' %>" required autofocus
+                              autocomplete="username" placeholder="Enter email" />
+                          </div>
+
+                          <div class="mb-3 position-relative">
+                            <label for="password" class="form-label">Password</label>
+
+                            <div class="input-group">
+                              <input id="password" class="form-control" type="password" name="password" required
+                                autocomplete="current-password" placeholder="Enter password" />
+
+                              <button type="button" class="btn btn-outline-secondary" id="togglePassword"
+                                style="border-color: #333; background-color: #1c1c1c">
+                                <!-- 👁 SVG Eye Icon -->
+                                <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white"
+                                  viewBox="0 0 16 16">
+                                  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 
+                 8 5.5S16 8 16 8zM8 13c-2.5 0-4-2-4-5s1.5-5 
+                 4-5 4 2 4 5-1.5 5-4 5z" />
+                                  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 
+                 2.5 2.5 0 0 0 0-5z" />
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+
+                          <div class="text-center text-lg-start">
+                            <button type="submit" class="btn btn-primary">
+                              Sign In
+                            </button>
+                            <p class="text-center mt-3 text-muted">
+                              Don’t have an account?
+                              <a href="/register" class="text-primary fw-semibold text-decoration-none">Register</a>
+                            </p>
+                            <p class="text-center mt-3 text-muted">
+                              Forgot Password?
+                              <a href="/forgot-password" class="text-primary fw-semibold text-decoration-none">Reset it
+                                here</a>
+                            </p>
+                          </div>
+                        </form>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <script>
-      //  Password visibility toggle
-      const togglePassword = document.querySelector("#togglePassword");
-      const passwordInput = document.querySelector("#password");
-      const eyeIcon = document.querySelector("#eyeIcon");
+  <script>
+    //  Password visibility toggle
+    const togglePassword = document.querySelector("#togglePassword");
+    const passwordInput = document.querySelector("#password");
+    const eyeIcon = document.querySelector("#eyeIcon");
 
-      togglePassword.addEventListener("click", () => {
-        const type =
-          passwordInput.getAttribute("type") === "password"
-            ? "text"
-            : "password";
-        passwordInput.setAttribute("type", type);
+    togglePassword.addEventListener("click", () => {
+      const type =
+        passwordInput.getAttribute("type") === "password"
+          ? "text"
+          : "password";
+      passwordInput.setAttribute("type", type);
 
-        // Toggle eye icon color or style
-        eyeIcon.style.opacity = type === "text" ? "0.5" : "1";
-      });
-    </script>
+      // Toggle eye icon color or style
+      eyeIcon.style.opacity = type === "text" ? "0.5" : "1";
+    });
+  </script>
 
-    <!-- Scripts -->
-    <script src="/assets/admin/libs/bundle.js"></script>
-    <script src="/assets/admin/js/app.min.js"></script>
-  </body>
+  <!-- Scripts -->
+  <script src="/assets/admin/libs/bundle.js"></script>
+  <script src="/assets/admin/js/app.min.js"></script>
+</body>
+
 </html>

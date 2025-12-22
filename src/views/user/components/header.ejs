@@ -272,7 +272,7 @@
                     <hr class="dropdown-divider" />
                   </li>
                   <li>
-                    <a class="dropdown-item text-danger" href="/logout">Logout</a>
+                    <a class="dropdown-item text-danger" href="#" onclick="confirmLogout(event)">Logout</a>
                   </li>
                 </ul>
               </li>
@@ -303,3 +303,5 @@
   removeClassesForTablets();
   window.addEventListener("resize", removeClassesForTablets);
 </script>
+
+<%- include('logout_script') %>

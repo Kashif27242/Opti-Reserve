@@ -115,16 +115,7 @@ class ResourceController {
     }
   }
 
-  // 🧩 Optional: JSON dump for debugging (dd-like)
-  static async dd(req, res) {
-    try {
-      const resources = await prisma.resource.findMany();
-      return res.send(`<pre>${JSON.stringify(resources, null, 2)}</pre>`);
-    } catch (err) {
-      console.error(err);
-      res.status(500).send("Error fetching resources");
-    }
-  }
+
 }
 
 export default ResourceController;

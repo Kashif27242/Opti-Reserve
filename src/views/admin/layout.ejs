@@ -1,49 +1,36 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title><%= title || "Opti-Reserve" %></title>
+  <title>
+    <%= title || "Opti-Reserve" %>
+  </title>
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="/assets/admin/images/favicon.png" />
 
   <!-- Google fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <!-- jQuery + jQuery UI -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <link
-    rel="stylesheet"
-    href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
-  />
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
   <!-- SweetAlert -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css"
-    rel="stylesheet"
-  />
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.all.min.js"></script>
 
   <!-- Bootstrap icons -->
-  <link
-    rel="stylesheet"
-    href="/assets/admin/dist/icons/bootstrap-icons-1.4.0/bootstrap-icons.min.css"
-    type="text/css"
-  />
+  <link rel="stylesheet" href="/assets/admin/dist/icons/bootstrap-icons-1.4.0/bootstrap-icons.min.css"
+    type="text/css" />
 
   <!-- Bootstrap Docs -->
-  <link
-    rel="stylesheet"
-    href="/assets/admin/dist/css/bootstrap-docs.css"
-    type="text/css"
-  />
+  <link rel="stylesheet" href="/assets/admin/dist/css/bootstrap-docs.css" type="text/css" />
 
   <!-- Slick -->
   <link rel="stylesheet" href="/assets/admin/libs/slick/slick.css" type="text/css" />
@@ -53,16 +40,10 @@
   <link rel="stylesheet" href="/assets/admin/dist/css/custom.css" type="text/css" />
 
   <!-- Fancybox -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"
-  />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
 
   <!-- Dropzone -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css" />
 
   <style>
     .form-group {
@@ -162,14 +143,34 @@
   <!-- Header include -->
   <%- include('./components/header') %>
 
-  <!-- Page Content -->
+    <!-- Page Content -->
     <%- include(body) %>
 
-  <!-- Scripts -->
-  <script src="/assets/admin/libs/bundle.js"></script>
-  <script src="/assets/admin/libs/charts/apex/apexcharts.min.js"></script>
-  <script src="/assets/admin/libs/slick/slick.min.js"></script>
-  <script src="/assets/admin/dist/js/examples/dashboard.js"></script>
-  <script src="/assets/admin/dist/js/app.min.js"></script>
+      <!-- Scripts -->
+      <script src="/assets/admin/libs/bundle.js"></script>
+      <script src="/assets/admin/libs/charts/apex/apexcharts.min.js"></script>
+      <script src="/assets/admin/libs/slick/slick.min.js"></script>
+      <script src="/assets/admin/dist/js/examples/dashboard.js"></script>
+      <script src="/assets/admin/dist/js/app.min.js"></script>
+
+      <script>
+        function confirmLogout(event) {
+          event.preventDefault();
+          Swal.fire({
+            title: 'Are you sure?',
+            text: "You will be logged out of your session.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, logout!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = '/logout';
+            }
+          })
+        }
+      </script>
 </body>
+
 </html>

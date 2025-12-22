@@ -1,26 +1,29 @@
 import express from "express";
 import { ensureAuthenticated } from "#middleware/authMiddleware.js";
-import UserPanelController from "#controllers/UserPanelController.js";
+import HomeController from "#controllers/user/HomeController.js";
+import ContactController from "#controllers/user/ContactController.js";
+import ResourceBrowserController from "#controllers/user/ResourceBrowserController.js";
+import UserBookingController from "#controllers/user/UserBookingController.js";
+import ProfileController from "#controllers/user/ProfileController.js";
 
 const router = express.Router();
 
-router.get("/welcome", UserPanelController.showWelcome);
-router.get("/contact", UserPanelController.showContact);
-router.get("/user/resources", UserPanelController.showUserResources);
-router.get("/user/resources/:id", UserPanelController.showResourceDetails);
+router.get("/welcome", HomeController.showWelcome);
+router.get("/contact", ContactController.showContact);
+router.get("/user/resources", ResourceBrowserController.showUserResources);
+router.get("/user/resources/:id", ResourceBrowserController.showResourceDetails);
 
 // Booking Routes
 import BookingRequestController from "#controllers/BookingRequestController.js";
 router.post("/booking/request", BookingRequestController.submitRequest);
 router.get("/api/booking/availability", BookingRequestController.checkAvailability);
-router.get("/user/my-bookings", UserPanelController.showMyBookings);
+router.get("/user/my-bookings", UserBookingController.showMyBookings);
 
 // Contact Submission
-import ContactController from "#controllers/admin/contactController.js";
 router.post("/contacts/store", ContactController.store);
 
 // Change Password
-router.get("/user/change-password", UserPanelController.showChangePassword);
-router.post("/user/change-password", UserPanelController.updatePassword);
+router.get("/user/change-password", ProfileController.showChangePassword);
+router.post("/user/change-password", ProfileController.updatePassword);
 
 export default router;

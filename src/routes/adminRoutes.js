@@ -21,7 +21,7 @@ router.get("/resources/list", ResourceController.index);
 router.get("/resources/create", ResourceController.create);
 router.post("/resources", ResourceController.store);
 router.get("/resources/delete/:id", ResourceController.delete);
-router.get("/resources/dd", ResourceController.dd);
+
 
 // -------- Bookings --------
 router.get("/bookings", BookingController.index);
