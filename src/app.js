@@ -38,6 +38,9 @@ app.use(
   })
 );
 app.use(flash());
+import passport from "./config/passport.js";
+app.use(passport.initialize());
+app.use(passport.session());
 
 // 🌐 EJS Template Engine
 app.set("view engine", "ejs");

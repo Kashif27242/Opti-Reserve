@@ -26,6 +26,20 @@ class UserRepository {
       data: { approved: true },
     });
   }
+
+  async updateGoogleId(id, googleId) {
+    return await prisma.user.update({
+      where: { id },
+      data: { googleId },
+    });
+  }
+
+  async updatePassword(id, password) {
+    return await prisma.user.update({
+      where: { id },
+      data: { password },
+    });
+  }
 }
 
 export default new UserRepository();
