@@ -27,6 +27,32 @@ class UserRepository {
     });
   }
 
+  async getAllUsers() {
+    return await prisma.user.findMany({
+      where: {
+        role: {
+          not: "ADMIN",
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+  }
+
+  async deleteUser(id) {
+    return await prisma.user.delete({
+      where: { id },
+    });
+  }
+
+  async updateUser(id, data) {
+    return await prisma.user.update({
+      where: { id },
+      data,
+    });
+  }
+
   async updateGoogleId(id, googleId) {
     return await prisma.user.update({
       where: { id },

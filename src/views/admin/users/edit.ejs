@@ -1,0 +1,76 @@
+<div class="layout-wrapper">
+    <!-- Header -->
+    <div class="header d-flex justify-content-between align-items-center">
+        <div class="menu-toggle-btn">
+            <a href="#"><i class="bi bi-list" style="color: #DBB778; margin-left:10px;"></i></a>
+        </div>
+        <div class="header-title">
+            <span>Edit User</span>
+        </div>
+        <a href="/" class="logo">
+            <img src="/assets/User/logo/Logo-min.png" height="40" alt="logo" />
+        </a>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="mb-4">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/dashboard"><i class="bi bi-globe2 small me-2"></i> Dashboard</a>
+                </li>
+                <li class="breadcrumb-item"><a href="/users">Manage Users</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Edit</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Alerts -->
+    <% if (error && error.length) { %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <%= error[0] %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <% } %>
+
+            <!-- Form Card -->
+            <div class="card">
+                <div class="card-body text-dark">
+                    <form action="/users/<%= user.id %>/update" method="POST">
+                        <div class="form-group mb-3">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" class="form-control" value="<%= user.name %>"
+                                required />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" class="form-control" value="<%= user.email %>"
+                                required />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="role">Role</label>
+                            <select name="role" id="role" class="form-control">
+                                <option value="FACULTY" <%=user.role==='FACULTY' ? 'selected' : '' %>>Faculty</option>
+                                <option value="ADMIN" <%=user.role==='ADMIN' ? 'selected' : '' %>>Admin</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="approved">Status</label>
+                            <select name="approved" id="approved" class="form-control">
+                                <option value="true" <%=user.approved ? 'selected' : '' %>>Active</option>
+                                <option value="false" <%=!user.approved ? 'selected' : '' %>>Pending/Inactive</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mx-3">Update User</button>
+                        <button type="button" class="btn btn-light my-2" onclick="history.back()">Cancel</button>
+                    </form>
+                </div>
+            </div>
+
+            <footer>
+                <p class="text-center my-2">&copy; 2024 Opti-Reserve</p>
+            </footer>
+</div>

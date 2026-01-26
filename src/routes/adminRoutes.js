@@ -57,4 +57,13 @@ router.post("/sliders", upload.single("image"), SliderController.store);
 router.post("/sliders/:id/toggle", SliderController.toggleStatus);
 router.post("/sliders/delete/:id", SliderController.delete);
 
+// -------- Users --------
+import UserController from "#controllers/admin/UserController.js";
+router.get("/users", UserController.index);
+router.get("/users/:id/edit", UserController.edit);
+router.post("/users/:id/update", UserController.update);
+router.post("/users/:id/toggle", UserController.toggleStatus);
+router.post("/users/:id/approve", UserController.approve);
+router.post("/users/delete/:id", UserController.delete);
+
 export default router; // ✅ FIXED
