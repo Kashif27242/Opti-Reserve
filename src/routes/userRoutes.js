@@ -16,6 +16,7 @@ router.get("/user/resources/:id", ResourceBrowserController.showResourceDetails)
 // Booking Routes
 import BookingRequestController from "#controllers/BookingRequestController.js";
 router.post("/booking/request", BookingRequestController.submitRequest);
+router.post("/booking/waitlist", BookingRequestController.joinWaitlist); // ✅ New route
 router.get("/api/booking/availability", BookingRequestController.checkAvailability);
 router.get("/user/my-bookings", UserBookingController.showMyBookings);
 

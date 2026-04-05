@@ -126,6 +126,36 @@
 
             <script async src="https://kit.fontawesome.com/a3fb55638a.js" crossorigin="anonymous"></script>
 
+            <!-- Global SweetAlert Flash Handler -->
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const successes = <% - JSON.stringify(success) %>;
+                    const errors = <% - JSON.stringify(error) %>;
+
+                    if (successes.length > 0) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: successes[0],
+                            confirmButtonColor: '#DBB778',
+                            background: '#1e1e1e',
+                            color: '#fff'
+                        });
+                    }
+
+                    if (errors.length > 0) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: errors[0],
+                            confirmButtonColor: '#d33',
+                            background: '#1e1e1e',
+                            color: '#fff'
+                        });
+                    }
+                });
+            </script>
+
 </body>
 
 </html>

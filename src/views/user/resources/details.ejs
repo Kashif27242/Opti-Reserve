@@ -1,10 +1,5 @@
 <div class="container my-5">
 
-  <!-- Resource Main Image -->
-  <!-- <div class="text-center mb-4">
-    <img src="<%= resource.image %>" alt="<%= resource.name %>" class="img-fluid" style="max-height: 400px; object-fit: cover;">
-  </div> -->
-
   <!-- Resource Name & Category -->
   <h1 class="mb-3 text-white text-center" style="font-size: 5rem;">
     <%= resource.name %>
@@ -25,68 +20,59 @@
       <!-- Booking Form -->
       <div class="row justify-content-center">
         <div class="col-md-8">
-          <div class="card p-4 shadow-lg border-0" style="border-radius: 15px;">
-            <h3 class="mb-4 text-center text-primary">Book This Resource</h3>
+          <div class="card p-4 shadow-lg border-0" style="border-radius: 15px; background: white;">
+            <h3 class="mb-4 text-center text-primary fw-bold">Book This Resource</h3>
 
-            <!-- Success/Error Messages -->
-            <% if (message && message.length> 0) { %>
-              <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <i class="bi bi-check-circle-fill me-2"></i>
-                <%= message %>
-                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <form id="bookingForm" action="/booking/request" method="POST">
+              <input type="hidden" name="resourceId" value="<%= resource.id %>">
+
+              <div class="mb-3">
+                <label class="form-label fw-bold">Your Name</label>
+                <input type="text" name="name" class="form-control form-control-lg" value="<%= user ? user.name : '' %>"
+                  readonly>
+                <div class="form-text">Logged in as <%= user ? user.email : 'Guest' %>
+                </div>
               </div>
-              <% } %>
-                <% if (errors && errors.length> 0) { %>
-                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                    <%= errors %>
-                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                  </div>
-                  <% } %>
 
-                    <form action="/booking/request" method="POST">
-                      <input type="hidden" name="resourceId" value="<%= resource.id %>">
+              <div class="mb-3">
+                <label class="form-label fw-bold">Select Date</label>
+                <input type="date" name="bookingDate" id="bookingDate" class="form-control form-control-lg" required>
+              </div>
 
-                      <div class="mb-3">
-                        <label class="form-label fw-bold">Your Name</label>
-                        <input type="text" name="name" class="form-control form-control-lg"
-                          value="<%= user ? user.name : '' %>" readonly>
-                        <div class="form-text">Logged in as <%= user ? user.email : 'Guest' %>
-                        </div>
-                      </div>
+              <!-- Improved Session Dropdown -->
+              <div class="mb-4">
+                <label class="form-label fw-bold">Select Session(s)</label>
+                <select name="sessions[]" id="sessionSelect" class="form-select" multiple size="8"
+                  style="min-height: 250px;" required>
+                  <% if (typeof timeSlots !=='undefined' && timeSlots.length> 0) { %>
+                    <% timeSlots.forEach(slot=> { %>
+                      <option value="<%= slot.id %>" class="py-2"
+                        data-base-text="<%= slot.label ? slot.label + ' (' + slot.startTime + ' - ' + slot.endTime + ')' : slot.startTime + ' - ' + slot.endTime %>">
+                        <%= slot.label ? slot.label + ' (' + slot.startTime + ' - ' + slot.endTime + ')' :
+                          slot.startTime + ' - ' + slot.endTime %>
+                      </option>
+                      <% }) %>
+                        <% } else { %>
+                          <option disabled>No time slots available</option>
+                          <% } %>
+                </select>
+                <div class="form-text mt-2"><i class="bi bi-info-circle"></i> Hold <strong>Ctrl</strong>
+                  (Windows) or <strong>⌘</strong> (Mac) to select multiple sessions.</div>
+              </div>
 
-                      <div class="mb-3">
-                        <label class="form-label fw-bold">Select Date</label>
-                        <input type="date" name="bookingDate" class="form-control form-control-lg" required>
-                      </div>
+              <div class="d-grid gap-2">
+                <!-- Dual Purpose Button Group -->
+                <button type="submit" id="submitBtn" class="btn btn-primary btn-lg">
+                  <i class="bi bi-calendar-check me-2"></i> Submit Booking Request
+                </button>
 
-                      <!-- Improved Session Dropdown -->
-                      <div class="mb-4">
-                        <label class="form-label fw-bold">Select Session(s)</label>
-                        <select name="sessions[]" class="form-select" multiple size="8" style="min-height: 250px;"
-                          required>
-                          <% if (typeof timeSlots !=='undefined' && timeSlots.length> 0) { %>
-                            <% timeSlots.forEach(slot=> { %>
-                              <option value="<%= slot.id %>" class="py-2">
-                                <%= slot.label ? slot.label + ' (' + slot.startTime + ' - ' + slot.endTime + ')' :
-                                  slot.startTime + ' - ' + slot.endTime %>
-                              </option>
-                              <% }) %>
-                                <% } else { %>
-                                  <option disabled>No time slots available</option>
-                                  <% } %>
-                        </select>
-                        <div class="form-text mt-2"><i class="bi bi-info-circle"></i> Hold <strong>Ctrl</strong>
-                          (Windows) or <strong>⌘</strong> (Mac) to select multiple sessions.</div>
-                      </div>
+                <button type="button" id="waitlistBtn" class="btn btn-warning btn-lg d-none">
+                  <i class="bi bi-hourglass-split me-2"></i> Join Waitlist
+                </button>
 
-                      <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary btn-lg">
-                          <i class="bi bi-calendar-check me-2"></i> Submit Booking Request
-                        </button>
-                        <a href="/user/resources" class="btn btn-outline-secondary">Back to Resources</a>
-                      </div>
-                    </form>
+                <a href="/user/resources" class="btn btn-outline-secondary">Back to Resources</a>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -94,12 +80,27 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const dateInput = document.querySelector('input[name="bookingDate"]');
-    const select = document.querySelector('select[name="sessions[]"]');
+    const dateInput = document.getElementById('bookingDate');
+    const select = document.getElementById('sessionSelect');
+    const form = document.getElementById('bookingForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const waitlistBtn = document.getElementById('waitlistBtn');
     const resourceId = document.querySelector('input[name="resourceId"]').value;
 
+    function updateUIState() {
+      const selectedOptions = Array.from(select.selectedOptions);
+      const hasBooked = selectedOptions.some(opt => opt.dataset.booked === "true");
+
+      if (hasBooked) {
+        submitBtn.classList.add('d-none');
+        waitlistBtn.classList.remove('d-none');
+      } else {
+        submitBtn.classList.remove('d-none');
+        waitlistBtn.classList.add('d-none');
+      }
+    }
+
     if (dateInput) {
-      // Set min date to today
       const today = new Date().toISOString().split('T')[0];
       dateInput.setAttribute('min', today);
 
@@ -110,17 +111,12 @@
         // Reset options
         Array.from(select.options).forEach(opt => {
           opt.disabled = false;
-          opt.classList.remove('text-danger', 'text-muted');
-          // Remove status text if present
-          const originalText = opt.text.split(' (')[0] + (opt.text.includes(' - ') ? ' (' + opt.text.split('(')[1].split(')')[0] + ')' : '');
-          // This regex replacement is tricky, simpler to just reset from data if possible, but we don't have it.
-          // Let's just remove the appended status strings.
-          opt.text = opt.text.replace(" (Booked)", "").replace(" (Pending)", "");
+          opt.removeAttribute('data-booked');
+          opt.classList.remove('text-danger', 'fw-bold');
+          opt.text = opt.dataset.baseText;
         });
 
         try {
-          // Show loading state?
-
           const response = await fetch(`/api/booking/availability?resourceId=${resourceId}&date=${date}`);
           const data = await response.json();
 
@@ -128,16 +124,35 @@
             data.bookedSlotIds.forEach(slotId => {
               const option = select.querySelector(`option[value="${slotId}"]`);
               if (option) {
-                option.disabled = true;
-                option.classList.add('text-danger');
-                option.text += " (Booked)";
+                option.dataset.booked = "true";
+                option.disabled = true; // Strictly disable the option
+                option.classList.add('text-muted', 'text-decoration-line-through');
+                option.text = option.dataset.baseText + " (BOOKED)";
               }
             });
           }
         } catch (err) {
           console.error("Error fetching availability:", err);
         }
+        updateUIState();
       });
     }
+
+    select.addEventListener('change', updateUIState);
+
+    waitlistBtn.addEventListener('click', function () {
+      form.action = "/booking/waitlist";
+      form.submit();
+    });
   });
 </script>
+
+<style>
+  .card {
+    background: #fff !important;
+  }
+
+  .text-primary {
+    color: #0d41eb !important;
+  }
+</style>

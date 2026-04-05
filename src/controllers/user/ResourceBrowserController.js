@@ -38,8 +38,6 @@ class ResourceBrowserController {
             resources,
             filter,
             user: req.session.user || null,
-            message: req.flash("message") || "",
-            errors: req.flash("errors") || [],
         });
     }
 
@@ -88,8 +86,6 @@ class ResourceBrowserController {
                 categoryName,
                 timeSlots,
                 user: req.session.user || null,
-                message: req.flash("message"),
-                errors: req.flash("errors"),
             });
         } catch (error) {
             console.error("Error fetching resource details:", error);

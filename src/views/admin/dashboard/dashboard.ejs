@@ -1,42 +1,303 @@
-<div class="layout-wrapper" style="display: flex; height: 100vh;">
+<div class="layout-wrapper"
+    style="display: flex; min-height: 100vh; flex-direction: column; background-color: #000000;">
     <!-- header -->
-    <div class="header d-flex justify-content-between align-items-center">
+    <div class="header d-flex justify-content-between align-items-center mb-4 p-3 shadow-sm border-bottom border-secondary border-opacity-25"
+        style="background: #000000;">
         <div class="menu-toggle-btn">
-            <a href="#"><i class="bi bi-list" style="color: #DBB778"></i></a>
+            <a href="#"><i class="bi bi-list" style="color: #DDB778; font-size: 1.5rem;"></i></a>
         </div>
         <div class="header-title">
-            <span>Dashboard</span>
+            <h4 class="mb-0 fw-bold text-white">Admin Dashboard</h4>
         </div>
-
-        <a href="index.html" class="logo">
-            <img src="/assets/User/logo/Logo-min.png" width="170" height="80" id="logo" alt="logo">
-        </a>
-
-        <div class="header-mobile-buttons d-flex align-items-center">
-            <a href="#" class="search-bar-btn"></a>
-            <a href="#" class="actions-btn"><i class="bi bi-three-dots"></i></a>
-
-        
+        <div class="logo">
+            <img src="/assets/User/logo/Logo-min.png" width="120" id="logo" alt="logo"
+                style="filter: brightness(0) invert(1);">
         </div>
-
-        <style>
-            h1 {
-                font-size: 40px;
-                margin-top: 100px;
-                margin-left: 2%;
-            }
-            @media (max-width: 576px) {
-                h1 {
-                    font-size: 24px;
-                    margin-top: 50px;
-                    padding: 20px;
-                    margin-left: 0;
-                }
-            }
-        </style>
     </div>
 
-  
-        <h1>Hello, Super Admin <br> Welcome to Opti-Reserve Admin Panel</h1>
-  
+    <div class="container-fluid px-4 pb-5">
+        <h2 class="mb-4 fw-bold text-white">Welcome back, Super Admin 👋</h2>
+
+        <!-- 🚀 Stat Cards -->
+        <div class="row g-4 mb-5">
+            <div class="col-md-3">
+                <div class="card border-0 shadow-sm rounded-4 p-3 stats-card h-100"
+                    style="background: #111111 !important;">
+                    <div class="d-flex align-items-center">
+                        <div class="icon-box p-3 rounded-circle me-3" style="background: rgba(221, 183, 120, 0.1);">
+                            <i class="bi bi-people fs-4" style="color: #DDB778;"></i>
+                        </div>
+                        <div>
+                            <p class="mb-0 small text-uppercase fw-bold"
+                                style="letter-spacing: 1px; color: rgba(255,255,255,0.6);">Total Users</p>
+                            <h3 class="fw-bold mb-0 text-white">
+                                <%= stats.users %>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-0 shadow-sm rounded-4 p-3 stats-card h-100"
+                    style="background: #111111 !important;">
+                    <div class="d-flex align-items-center">
+                        <div class="icon-box p-3 rounded-circle me-3" style="background: rgba(221, 183, 120, 0.1);">
+                            <i class="bi bi-calendar-check fs-4" style="color: #DDB778;"></i>
+                        </div>
+                        <div>
+                            <p class="mb-0 small text-uppercase fw-bold"
+                                style="letter-spacing: 1px; color: rgba(255,255,255,0.6);">Bookings</p>
+                            <h3 class="fw-bold mb-0 text-white">
+                                <%= stats.bookings %>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-0 shadow-sm rounded-4 p-3 stats-card h-100"
+                    style="background: #111111 !important;">
+                    <div class="d-flex align-items-center">
+                        <div class="icon-box p-3 rounded-circle me-3" style="background: rgba(221, 183, 120, 0.1);">
+                            <i class="bi bi-box-seam fs-4" style="color: #DDB778;"></i>
+                        </div>
+                        <div>
+                            <p class="mb-0 small text-uppercase fw-bold"
+                                style="letter-spacing: 1px; color: rgba(255,255,255,0.6);">Resources</p>
+                            <h3 class="fw-bold mb-0 text-white">
+                                <%= stats.resources %>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-0 shadow-sm rounded-4 p-3 stats-card h-100"
+                    style="background: #111111 !important;">
+                    <div class="d-flex align-items-center">
+                        <div class="icon-box p-3 rounded-circle me-3" style="background: rgba(221, 183, 120, 0.1);">
+                            <i class="bi bi-tags fs-4" style="color: #DDB778;"></i>
+                        </div>
+                        <div>
+                            <p class="mb-0 small text-uppercase fw-bold"
+                                style="letter-spacing: 1px; color: rgba(255,255,255,0.6);">Categories</p>
+                            <h3 class="fw-bold mb-0 text-white">
+                                <%= stats.categories %>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 📊 Charts Row -->
+        <div class="row g-4 mb-4">
+            <!-- Booking Trends (Line) -->
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm rounded-4 p-4 h-100" style="background: #111111 !important;">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h5 class="fw-bold mb-0 text-white">Booking Trends</h5>
+                        <i class="bi bi-graph-up" style="color: #DDB778 !important;"></i>
+                    </div>
+                    <p class="text-secondary small mb-4" style="color: rgba(255,255,255,0.5) !important;">
+                        Volume of booking requests received over the last 7 days.
+                    </p>
+                    <div id="trendsChart" style="min-height: 280px;"></div>
+                </div>
+            </div>
+
+            <!-- Status Distribution (Pie) -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm rounded-4 p-4 h-100" style="background: #111111 !important;">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h5 class="fw-bold mb-0 text-white">Status Mix</h5>
+                        <i class="bi bi-pie-chart" style="color: #DDB778 !important;"></i>
+                    </div>
+                    <p class="text-secondary small mb-4" style="color: rgba(255,255,255,0.5) !important;">
+                        Distribution of booking states (Pending vs Confirmed).
+                    </p>
+                    <div id="statusChart" style="min-height: 280px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- Resource Popularity (Bar) -->
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm rounded-4 p-4" style="background: #111111 !important;">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="fw-bold mb-0 text-white">Top Performing Resources</h5>
+                        <i class="bi bi-trophy" style="color: #DDB778 !important;"></i>
+                    </div>
+                    <div id="resourceChart" style="min-height: 280px;"></div>
+                </div>
+            </div>
+
+            <!-- 🕒 Recent Activity -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm rounded-4 p-4 h-100" style="background: #111111 !important;">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="fw-bold mb-0 text-white">Recent Activity</h5>
+                        <i class="bi bi-clock-history" style="color: #DDB778 !important;"></i>
+                    </div>
+                    <div class="activity-feed mt-3">
+                        <% if (activities && activities.length> 0) { %>
+                            <% activities.forEach(activity=> { %>
+                                <div class="d-flex mb-3 align-items-start">
+                                    <div class="activity-icon me-3 mt-1">
+                                        <% if (activity.type==='booking' ) { %>
+                                            <i class="bi bi-calendar2-check-fill" style="color: #DDB778;"></i>
+                                            <% } else if (activity.type==='user' ) { %>
+                                                <i class="bi bi-person-plus-fill" style="color: #05cd99;"></i>
+                                                <% } else { %>
+                                                    <i class="bi bi-plus-circle-fill" style="color: #00bfff;"></i>
+                                                    <% } %>
+                                    </div>
+                                    <div class="activity-content">
+                                        <p class="mb-0 text-white small">
+                                            <%= activity.text %>
+                                        </p>
+                                        <span class="text-secondary-light smaller"
+                                            style="font-size: 0.75rem; color: rgba(255,255,255,0.4) !important;">
+                                            <%= new Date(activity.time).toLocaleString() %>
+                                        </span>
+                                    </div>
+                                </div>
+                                <% }) %>
+                                    <% } else { %>
+                                        <p class="text-secondary small">No recent activity found.</p>
+                                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- ⚖️ ApexCharts -->
+<script src="/assets/admin/libs/charts/apex/apexcharts.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Static Data for Verification
+        const trendData = {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            series: [31, 40, 28, 51, 42, 109, 100]
+        };
+
+        const statusData = {
+            labels: ['Confirmed', 'Pending', 'Rejected'],
+            series: [44, 55, 13]
+        };
+
+        const resourceData = {
+            labels: ['Resource A', 'Resource B', 'Resource C', 'Resource D', 'Resource E'],
+            series: [400, 430, 448, 470, 540]
+        };
+
+        const goldColor = '#DDB778';
+        const gridColor = 'rgba(255, 255, 255, 0.05)';
+
+        // 1. Booking Trends (Area)
+        if (document.querySelector("#trendsChart")) {
+            new ApexCharts(document.querySelector("#trendsChart"), {
+                series: [{ name: 'Bookings', data: trendData.series }],
+                chart: { type: 'area', height: 280, toolbar: { show: false }, background: 'transparent' },
+                colors: [goldColor],
+                fill: {
+                    type: 'gradient',
+                    gradient: { shadeIntensity: 1, opacityFrom: 0.7, opacityTo: 0.3, stops: [0, 90, 100] }
+                },
+                dataLabels: { enabled: false },
+                stroke: { curve: 'smooth', width: 3 },
+                xaxis: {
+                    categories: trendData.labels,
+                    labels: { style: { colors: 'rgba(255,255,255,0.6)' } }
+                },
+                yaxis: { labels: { style: { colors: 'rgba(255,255,255,0.6)' } } },
+                grid: { borderColor: gridColor },
+                theme: { mode: 'dark' }
+            }).render();
+        }
+
+        // 2. Status Mix (Donut)
+        if (document.querySelector("#statusChart")) {
+            new ApexCharts(document.querySelector("#statusChart"), {
+                series: statusData.series,
+                chart: { type: 'donut', height: 280, background: 'transparent' },
+                labels: statusData.labels,
+                colors: [goldColor, '#ffffff', 'rgba(255,255,255,0.3)'],
+                stroke: { show: false },
+                legend: { position: 'bottom', labels: { colors: 'rgba(255,255,255,0.6)' } },
+                dataLabels: { enabled: false },
+                plotOptions: {
+                    pie: { donut: { size: '70%', background: 'transparent' } }
+                }
+            }).render();
+        }
+
+        // 3. Top Performing Resources (Bar)
+        if (document.querySelector("#resourceChart")) {
+            new ApexCharts(document.querySelector("#resourceChart"), {
+                series: [{ name: 'Bookings', data: resourceData.series }],
+                chart: { type: 'bar', height: 280, toolbar: { show: false }, background: 'transparent' },
+                plotOptions: {
+                    bar: { borderRadius: 4, horizontal: true, barHeight: '50%' }
+                },
+                colors: [goldColor],
+                dataLabels: { enabled: false },
+                xaxis: {
+                    categories: resourceData.labels,
+                    labels: { style: { colors: 'rgba(255,255,255,0.6)' } }
+                },
+                yaxis: { labels: { style: { colors: 'rgba(255,255,255,0.6)' } } },
+                grid: { borderColor: gridColor }
+            }).render();
+        }
+    });
+</script>
+
+<style>
+    body {
+        background-color: #000000 !important;
+        font-family: 'DM Sans', sans-serif;
+    }
+
+    .stats-card {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    }
+
+    .stats-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6) !important;
+    }
+
+    .icon-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 56px;
+        height: 56px;
+    }
+
+    .activity-feed {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    .activity-feed::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .activity-feed::-webkit-scrollbar-thumb {
+        background: rgba(221, 183, 120, 0.3);
+        border-radius: 10px;
+    }
+
+    /* Fixed chart height to prevent collapsed boxes */
+    canvas,
+    .apexcharts-canvas {
+        min-height: 280px;
+    }
+</style>

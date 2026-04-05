@@ -28,6 +28,7 @@ router.get("/bookings", BookingController.index);
 router.get("/bookings/create", BookingController.create);
 router.post("/bookings", BookingController.store);
 router.post("/bookings/:id/approve", BookingController.approve);
+router.post("/bookings/approve-all", BookingController.approveAll);
 router.post("/bookings/:id/reject", BookingController.reject);
 router.post("/bookings/:id/delete", BookingController.delete);
 

@@ -1,156 +1,286 @@
 <div class="layout-wrapper">
     <!-- Header -->
-    <div class="header d-flex justify-content-between align-items-center">
+    <div class="header d-flex justify-content-between align-items-center bg-white p-3 shadow-sm mb-4">
         <div class="menu-toggle-btn">
-            <a href="#">
-                <i class="bi bi-list" style="color: #dbb778; margin-left: 10px"></i>
-            </a>
+            <a href="#"><i class="bi bi-list" style="color: #0d41eb; font-size: 1.5rem;"></i></a>
         </div>
-
         <div class="header-title">
-            <span>Manage Bookings</span>
+            <h4 class="mb-0 fw-bold">Manage Bookings & Waitlist</h4>
         </div>
-
-        <a href="/" class="logo">
+        <div class="logo">
             <img src="/assets/User/logo/Logo-min.png" height="40" id="logo" alt="logo" />
-        </a>
-
-        <div class="header-mobile-buttons d-flex align-items-center">
-            <a href="#" class="search-bar-btn"></a>
-            <a href="#" class="actions-btn">
-                <i class="bi bi-three-dots"></i>
-            </a>
         </div>
     </div>
 
     <!-- Content -->
-    <div class="content">
+    <div class="container-fluid px-4">
         <!-- Breadcrumb -->
-        <div class="mb-4">
-            <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="/dashboard">
-                            <i class="bi bi-globe2 small me-2"></i> Dashboard
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">Bookings</li>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Bookings</li>
                 </ol>
             </nav>
-
-            <!-- Add button -->
-            <div>
-                <a href="/bookings/create">
-                    <button class="btn btn-primary">Create Booking</button>
-                </a>
-            </div>
-
-            <br />
-
-            <% if (success && success.length) { %>
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <%= success[0] %>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <% } %>
-                    <% if (error && error.length) { %>
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <%= error[0] %>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                        </div>
-                        <% } %>
+            <a href="/bookings/create" class="btn btn-primary">
+                <i class="bi bi-plus-lg me-2"></i> Create Booking
+            </a>
         </div>
 
-        <!-- Table -->
-        <div class="table-responsive">
-            <table class="table table-custom table-lg mb-0" id="bookingsTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>RESOURCE</th>
-                        <th>USER</th>
-                        <th>DATE</th>
-                        <th>TIME SLOT</th>
-                        <th>STATUS</th>
-                        <th class="text-end">Actions</th>
-                    </tr>
-                </thead>
+        <% if (success && success.length) { %>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <%= success[0] %>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <% } %>
 
-                <tbody>
-                    <% if (bookings && bookings.length> 0) { %> <% bookings.forEach(booking=> { %>
-                            <tr>
-                                <td>
-                                    <%= booking.id %>
-                                </td>
-                                <td>
-                                    <%= booking.resource ? booking.resource.name : 'Unknown' %>
-                                </td>
-                                <td>
-                                    <%= booking.user ? booking.user.name : 'Unknown' %>
-                                </td>
-                                <td>
-                                    <%= new Date(booking.bookingDate).toLocaleDateString() %>
-                                </td>
-                                <td>
-                                    <% if (booking.timeSlot) { %>
-                                        <%= booking.timeSlot.startTime %> - <%= booking.timeSlot.endTime %>
-                                                <% } else { %>
-                                                    -
-                                                    <% } %>
-                                </td>
-                                <td>
-                                    <span
-                                        class="badge bg-<%= booking.status === 'confirmed' ? 'success' : (booking.status === 'pending' ? 'warning' : 'danger') %>">
-                                        <%= booking.status %>
-                                    </span>
-                                </td>
-                                <td class="text-end">
-                                    <div class="d-flex">
-                                        <div class="dropdown ms-auto">
-                                            <a href="#" data-bs-toggle="dropdown" class="btn btn-floating"
-                                                aria-haspopup="true" aria-expanded="false">
-                                                <i class="bi bi-three-dots"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <% if (booking.status==='pending' ) { %>
-                                                    <form action="/bookings/<%= booking.id %>/approve" method="POST"
-                                                        style="display: inline">
-                                                        <button type="submit"
-                                                            class="dropdown-item text-success">Approve</button>
-                                                    </form>
-                                                    <form action="/bookings/<%= booking.id %>/reject" method="POST"
-                                                        style="display: inline">
-                                                        <button type="submit"
-                                                            class="dropdown-item text-danger">Reject</button>
-                                                    </form>
-                                                    <% } %>
+                <% const pending=bookings.filter(b=> b.status === 'pending');
+                    const established = bookings.filter(b => b.status !== 'pending');
+                    const activeWaitlist = waitlist.filter(w => w.status === 'waiting');
+                    %>
+
+                    <!-- 📑 Tabs for Bookings and Waiting List -->
+                    <ul class="nav nav-tabs mb-4" id="bookingTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active fw-bold text-uppercase" id="booking-list-tab"
+                                data-bs-toggle="tab" data-bs-target="#booking-list-content" type="button"
+                                role="tab">Established Bookings</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link fw-bold text-uppercase d-flex align-items-center" id="waiting-tab"
+                                data-bs-toggle="tab" data-bs-target="#waiting-content" type="button" role="tab">
+                                Waiting List
+                                <% const totalWaiting=pending.length + activeWaitlist.length; %>
+                                    <% if (totalWaiting> 0) { %>
+                                        <span class="badge bg-danger ms-2">
+                                            <%= totalWaiting %>
+                                        </span>
+                                        <% } %>
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="bookingTabsContent">
+                        <!-- 📅 Established Bookings Tab (Confirmed, Rejected) -->
+                        <div class="tab-pane fade show active" id="booking-list-content" role="tabpanel">
+                            <div class="card border-0 shadow-sm rounded-4">
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle mb-0">
+                                        <thead class="bg-light">
+                                            <tr>
+                                                <th class="ps-4">ID</th>
+                                                <th>Resource</th>
+                                                <th>User</th>
+                                                <th>Date & Time Slot</th>
+                                                <th>Status</th>
+                                                <th class="text-end pe-4">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% if (established.length> 0) {
+                                                established.forEach(booking => {
+                                                %>
+                                                <tr>
+                                                    <td class="ps-4">
+                                                        <%= booking.id %>
+                                                    </td>
+                                                    <td class="fw-bold">
+                                                        <%= booking.resource ? booking.resource.name : 'Unknown' %>
+                                                    </td>
+                                                    <td>
+                                                        <%= booking.user ? booking.user.name : 'Unknown' %>
+                                                    </td>
+                                                    <td>
+                                                        <div class="small fw-bold">
+                                                            <%= new Date(booking.bookingDate).toLocaleDateString() %>
+                                                        </div>
+                                                        <div class="smaller text-muted">
+                                                            <%= booking.timeSlot ? booking.timeSlot.startTime + ' - ' +
+                                                                booking.timeSlot.endTime : '-' %>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <% let badgeClass=booking.status==='confirmed' ? 'success'
+                                                            : 'danger' ; %>
+                                                            <span class="badge bg-<%= badgeClass %> rounded-pill px-3">
+                                                                <%= booking.status %>
+                                                            </span>
+                                                    </td>
+                                                    <td class="text-end pe-4">
                                                         <form action="/bookings/<%= booking.id %>/delete" method="POST"
-                                                            style="display: inline">
-                                                            <button type="submit" class="dropdown-item text-danger">
-                                                                Delete
+                                                            class="d-inline">
+                                                            <button type="submit" class="btn btn-sm btn-outline-danger"
+                                                                onclick="return confirm('Are you sure?')">
+                                                                <i class="bi bi-trash"></i>
                                                             </button>
                                                         </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <% }) %>
-                                <% } else { %>
-                                    <tr>
-                                        <td colspan="7" class="text-center text-muted">
-                                            No bookings found.
-                                        </td>
-                                    </tr>
-                                    <% } %>
-                </tbody>
-            </table>
-        </div>
+                                                    </td>
+                                                </tr>
+                                                <% }); } else { %>
+                                                    <tr>
+                                                        <td colspan="6" class="text-center py-5 text-muted">No
+                                                            established bookings found.</td>
+                                                    </tr>
+                                                    <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
 
-        <footer>
-            <p class="text-center my-2">&copy; 2024 Opti-Reserve</p>
-        </footer>
-        <br />
+                        <!-- ⏳ Waiting List Tab (Pending + Waitlist) -->
+                        <div class="tab-pane fade" id="waiting-content" role="tabpanel">
+                            <div class="card border-0 shadow-sm rounded-4">
+                                <div
+                                    class="card-header bg-white border-0 pt-4 px-4 pb-0 d-flex justify-content-between align-items-center">
+                                    <h6 class="fw-bold text-primary mb-0">Pending Booking Requests</h6>
+                                    <% if (pending.length> 0) { %>
+                                        <form action="/bookings/approve-all" method="POST">
+                                            <button type="submit" class="btn btn-sm btn-success"
+                                                onclick="return confirm('Approve all pending requests?')">
+                                                <i class="bi bi-check-all me-1"></i> Approve All
+                                            </button>
+                                        </form>
+                                        <% } %>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle mb-0">
+                                        <thead class="bg-light text-muted small">
+                                            <tr>
+                                                <th class="ps-4">ID</th>
+                                                <th>Resource</th>
+                                                <th>User</th>
+                                                <th>Requested Slot</th>
+                                                <th class="text-end pe-4">Decisions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% if (pending.length> 0) {
+                                                pending.forEach(booking => {
+                                                %>
+                                                <tr>
+                                                    <td class="ps-4">
+                                                        <%= booking.id %>
+                                                    </td>
+                                                    <td class="fw-bold">
+                                                        <%= booking.resource ? booking.resource.name : 'Unknown' %>
+                                                    </td>
+                                                    <td>
+                                                        <%= booking.user ? booking.user.name : 'Unknown' %>
+                                                    </td>
+                                                    <td>
+                                                        <div class="small">
+                                                            <%= new Date(booking.bookingDate).toLocaleDateString() %>
+                                                        </div>
+                                                        <div class="smaller text-primary">
+                                                            <%= booking.timeSlot ? booking.timeSlot.startTime + ' - ' +
+                                                                booking.timeSlot.endTime : '-' %>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-end pe-4">
+                                                        <div class="btn-group">
+                                                            <form action="/bookings/<%= booking.id %>/approve"
+                                                                method="POST" class="me-2">
+                                                                <button type="submit" class="btn btn-sm btn-success">
+                                                                    <i class="bi bi-check-lg pe-1"></i> Approve
+                                                                </button>
+                                                            </form>
+                                                            <form action="/bookings/<%= booking.id %>/reject"
+                                                                method="POST">
+                                                                <button type="submit" class="btn btn-sm btn-danger">
+                                                                    <i class="bi bi-x-lg pe-1"></i> Reject
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <% }); } else { %>
+                                                    <tr>
+                                                        <td colspan="5" class="text-center py-4 text-muted small">No
+                                                            pending booking requests.</td>
+                                                    </tr>
+                                                    <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <hr class="my-4 mx-4">
+
+                                <div class="card-header bg-white border-0 pt-0 px-4 pb-0">
+                                    <h6 class="fw-bold text-secondary mb-3">Waitlist (For Full Slots)</h6>
+                                </div>
+                                <div class="table-responsive pb-4">
+                                    <table class="table table-hover align-middle mb-0">
+                                        <thead class="bg-light text-muted small">
+                                            <tr>
+                                                <th class="ps-4">ID</th>
+                                                <th>Resource</th>
+                                                <th>User</th>
+                                                <th>Expected Slot</th>
+                                                <th>Applied On</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% if (activeWaitlist.length> 0) {
+                                                activeWaitlist.forEach(item => {
+                                                %>
+                                                <tr>
+                                                    <td class="ps-4">
+                                                        <%= item.id %>
+                                                    </td>
+                                                    <td class="fw-bold">
+                                                        <%= item.resource ? item.resource.name : 'Unknown' %>
+                                                    </td>
+                                                    <td>
+                                                        <%= item.user ? item.user.name : 'Unknown' %>
+                                                    </td>
+                                                    <td>
+                                                        <div class="small">
+                                                            <%= new Date(item.bookingDate).toLocaleDateString() %>
+                                                        </div>
+                                                        <div class="smaller text-muted">
+                                                            <%= item.timeSlot ? item.timeSlot.startTime + ' - ' +
+                                                                item.timeSlot.endTime : '-' %>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-muted small">
+                                                        <%= item.createdAt.toLocaleString() %>
+                                                    </td>
+                                                </tr>
+                                                <% }); } else { %>
+                                                    <tr>
+                                                        <td colspan="5" class="text-center py-4 text-muted small">
+                                                            Waitlist is currently empty.</td>
+                                                    </tr>
+                                                    <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
     </div>
 </div>
+
+<style>
+    .nav-tabs .nav-link {
+        color: #6c757d;
+        border: none;
+        border-bottom: 2px solid transparent;
+        padding: 1rem 1.5rem;
+    }
+
+    .nav-tabs .nav-link.active {
+        color: #0d41eb;
+        border-bottom: 2px solid #0d41eb;
+        background: transparent;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: rgba(13, 65, 235, 0.02);
+    }
+
+    .badge {
+        font-weight: 600;
+    }
+</style>
