@@ -114,17 +114,27 @@ class BookingController {
         return res.redirect("/bookings/create");
       }
 
-      await prisma.booking.create({
+      const newBooking = await prisma.booking.create({
         data: {
           userId: Number(userId),
           resourceId: Number(resourceId),
           bookingDate: new Date(bookingDate),
           timeSlotId: Number(timeSlotId),
-          status: "pending",
+          status: "confirmed",
         },
+        include: { user: true, resource: true, timeSlot: true }
       });
 
-      req.flash("success", "Booking request submitted successfully");
+      // 📧 Send Approval Email
+      try {
+        if (newBooking.user) {
+          await MailService.sendStatusUpdate(newBooking.user, newBooking, newBooking.resource, newBooking.timeSlot, "confirmed");
+        }
+      } catch (emailError) {
+        console.error("Error sending admin booking email:", emailError);
+      }
+
+      req.flash("success", "Booking created and approved successfully");
       res.redirect("/bookings");
     } catch (error) {
       console.error("Error storing booking:", error);

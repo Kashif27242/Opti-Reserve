@@ -20,6 +20,8 @@ router.post("/categories/delete/:id", ResourceCategoryController.delete);
 router.get("/resources/list", ResourceController.index);
 router.get("/resources/create", ResourceController.create);
 router.post("/resources", ResourceController.store);
+router.get("/resources/edit/:id", ResourceController.edit);
+router.post("/resources/update/:id", ResourceController.update);
 router.get("/resources/delete/:id", ResourceController.delete);
 
 

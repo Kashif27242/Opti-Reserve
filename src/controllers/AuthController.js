@@ -4,6 +4,9 @@ import { validateRegisterInput } from "#utils/validation.js";
 
 class AuthController {
   showRegister(req, res) {
+    if (req.session.user) {
+      return res.redirect(req.session.user.role === "ADMIN" ? "/dashboard" : "/welcome");
+    }
     res.render("auth/register");
   }
 
@@ -46,6 +49,9 @@ class AuthController {
 
 
   showLogin(req, res) {
+    if (req.session.user) {
+      return res.redirect(req.session.user.role === "ADMIN" ? "/dashboard" : "/welcome");
+    }
     res.render("auth/login");
   }
 

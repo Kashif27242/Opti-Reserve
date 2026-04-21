@@ -6,8 +6,17 @@ import { route } from "#utils/routes.js";
 
 const router = express.Router();
 
-// Root redirect → login
-router.get("/", (req, res) => res.redirect(route("login.show")));
+// Root redirect based on role
+// Root redirect based on role
+router.get("/", (req, res) => {
+    if (req.session.user) {
+        if (req.session.user.role === "ADMIN") {
+            return res.redirect("/dashboard");
+        }
+        return res.redirect("/welcome");
+    }
+    return res.redirect(route("login.show"));
+});
 
 // Use modular route groups
 router.use("/", authRoutes);
