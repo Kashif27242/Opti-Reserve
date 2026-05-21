@@ -1,0 +1,173 @@
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <!-- Profile Left Info Card -->
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100 shadow-lg border-0 rounded-lg text-white" style="background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(212, 177, 112, 0.15) !important;">
+                <div class="card-body text-center p-5 d-flex flex-column align-items-center justify-content-center">
+                    <!-- Elegant Initial Avatar -->
+                    <div class="rounded-circle d-flex align-items-center justify-content-center mb-4 shadow-lg" style="width: 110px; height: 110px; background: linear-gradient(135deg, #DBB778, #bca167); border: 3px solid rgba(255, 255, 255, 0.1);">
+                        <span class="fs-1 fw-bold text-black" style="font-family: 'Titillium Web', sans-serif;">
+                            <%= profileUser.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() %>
+                        </span>
+                    </div>
+
+                    <h3 class="fw-bold text-white mb-1" style="font-family: 'Titillium Web', sans-serif; text-align: center !important;">
+                        <%= profileUser.name %>
+                    </h3>
+                    <p class="text-muted mb-3"><%= profileUser.email %></p>
+
+                    <!-- Role Badge -->
+                    <div class="mb-4">
+                        <% if (profileUser.role === 'ADMIN') { %>
+                            <span class="badge px-3 py-2 bg-danger rounded-pill fw-bold uppercase">Administrator</span>
+                        <% } else { %>
+                            <span class="badge px-3 py-2 rounded-pill fw-bold text-black" style="background-color: #DBB778;">Faculty Member</span>
+                        <% } %>
+
+                        <% if (profileUser.approved) { %>
+                            <span class="badge px-3 py-2 bg-success rounded-pill fw-bold ms-1">Approved</span>
+                        <% } else { %>
+                            <span class="badge px-3 py-2 bg-warning text-dark rounded-pill fw-bold ms-1">Pending Approval</span>
+                        <% } %>
+                    </div>
+
+                    <!-- Meta Information -->
+                    <div class="w-100 border-top pt-4" style="border-color: rgba(255, 255, 255, 0.08) !important;">
+                        <div class="d-flex justify-content-between text-start mb-2 px-2">
+                            <span class="text-muted small">Joined Date:</span>
+                            <span class="small text-light">
+                                <%= new Date(profileUser.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) %>
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-between text-start px-2">
+                            <span class="text-muted small">Profile Status:</span>
+                            <span class="small text-success fw-bold">Active</span>
+                        </div>
+                    </div>
+
+                    <!-- Direct actions -->
+                    <div class="w-100 mt-4 d-grid gap-2">
+                        <a href="/user/my-bookings" class="btn btn-outline-light btn-sm rounded-pill py-2" style="border-color: rgba(255, 255, 255, 0.25);">
+                            <i class="fa-regular fa-calendar-check me-2"></i>View My Bookings
+                        </a>
+                        <a href="/user/change-password" class="btn btn-outline-light btn-sm rounded-pill py-2" style="border-color: rgba(255, 255, 255, 0.25);">
+                            <i class="fa-solid fa-key me-2"></i>Change Password
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Edit Form Card -->
+        <div class="col-lg-7 mb-4">
+            <div class="card h-100 shadow-lg border-0 rounded-lg text-white" style="background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(212, 177, 112, 0.15) !important;">
+                <div class="card-header bg-transparent py-4 px-5" style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+                    <h3 class="mb-0 text-white fw-bold d-flex align-items-center" style="font-family: 'Titillium Web', sans-serif;">
+                        <i class="fa-regular fa-id-card me-3 text-primary"></i>Profile Details
+                    </h3>
+                </div>
+                <div class="card-body p-5">
+                    <% if (message && message.length > 0) { %>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert" style="background-color: rgba(25, 135, 84, 0.2); border-color: rgba(25, 135, 84, 0.3); color: #fff;">
+                            <%= message %>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <% } %>
+
+                    <% if (errors && errors.length > 0) { %>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="background-color: rgba(220, 53, 69, 0.2); border-color: rgba(220, 53, 69, 0.3); color: #fff;">
+                            <ul class="mb-0 ps-3">
+                                <% errors.forEach(err => { %>
+                                    <li><%= err %></li>
+                                <% }) %>
+                            </ul>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <% } %>
+
+                    <form action="/profile" method="POST">
+                        <!-- Name Field -->
+                        <div class="mb-4">
+                            <label for="name" class="form-label fw-bold text-muted small uppercase">Full Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text" style="background-color: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.15); color: #DBB778;">
+                                    <i class="fa-regular fa-user"></i>
+                                </span>
+                                <input type="text" class="form-control form-control-lg text-white" id="name" name="name" 
+                                       value="<%= profileUser.name %>" required 
+                                       style="background-color: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.15);">
+                            </div>
+                        </div>
+
+                        <!-- Email Field (Read Only) -->
+                        <div class="mb-4">
+                            <label for="email" class="form-label fw-bold text-muted small uppercase">Email Address (Read-Only)</label>
+                            <div class="input-group">
+                                <span class="input-group-text" style="background-color: rgba(0,0,0,0.5); border-color: rgba(255,255,255,0.08); color: rgba(255,255,255,0.4);">
+                                    <i class="fa-regular fa-envelope"></i>
+                                </span>
+                                <input type="email" class="form-control form-control-lg text-muted" id="email" name="email" 
+                                       value="<%= profileUser.email %>" readonly 
+                                       style="background-color: rgba(0,0,0,0.5); border-color: rgba(255,255,255,0.08); cursor: not-allowed;">
+                            </div>
+                            <% if (profileUser.googleId) { %>
+                                <div class="form-text text-info small mt-2">
+                                    <i class="fa-brands fa-google me-1"></i> Connected via Google OAuth
+                                </div>
+                            <% } %>
+                        </div>
+
+                        <!-- Date of Birth Field -->
+                        <div class="mb-5">
+                            <label for="dob" class="form-label fw-bold text-muted small uppercase">Date of Birth</label>
+                            <div class="input-group">
+                                <span class="input-group-text" style="background-color: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.15); color: #DBB778;">
+                                    <i class="fa-regular fa-calendar"></i>
+                                </span>
+                                <input type="date" class="form-control form-control-lg text-white" id="dob" name="dob" 
+                                       value="<%= formattedDob %>" required 
+                                       style="background-color: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.15);">
+                            </div>
+                        </div>
+
+                        <!-- Submit Buttons -->
+                        <div class="d-flex justify-content-between align-items-center border-top pt-4" style="border-color: rgba(255, 255, 255, 0.08) !important;">
+                            <span class="text-muted small">
+                                <i class="fa-solid fa-circle-info me-1"></i> Update fields and save changes.
+                            </span>
+                            <div>
+                                <a href="/welcome" class="btn btn-outline-secondary me-2 px-4 py-2">Cancel</a>
+                                <button type="submit" class="btn btn-primary px-4 py-2 text-black fw-bold hover-lift" style="background-color: #DBB778 !important; border: none;">
+                                    Save Changes
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Styling adjustments to blend with the app design */
+    .form-control:focus {
+        background-color: rgba(0,0,0,0.4) !important;
+        border-color: #DBB778 !important;
+        color: #fff !important;
+    }
+    
+    .hover-lift {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .hover-lift:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(219, 183, 120, 0.4);
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        filter: invert(1) sepia(50%) saturate(1000%) hue-rotate(15deg);
+        cursor: pointer;
+    }
+</style>

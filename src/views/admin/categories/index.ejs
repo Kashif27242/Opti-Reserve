@@ -12,12 +12,7 @@
     </div>
 
     <a href="/" class="logo">
-      <img
-        src="/assets/User/logo/Logo-min.png"
-        height="40"
-        id="logo"
-        alt="logo"
-      />
+      <img src="/assets/User/logo/Logo-min.png" height="40" id="logo" alt="logo" />
     </a>
 
     <div class="header-mobile-buttons d-flex align-items-center">
@@ -57,26 +52,17 @@
       <br />
 
       <% if (success && success.length) { %>
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <%= success[0] %>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="alert"
-          aria-label="Close"
-        ></button>
-      </div>
-      <% } %> <% if (error && error.length) { %>
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <%= error[0] %>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="alert"
-          aria-label="Close"
-        ></button>
-      </div>
-      <% } %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <%= success[0] %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <% } %>
+          <% if (error && error.length) { %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <%= error[0] %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <% } %>
     </div>
 
     <!-- Card: Filters and Table -->
@@ -89,11 +75,7 @@
             <form class="mb-3 mb-md-0" id="filterForm">
               <div class="row g-3">
                 <div class="col-md-3">
-                  <select
-                    class="form-select"
-                    name="sortDirection"
-                    id="sortSelect"
-                  >
+                  <select class="form-select" name="sortDirection" id="sortSelect">
                     <option value="">Sort by</option>
                     <option value="desc">Desc</option>
                     <option value="asc">Asc</option>
@@ -110,17 +92,8 @@
                 </div>
                 <div class="col-md-6">
                   <div class="input-group">
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Search"
-                      id="searchInput"
-                    />
-                    <button
-                      class="btn btn-outline-light"
-                      type="button"
-                      id="searchButton"
-                    ></button>
+                    <input type="text" class="form-control" placeholder="Search" id="searchInput" />
+                    <button class="btn btn-outline-light" type="button" id="searchButton"></button>
                   </div>
                 </div>
               </div>
@@ -142,56 +115,47 @@
         </thead>
 
         <tbody>
-          <% if (categories && categories.length > 0) { %> <%
-          categories.forEach(category => { %>
-          <tr>
-            <td><%= category.id %></td>
-            <td><%= category.name %></td>
-            <td class="text-end">
-              <div class="d-flex">
-                <div class="dropdown ms-auto">
-                  <a
-                    href="#"
-                    data-bs-toggle="dropdown"
-                    class="btn btn-floating"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <i class="bi bi-three-dots"></i>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-end">
-                    <a
-                      href="/categories/<%= category.id %>/edit"
-                      class="dropdown-item"
-                      >Edit</a
-                    >
-                    <form
-                      action="/categories/delete/<%= category.id %>"
-                      method="POST"
-                      style="display: inline"
-                    >
-                      <button type="submit" class="dropdown-item text-danger">
-                        Delete
-                      </button>
-                    </form>
+          <% if (categories && categories.length> 0) { %> <% categories.forEach(category=> { %>
+              <tr>
+                <td>
+                  <%= category.id %>
+                </td>
+                <td>
+                  <%= category.name %>
+                </td>
+                <td class="text-end">
+                  <div class="d-flex">
+                    <div class="dropdown ms-auto">
+                      <a href="#" data-bs-toggle="dropdown" class="btn btn-floating" aria-haspopup="true"
+                        aria-expanded="false">
+                        <i class="bi bi-three-dots"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-end">
+                        <a href="/categories/<%= category.id %>/edit" class="dropdown-item">Edit</a>
+                        <form action="/categories/delete/<%= category.id %>" method="POST" style="display: inline">
+                          <button type="submit" class="dropdown-item text-danger">
+                            Delete
+                          </button>
+                        </form>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <% }) %> <% } else { %>
-          <tr>
-            <td colspan="3" class="text-center text-muted">
-              No categories found.
-            </td>
-          </tr>
-          <% } %>
+                </td>
+              </tr>
+              <% }) %>
+                <% } else { %>
+                  <tr>
+                    <td colspan="3" class="text-center text-muted">
+                      No categories found.
+                    </td>
+                  </tr>
+                  <% } %>
         </tbody>
       </table>
     </div>
 
     <footer>
-      <p class="text-center my-2">&copy; 2024 EventEase</p>
+      <p class="text-center my-2">&copy; 2024 </p>
     </footer>
     <br />
   </div>

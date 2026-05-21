@@ -27,4 +27,8 @@ router.post("/contacts/store", ContactController.store);
 router.get("/user/change-password", ProfileController.showChangePassword);
 router.post("/user/change-password", ProfileController.updatePassword);
 
+// User Profile
+router.get("/profile", ProfileController.showProfile);
+router.post("/profile", ProfileController.updateProfile);
+
 export default router;
