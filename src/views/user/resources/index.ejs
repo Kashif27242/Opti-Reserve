@@ -3,7 +3,7 @@
   .featured-vehicles {
     margin-top: 0;
     padding-top: 2%;
-    background-color: #111; /* Dark background for contrast */
+    background-color: transparent;
   }
 
   .card-container {
@@ -13,53 +13,82 @@
 
   /* --- Card styling --- */
   .resource-card {
-    border-radius: 8px;
+    border-radius: 16px;
     overflow: hidden;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    background-color: #1e1e1e;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: var(--glass-bg, rgba(15, 23, 42, 0.6));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    height: 100%;
   }
 
   .resource-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(219, 183, 120, 0.3);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 191, 255, 0.2);
+    border-color: rgba(0, 191, 255, 0.4);
   }
 
   .resource-card img {
     width: 100%;
-    aspect-ratio: 3 / 2;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    border-bottom: 2px solid rgba(0, 191, 255, 0.2);
+    transition: transform 0.5s ease;
+  }
+
+  .resource-card:hover img {
+    transform: scale(1.05);
+  }
+
+  .img-wrapper {
+    overflow: hidden;
   }
 
   /* --- Content inside the card --- */
   .card-body-custom {
-    padding: 12px;
-    border-top: 1px solid rgba(219, 183, 120, 0.3);
+    padding: 20px;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent);
   }
 
   .card-body-custom h3 {
-    color: white;
-    font-size: 2rem;
+    color: #fff;
+    font-size: 1.5rem;
     text-align: center;
     margin: 0;
-    font-weight: 500;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-weight: 600;
+  }
+
+  /* --- Filter Buttons --- */
+  .filter-button {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #cbd5e1;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    padding: 8px 24px;
+    margin: 0 5px 10px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .filter-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+
+  .filter-button.active {
+    background-color: var(--color-accent, #00bfff);
+    color: #020617;
+    border-color: var(--color-accent, #00bfff);
+    font-weight: 600;
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.4);
   }
 
   /* --- Responsive Adjustments --- */
   @media (max-width: 768px) {
     .resource-card h3 {
-      font-size: 1rem;
+      font-size: 1.25rem;
     }
-  }
-
-  .active {
-    background-color: #DBB778;
-    color: #1e1e1e;
   }
 </style>
 
@@ -82,12 +111,12 @@
     <% if (resources.length === 0) { %>
       <h1 class="text-white text-center">No Services Available.</h1>
     <% } else { %>
-      <div class="row" id="resources-container">
+      <div class="row g-4" id="resources-container">
         <% resources.forEach(resource => { %>
-          <div class="col-md-4 mb-4 col-sm-6">
+          <div class="col-md-4 col-sm-6">
             <div class="resource-card">
               <a href="/user/resources/<%= resource.id %>" class="text-decoration-none">
-                <div class="bg-white">
+                <div class="img-wrapper">
                   <img
                     src="<%= resource.image || '/images/placeholder.jpg' %>"
                     alt="<%= resource.name %>"

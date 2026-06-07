@@ -1,0 +1,217 @@
+/* Premium UI Custom CSS */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Colors */
+  --color-bg-dark: #0f172a; /* Deep navy/slate */
+  --color-bg-darker: #020617;
+  --color-accent: #00bfff; /* Electric Cyan */
+  --color-accent-hover: #06b6d4;
+  --color-accent-gold: #DBB778;
+  
+  --color-text-main: #f8fafc;
+  --color-text-muted: #94a3b8;
+  
+  /* Glassmorphism */
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  
+  /* Animations */
+  --transition-fast: 0.2s ease;
+  --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--color-bg-darker);
+  background-image: radial-gradient(circle at top center, #1e293b 0%, #020617 100%);
+  color: var(--color-text-main);
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Glassmorphism Utilities */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 16px;
+}
+
+/* Gradients */
+.text-gradient {
+  background: linear-gradient(135deg, #00bfff, #DBB778);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animations */
+.hover-lift {
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 191, 255, 0.2);
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Override Bootstrap Colors */
+.bg-dark {
+  background-color: var(--color-bg-dark) !important;
+}
+
+.text-primary {
+  color: var(--color-accent) !important;
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #020617;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all var(--transition-fast);
+}
+.btn-primary:hover, .btn-primary:focus {
+  background-color: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  box-shadow: 0 0 15px rgba(0, 191, 255, 0.4);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.btn-outline-light {
+  border-color: rgba(255,255,255,0.2);
+}
+.btn-outline-light:hover {
+  background-color: rgba(255,255,255,0.1);
+  color: #fff;
+  border-color: rgba(255,255,255,0.4);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-darker);
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+/* Navbar specific */
+.navbar {
+  background: rgba(15, 23, 42, 0.8) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--glass-border);
+}
+.nav-link {
+  position: relative;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+.nav-link::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 10px;
+  background-color: var(--color-accent);
+  transition: width var(--transition-smooth);
+}
+.nav-link:hover::before {
+  width: calc(100% - 20px);
+}
+.nav-link:hover {
+  color: var(--color-accent) !important;
+}
+.dropdown-item:hover, .dropdown-item:focus {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+}
+
+/* Form Overrides */
+.form-control {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-radius: 8px;
+  transition: all var(--transition-fast);
+}
+.form-control:focus {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 0.25rem rgba(0, 191, 255, 0.25);
+  color: #fff;
+}
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+.form-label {
+  font-weight: 500;
+  color: var(--color-text-main);
+}
+
+/* Alerts Override */
+.alert-success {
+  background-color: rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #34d399;
+}
+.alert-danger {
+  background-color: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #f87171;
+}
+
+/* SweetAlert Global Overrides inside body */
+.swal2-popup {
+  background: var(--color-bg-dark) !important;
+  color: #fff !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 16px !important;
+}
+
+/* Fix old theme interference on btn-check checkboxes */
+input[type="checkbox"].btn-check + label::before,
+input[type="checkbox"].btn-check + label:before,
+input[type="checkbox"].btn-check + label::after,
+input[type="checkbox"].btn-check + label:after {
+  display: none !important;
+  content: "" !important;
+  width: 0 !important;
+  height: 0 !important;
+  border: none !important;
+  background: transparent !important;
+}
+input[type="checkbox"].btn-check {
+  display: none !important;
+}

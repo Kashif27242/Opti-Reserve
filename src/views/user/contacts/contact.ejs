@@ -1,12 +1,13 @@
 <div class="container text-white py-5">
-    <h3 class="fw-medium mb-4 text-center" style="font-size: 30px;">Contact Us</h3>
-    <p class="text-center" style="font-size: 18px;">
-        Have a question or need assistance? At Opti-reseve, we're here to help with all your event planning needs.
-        Whether you want to book a service, inquire about our event packages, or need support with your upcoming event,
-        our team is just a message away. Let us make your event planning experience effortless and enjoyable!
-    </p>
+    <div class="glass-panel p-5 my-4 mx-auto" style="max-width: 800px;">
+        <h3 class="fw-bold mb-4 text-center text-gradient" style="font-size: 36px;">Contact Us</h3>
+        <p class="text-center text-muted mb-5" style="font-size: 18px;">
+            Have a question or need assistance? At Opti-reserve, we're here to help with all your event planning needs.
+            Whether you want to book a service, inquire about our event packages, or need support with your upcoming event,
+            our team is just a message away. Let us make your event planning experience effortless and enjoyable!
+        </p>
 
-    <% if (message) { %>
+    <% if (message && message.length > 0) { %>
         <div class="alert alert-success text-center mt-4">
             <%= message %>
         </div>
@@ -24,72 +25,35 @@
                 </div>
                 <% } %>
 
-                    <form action="/contacts/store" id="myForm" method="post" class="mt-5">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label>First Name *</label>
-                                <input name="first_name" type="text" class="form-control" required>
+                        <form action="/contacts/store" id="myForm" method="post" class="mt-4">
+                            <div class="row g-4">
+                                <div class="col-md-6 mb-2">
+                                    <label class="form-label text-muted small uppercase">First Name *</label>
+                                    <input name="first_name" type="text" class="form-control form-control-lg" required>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label class="form-label text-muted small uppercase">Last Name *</label>
+                                    <input name="last_name" type="text" class="form-control form-control-lg" required>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label class="form-label text-muted small uppercase">Email *</label>
+                                    <input name="email" type="email" class="form-control form-control-lg" required>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label class="form-label text-muted small uppercase">Mobile *</label>
+                                    <input name="phone" type="tel" class="form-control form-control-lg" required>
+                                </div>
+                                <div class="col-md-12 mb-4">
+                                    <label class="form-label text-muted small uppercase">Comments</label>
+                                    <textarea name="comments" class="form-control form-control-lg" rows="4" required></textarea>
+                                </div>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label>Last Name *</label>
-                                <input name="last_name" type="text" class="form-control" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label>Email *</label>
-                                <input name="email" type="email" class="form-control" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label>Mobile *</label>
-                                <input name="phone" type="tel" class="form-control" required>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <label>Comments</label>
-                                <textarea name="comments" class="form-control" required></textarea>
-                            </div>
-                        </div>
 
-                        <label>* How would you like us to respond?</label>
-                        <div class="d-flex flex-wrap gap-3">
-                            <div class="form-check">
-                                <input type="checkbox" id="checkboxCall" name="informBY[]" value="Call"
-                                    class="form-check-input">
-                                <label for="checkboxCall" class="form-check-label">Call</label>
+                            <div class="d-grid mt-5">
+                                <button type="submit" class="btn btn-primary btn-lg rounded-pill fw-bold hover-lift">Send Message <i class="fa-solid fa-paper-plane ms-2"></i></button>
                             </div>
-                            <div class="form-check">
-                                <input type="checkbox" id="checkboxWhatsapp" name="informBY[]" value="Whatsapp"
-                                    class="form-check-input">
-                                <label for="checkboxWhatsapp" class="form-check-label">Whatsapp</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" id="checkboxSMS" name="informBY[]" value="SMS"
-                                    class="form-check-input">
-                                <label for="checkboxSMS" class="form-check-label">SMS</label>
-                            </div>
-                        </div>
+                        </form>
+    </div>
 
-                        <div id="error-message" class="error-message mt-2">Please select at least one option.</div>
 
-                        <button type="submit" class="btn btn-primary mt-4">Submit</button>
-                    </form>
-
-                    <div class="mt-5">
-                        <iframe class="rounded" height="350px"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d638.4002197973622!2d55.230421949465715!3d25.158096497912464"
-                            width="100%" style="border:0;" allowfullscreen loading="lazy"></iframe>
-                    </div>
 </div>
-
-<script>
-    document.getElementById('myForm').addEventListener('submit', function (event) {
-        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        const checked = Array.from(checkboxes).some(ch => ch.checked);
-        const errorMessage = document.getElementById('error-message');
-
-        if (!checked) {
-            event.preventDefault();
-            errorMessage.style.display = 'block';
-        } else {
-            errorMessage.style.display = 'none';
-        }
-    });
-</script>

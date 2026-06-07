@@ -2,16 +2,16 @@
     <div class="row justify-content-center">
         <!-- Profile Left Info Card -->
         <div class="col-lg-4 mb-4">
-            <div class="card h-100 shadow-lg border-0 rounded-lg text-white" style="background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(212, 177, 112, 0.15) !important;">
+            <div class="card h-100 glass-panel border-0 rounded-lg text-white">
                 <div class="card-body text-center p-5 d-flex flex-column align-items-center justify-content-center">
                     <!-- Elegant Initial Avatar -->
-                    <div class="rounded-circle d-flex align-items-center justify-content-center mb-4 shadow-lg" style="width: 110px; height: 110px; background: linear-gradient(135deg, #DBB778, #bca167); border: 3px solid rgba(255, 255, 255, 0.1);">
-                        <span class="fs-1 fw-bold text-black" style="font-family: 'Titillium Web', sans-serif;">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center mb-4 shadow-lg" style="width: 110px; height: 110px; background: linear-gradient(135deg, #00bfff, #06b6d4); border: 3px solid rgba(255, 255, 255, 0.1);">
+                        <span class="fs-1 fw-bold text-black" style="font-family: 'Outfit', sans-serif;">
                             <%= profileUser.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() %>
                         </span>
                     </div>
 
-                    <h3 class="fw-bold text-white mb-1" style="font-family: 'Titillium Web', sans-serif; text-align: center !important;">
+                    <h3 class="fw-bold text-white mb-1" style="font-family: 'Outfit', sans-serif; text-align: center !important;">
                         <%= profileUser.name %>
                     </h3>
                     <p class="text-muted mb-3"><%= profileUser.email %></p>
@@ -21,7 +21,7 @@
                         <% if (profileUser.role === 'ADMIN') { %>
                             <span class="badge px-3 py-2 bg-danger rounded-pill fw-bold uppercase">Administrator</span>
                         <% } else { %>
-                            <span class="badge px-3 py-2 rounded-pill fw-bold text-black" style="background-color: #DBB778;">Faculty Member</span>
+                            <span class="badge px-3 py-2 rounded-pill fw-bold text-black" style="background-color: var(--color-accent);">Faculty Member</span>
                         <% } %>
 
                         <% if (profileUser.approved) { %>
@@ -60,9 +60,9 @@
 
         <!-- Profile Edit Form Card -->
         <div class="col-lg-7 mb-4">
-            <div class="card h-100 shadow-lg border-0 rounded-lg text-white" style="background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(212, 177, 112, 0.15) !important;">
+            <div class="card h-100 glass-panel border-0 rounded-lg text-white">
                 <div class="card-header bg-transparent py-4 px-5" style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
-                    <h3 class="mb-0 text-white fw-bold d-flex align-items-center" style="font-family: 'Titillium Web', sans-serif;">
+                    <h3 class="mb-0 text-white fw-bold d-flex align-items-center" style="font-family: 'Outfit', sans-serif;">
                         <i class="fa-regular fa-id-card me-3 text-primary"></i>Profile Details
                     </h3>
                 </div>
@@ -136,8 +136,8 @@
                                 <i class="fa-solid fa-circle-info me-1"></i> Update fields and save changes.
                             </span>
                             <div>
-                                <a href="/welcome" class="btn btn-outline-secondary me-2 px-4 py-2">Cancel</a>
-                                <button type="submit" class="btn btn-primary px-4 py-2 text-black fw-bold hover-lift" style="background-color: #DBB778 !important; border: none;">
+                                <a href="/welcome" class="btn btn-outline-secondary me-2 px-4 py-2 rounded-pill hover-lift">Cancel</a>
+                                <button type="submit" class="btn btn-primary px-4 py-2 text-dark fw-bold hover-lift rounded-pill border-0">
                                     Save Changes
                                 </button>
                             </div>
@@ -151,23 +151,8 @@
 
 <style>
     /* Styling adjustments to blend with the app design */
-    .form-control:focus {
-        background-color: rgba(0,0,0,0.4) !important;
-        border-color: #DBB778 !important;
-        color: #fff !important;
-    }
-    
-    .hover-lift {
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    
-    .hover-lift:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(219, 183, 120, 0.4);
-    }
-
     input[type="date"]::-webkit-calendar-picker-indicator {
-        filter: invert(1) sepia(50%) saturate(1000%) hue-rotate(15deg);
+        filter: invert(1) sepia(50%) saturate(1000%) hue-rotate(180deg);
         cursor: pointer;
     }
 </style>

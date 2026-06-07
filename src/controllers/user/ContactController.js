@@ -16,14 +16,12 @@ class ContactController {
 
     static async store(req, res) {
         try {
-            const { first_name, last_name, email, phone, comments, informBY } = req.body;
+            const { first_name, last_name, email, phone, comments } = req.body;
 
             if (!first_name || !last_name || !email || !phone || !comments) {
                 req.flash("errors", ["All fields are required."]);
                 return res.redirect("/contact");
             }
-
-            const informByString = Array.isArray(informBY) ? informBY.join(", ") : informBY;
 
             await prisma.contact.create({
                 data: {
@@ -32,7 +30,6 @@ class ContactController {
                     email,
                     phone,
                     comments,
-                    informBy: informByString,
                 },
             });
 
