@@ -1,193 +1,306 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Register | Opti-Reserve</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Opti-Reserve - Register</title>
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="/assets/admin/assets/images/favicon.png" />
 
-  <!-- Themify icons -->
-  <link rel="stylesheet" href="/assets/admin/dist/icons/themify-icons/themify-icons.css" type="text/css">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Main style file -->
-  <link rel="stylesheet" href="/assets/admin/dist/css/app.min.css" type="text/css">
+  <!-- Main Bootstrap style file -->
+  <link rel="stylesheet" href="/assets/admin/dist/css/app.min.css" type="text/css" />
 
   <style>
+    :root {
+      --color-bg-dark: #0f172a;
+      --color-bg-darker: #020617;
+      --color-accent: #00bfff;
+      --color-accent-hover: #06b6d4;
+      --color-accent-gold: #DBB778;
+      
+      --glass-bg: rgba(15, 23, 42, 0.55);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+    }
+
     body {
-      background-color: #c5c5c5 !important;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--color-bg-darker) !important;
+      background-image: radial-gradient(circle at top center, #1e293b 0%, #020617 100%) !important;
+      color: #f8fafc !important;
+      min-height: 100vh;
+      margin: 0;
     }
 
-    .btn-primary {
-      background-color: #0d41eb !important;
-      border: none !important;
+    .auth .form-wrapper {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 100% !important;
+      max-width: 480px !important;
+      margin: auto !important;
+      min-height: 100vh !important;
+      padding: 40px 20px !important;
     }
 
-    input:focus,
-    textarea:focus,
-    select:focus,
-    button:focus {
-      outline: none !important;
-      border-color: #DBB778 !important;
-      box-shadow: 0 0 0 0.2rem rgba(219, 183, 120, 0.25) !important;
-      color: white !important;
+    .glass-panel {
+      background: var(--glass-bg) !important;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border) !important;
+      box-shadow: var(--glass-shadow) !important;
+      border-radius: 20px !important;
+      width: 100% !important;
     }
 
-    .card {
-      background-color: black !important;
-      border-radius: 15px;
-      padding: 30px;
-      color: white;
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Outfit', sans-serif;
     }
 
-    label {
-      color: #fff;
-      font-weight: 500;
-    }
-
+    /* Custom form elements styled dark/glass */
     .form-control {
-      background-color: #1c1c1c;
-      color: #fff;
-      border: 1px solid #333;
-    }
-
-    .form-control::placeholder {
-      color: #aaa;
+      background-color: rgba(255, 255, 255, 0.05) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      color: #fff !important;
+      border-radius: 10px !important;
+      padding: 12px 16px !important;
+      transition: all 0.2s ease !important;
     }
 
     .form-control:focus {
-      background-color: #1c1c1c;
+      background-color: rgba(255, 255, 255, 0.08) !important;
+      border-color: var(--color-accent) !important;
+      box-shadow: 0 0 15px rgba(0, 191, 255, 0.25) !important;
     }
 
-    a {
-      color: #00bfff;
+    .form-control::placeholder {
+      color: rgba(255, 255, 255, 0.35) !important;
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: #94a3b8;
+      font-size: 13px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Input type date styling adjustment */
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(1) sepia(50%) saturate(1000%) hue-rotate(180deg);
+      cursor: pointer;
+    }
+
+    /* Primary button style */
+    .btn-primary {
+      background-color: var(--color-accent) !important;
+      border-color: var(--color-accent) !important;
+      color: #020617 !important;
+      font-weight: 700 !important;
+      padding: 12px 20px !important;
+      border-radius: 10px !important;
+      width: 100%;
+      transition: all 0.2s ease !important;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 14px;
+    }
+
+    .btn-primary:hover, .btn-primary:focus {
+      background-color: var(--color-accent-hover) !important;
+      border-color: var(--color-accent-hover) !important;
+      box-shadow: 0 0 20px rgba(0, 191, 255, 0.4) !important;
+      transform: translateY(-2px);
+    }
+
+    /* Google button style */
+    .btn-google {
+      background-color: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.15) !important;
+      color: #fff !important;
+      font-weight: 600 !important;
+      padding: 12px 20px !important;
+      border-radius: 10px !important;
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s ease !important;
+      text-decoration: none !important;
+    }
+
+    .btn-google:hover {
+      background-color: rgba(255, 255, 255, 0.15) !important;
+      border-color: rgba(255, 255, 255, 0.3) !important;
+      transform: translateY(-2px);
+      color: #fff !important;
+    }
+
+    .auth-link {
+      color: var(--color-accent) !important;
       text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s ease;
     }
 
-    a:hover {
-      text-decoration: underline;
+    .auth-link:hover {
+      color: var(--color-accent-hover) !important;
+      text-decoration: underline !important;
     }
 
-    #main_logo {
-      font-family: 'Inter', sans-serif;
-      font-weight: 700;
-      font-size: 2.5rem;
-      color: white;
-      text-shadow: 2px 2px 10px rgba(0, 153, 255, 0.5);
-      border-bottom: 3px solid #00bfff;
-      display: inline-block;
-      padding-bottom: 5px;
+    /* Input group design for password toggle */
+    .input-group {
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .input-group .form-control {
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+
+    #togglePassword {
+      background-color: rgba(255, 255, 255, 0.05) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      border-left: none !important;
+      border-top-right-radius: 10px !important;
+      border-bottom-right-radius: 10px !important;
+      padding: 0 16px !important;
+      color: #fff !important;
+      transition: background-color 0.2s ease !important;
+      cursor: pointer;
+    }
+
+    #togglePassword:hover {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .alert-danger {
+      background-color: rgba(239, 68, 68, 0.15) !important;
+      border: 1px solid rgba(239, 68, 68, 0.3) !important;
+      color: #f87171 !important;
+      border-radius: 10px !important;
+    }
+
+    .alert-success {
+      background-color: rgba(16, 185, 129, 0.15) !important;
+      border: 1px solid rgba(16, 185, 129, 0.3) !important;
+      color: #34d399 !important;
+      border-radius: 10px !important;
     }
   </style>
 </head>
 
 <body class="auth">
-
   <div class="form-wrapper">
-    <div class="container">
-      <div class="text-uppercase text-dark text-center my-1" style="font-weight: 800; font-size:24px">
-        Welcome to Opti-Reserve
-      </div>
-
-      <div class="card text-white">
-        <div class="row g-0">
-          <div class="col register">
-            <div class="row">
-              <div class="col-md-10 offset-md-1">
-
-                <div class="d-flex justify-content-center mb-4">
-                  <h1 id="main_logo">Opti-<span style="color:#00bfff;">Reserve</span></h1>
-                </div>
-
-                <div class="text-center mb-4">
-                  <h1 class="display-8">Create an Account</h1>
-                  <p class="text-white">Join us and start reserving smarter</p>
-                </div>
-
-                <% if (error && error.length> 0) { %>
-                  <div class="alert alert-danger">
-                    <%= error %>
-                  </div>
-                  <% } %>
-                    <% if (success && success.length> 0) { %>
-                      <div class="alert alert-success">
-                        <%= success %>
-                      </div>
-                      <% } %>
-
-                        <form method="POST" action="<%= route('register.submit') %>" class="mb-4">
-
-                          <div class="mb-3">
-                            <label for="name" class="form-label">Full Name</label>
-                            <input type="text" id="name" name="name" class="form-control"
-                              placeholder="Enter your full name" required />
-                          </div>
-
-                          <div class="mb-3">
-                            <label for="email" class="form-label">Email Address</label>
-                            <input type="email" id="email" name="email" class="form-control"
-                              placeholder="Enter your email" required />
-                          </div>
-                          <div class="mb-3">
-                            <label for="dob" class="form-label">Date of Birth</label>
-                            <input id="dob" class="form-control" type="date" name="dob" required
-                              placeholder="Enter your Date of Birth">
-                          </div <div class="mb-3 position-relative">
-                          <label for="password" class="form-label">Password</label>
-
-                          <div class="input-group">
-                            <input id="password" class="form-control" type="password" name="password" required
-                              autocomplete="current-password" placeholder="Enter password" />
-
-                            <button type="button" class="btn btn-outline-secondary" id="togglePassword"
-                              style="border-color: #333; background-color: #1c1c1c">
-                              <!-- 👁 SVG Eye Icon -->
-                              <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white"
-                                viewBox="0 0 16 16">
-                                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 
-                 8 5.5S16 8 16 8zM8 13c-2.5 0-4-2-4-5s1.5-5 
-                 4-5 4 2 4 5-1.5 5-4 5z" />
-                                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 
-                 2.5 2.5 0 0 0 0-5z" />
-                              </svg>
-                            </button>
-                          </div>
-              </div>
-
-
-              <div class="text-center text-lg-start">
-                <button type="submit" class="btn btn-primary w-100 py-2">Register</button>
-
-                <div class="mt-3">
-                  <a href="/auth/google" class="btn btn-light w-100"
-                    style="border: 1px solid #ccc; color: #333; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 10px;">
-                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google"
-                      style="width: 20px; height: 20px;">
-                    Sign up with Google
-                  </a>
-                </div>
-              </div>
-              </form>
-
-              <p class="text-center mt-3 mb-0">
-                Already have an account?
-                <a href="<%= route('login.show') %>">Login here</a>
-              </p>
-
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="text-uppercase text-center mb-4" style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 24px; color: #DBB778; letter-spacing: 2px;">
+      Welcome to Opti-Reserve
     </div>
 
-  </div>
+    <div class="card glass-panel p-4 p-md-5 border-0 shadow-lg">
+      <div class="d-flex justify-content-center mb-4">
+        <h1 id="main_logo" style="
+              font-family: 'Outfit', sans-serif;
+              font-weight: 700;
+              font-size: 2.5rem;
+              color: white;
+              text-shadow: 2px 2px 10px rgba(0, 153, 255, 0.5);
+              border-bottom: 3px solid #00bfff;
+              display: inline-block;
+              padding-bottom: 5px;
+              margin: 0;
+            ">
+          Opti-<span style="color: #00bfff">Reserve</span>
+        </h1>
+      </div>
+
+      <div class="mb-4 text-center">
+        <h2 class="h4 text-white fw-bold mb-1">Create an Account</h2>
+        <p class="text-muted small mb-0">Join us and start reserving smarter</p>
+      </div>
+
+      <!-- Express + EJS Feedback Alerts -->
+      <% if (error && error.length > 0) { %>
+        <div class="alert alert-danger mb-4">
+          <%= error %>
+        </div>
+      <% } %>
+      <% if (success && success.length > 0) { %>
+        <div class="alert alert-success mb-4">
+          <%= success %>
+        </div>
+      <% } %>
+
+      <form method="POST" action="<%= route('register.submit') %>">
+        <div class="mb-3">
+          <label for="name" class="form-label">Full Name</label>
+          <input type="text" id="name" name="name" class="form-control"
+            placeholder="Enter your full name" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email Address</label>
+          <input type="email" id="email" name="email" class="form-control"
+            placeholder="Enter your email" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="dob" class="form-label">Date of Birth</label>
+          <input id="dob" class="form-control" type="date" name="dob" required />
+        </div>
+
+        <div class="mb-4">
+          <label for="password" class="form-label">Password</label>
+          <div class="input-group">
+            <input id="password" class="form-control" type="password" name="password" required
+              placeholder="Enter password" />
+            <button type="button" class="btn" id="togglePassword">
+              <!-- 👁 SVG Eye Icon -->
+              <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                viewBox="0 0 16 16">
+                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM8 13c-2.5 0-4-2-4-5s1.5-5 4-5 4 2 4 5-1.5 5-4 5z" />
+                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <button type="submit" class="btn btn-primary w-100">
+            Register
+          </button>
+        </div>
+
+        <div class="mb-4">
+          <a href="/auth/google" class="btn btn-google w-100">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+              alt="Google" style="width: 20px; height: 20px;">
+            Sign up with Google
+          </a>
+        </div>
+
+        <div class="text-center text-muted small mt-4">
+          <p class="mb-0">
+            Already have an account?
+            <a href="<%= route('login.show') %>" class="auth-link">Login here</a>
+          </p>
+        </div>
+      </form>
+    </div>
   </div>
 
   <script>
-    //  Password visibility toggle
+    // Password visibility toggle
     const togglePassword = document.querySelector("#togglePassword");
     const passwordInput = document.querySelector("#password");
     const eyeIcon = document.querySelector("#eyeIcon");
@@ -199,12 +312,10 @@
           : "password";
       passwordInput.setAttribute("type", type);
 
-      // Toggle eye icon color or style
+      // Toggle eye icon opacity
       eyeIcon.style.opacity = type === "text" ? "0.5" : "1";
     });
   </script>
-
-
 
   <!-- Scripts -->
   <script src="/assets/admin/libs/bundle.js"></script>

@@ -28,6 +28,12 @@ body {
   background-image: radial-gradient(circle at top center, #1e293b 0%, #020617 100%);
   color: var(--color-text-main);
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
 }
 
 h1, h2, h3, h4, h5, h6, .navbar-brand {
@@ -172,6 +178,14 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
   box-shadow: 0 0 0 0.25rem rgba(0, 191, 255, 0.25);
   color: #fff;
 }
+.form-control[readonly],
+.form-control:disabled,
+.form-select:disabled {
+  background-color: rgba(0, 0, 0, 0.35) !important;
+  color: var(--color-text-muted) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  cursor: not-allowed;
+}
 .form-control::placeholder {
   color: rgba(255, 255, 255, 0.4);
 }
@@ -214,4 +228,17 @@ input[type="checkbox"].btn-check + label:after {
 }
 input[type="checkbox"].btn-check {
   display: none !important;
+}
+
+/* Fix visibility of dark/black text on light or warning backgrounds (e.g. badges, bg-light elements) */
+.text-dark,
+.badge.text-dark,
+.bg-light,
+.badge.bg-light {
+  color: #020617 !important;
+}
+
+.text-black,
+.badge.text-black {
+  color: #000000 !important;
 }
